@@ -14,6 +14,7 @@ import pytz
 import sys
 import os
 import platform
+#import argparse
 
 def createTD(text, css='', align=''):
     retVal = '<td '
@@ -64,17 +65,50 @@ if __name__ == '__main__':
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
     link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
     link_members = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/members' #23QQG200V/members'
+    link_warlog = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/warlog'
+    link_current_war = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/currentwar'
+    link_tourn_global = 'https://api.clashroyale.com/v1/globaltournaments'
+
     
+    # Get Clan Data
+    print('Getting Clan Data')
     r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_data = r.json();
     r.close()
+    print('Clan Data for ' + clan_data['name'])
     
-    #print(json.dumps(clan_data, indent = 4))
-    
+    # Get Clan member Data
+    print('Getting Clan Member Data')
     r = requests.get(link_members, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    
-    data_store = r.json()
+    clan_member_data = r.json()
     r.close()
+    print('total Clan Members = ' + str(clan_data['members']))
+    
+    # Get Clan warlog Data
+    print('Getting Clan Member Data')
+    r = requests.get(link_warlog, headers={"Accept":"application/json", "authorization":"Bearer " + key})
+    clan_warlog = r.json()
+    r.close()
+    print('total Clan Members = ' + str(clan_data['members']))
+    
+    # Get Clan Current War Data
+    print('Getting Clan Member Data')
+    r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
+    clan_current_war = r.json()
+    r.close()
+    print('total Clan Members = ' + str(clan_data['members']))
+    
+    
+    # Get Global Tournament Data
+    print('Getting Global Tournament Data')
+    r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
+    tourn_global_data = r.json()
+    r.close()
+    print('total Clan Members = ' + str(clan_data['members']))
+    
+    
+    
+    
     
     htmlout = ''
     htmlout += '<!DOCTYPE HTML>\n'
@@ -164,23 +198,6 @@ if __name__ == '__main__':
     
     htmlout += '</div>\n' # End Clan Information Section Div
     htmlout += '</div>\n'
-#    htmlout += '<div style="width:100%;"">\n'
-#    htmlout += '<div align="center" style="text-align:left;">\n'
-#    htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/trophy.png" height="51px" width="51px">\n'
-#    htmlout += '<div style="line-height:25px;font-size:23px;font-weight:bold">'
-#    htmlout += str(clan_data['clanScore'])
-#    htmlout += '</div>\n'
-#    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>\n'
-#    
-#    # Clan War Information
-#    htmlout += '<div class="clan_info">\n'
-#    htmlout += '<div style="text-align:center;">\n'
-#    htmlout += '<img style="float:left;margin-bottom:20px" src="https://cdn.statsroyale.com/images/clan-trophies.png" height="51px" width="51px">\n'
-#    htmlout += '<div style="line-height:25px;font-size:23px;font-weight:bold">'
-#    htmlout += str(clan_data['clanWarTrophies'])
-#    htmlout += '</div>\n'
-#    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>\n'
-#    
     
     htmlout += '<div style="clear:both;"></div>\n'
     
@@ -200,7 +217,7 @@ if __name__ == '__main__':
     
     
     htmlout += '<tbody>\n'
-    for item in data_store["items"]:
+    for item in clan_member_data["items"]:
         
         htmlout += '<tr>'
 
@@ -253,10 +270,10 @@ if __name__ == '__main__':
     htmlout += '<div align=\"right\">\n'
     htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
     eastern = pytz.timezone("US/Eastern")
-#    print(timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+
     htmlout += timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p %Z')
     htmlout += '</p>\n'
-#        htmlBuilder.append("<p style=\"font-size:10px;right:auto\"> Dashboard Version: ").append("v").append(jarVer).append("</p>\n");
+
     htmlout += '</div>\n'
     
     
@@ -264,18 +281,38 @@ if __name__ == '__main__':
     out.write(htmlout)
     out.close()
     
-    
-    out = open('tmp.txt', 'w', encoding='UTF-8')
+    #Save Clan Data
+    out = open('clan_data.txt', 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
+    
+    #Save Clan Member Data
+    out = open('clan_member_data.txt', 'w', encoding='UTF-8')
+    out.write(json.dumps(clan_member_data, indent = 4))
+    out.close()
+    
+    
+    #Save Warlog Data
+    out = open('warlog.txt', 'w', encoding='UTF-8')
+    out.write(json.dumps(clan_warlog, indent = 4))
+    out.close()
+
+    #Save Current War Data
+    out = open('currentwar.txt', 'w', encoding='UTF-8')
+    out.write(json.dumps(clan_current_war, indent = 4))
+    out.close()
+
+    #Save Global Tournament Data
+    out = open('tourn_global_data.txt', 'w', encoding='UTF-8')
+    out.write(json.dumps(tourn_global_data, indent = 4))
+    out.close()
+    
+
     
     #Capture weekly data if its time, between 23:55 and 11:59:59
     midnight = timeNow.replace(hour=23, minute=59, second=59, microsecond=0)
     eleven_fifty_five = timeNow.replace(hour=23, minute=55, second=0, microsecond=0)
-#    timeNow = timeNow.replace(hour=23, minute=57, second=33, microsecond=0)
-#    print(timeNow)
-#    print(midnight)
-#    print(eleven_fifty_five)
+
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = clan_data['name'] 
         fname += '-'
@@ -285,6 +322,10 @@ if __name__ == '__main__':
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
-        #print('Time to save the weekly data', fname)
     
     
+    
+    
+    
+    for item in clan_warlog['items']:
+        print(item['seasonId'])
