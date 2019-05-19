@@ -1,0 +1,91 @@
+/* Sortable tables */
+
+table.sortable {
+
+                border: 1px solid #778899;
+
+                border-collapse: collapse;
+
+}
+
+table.sortable thead {
+
+    background-color:#eee;
+
+    color:#666666;
+
+    font-weight: bold;
+
+    cursor: default;
+
+}
+
+table.sortable th{
+
+                border: 2px solid #778899;
+
+                padding-left: 2px;
+
+                padding-right: 2px;
+
+//            padding-top: 1px;
+
+//            padding-bottom: 1px;
+
+               
+
+}
+
+//table.sortable td{
+
+//            border: 1px solid #778899;
+
+//}
+
+ 
+
+table.sortable tbody tr td{
+
+                cursor: default;
+
+                font-size: 14px;
+
+                padding-left: 2px;
+
+                padding-right: 2px;
+
+//            padding-top: 1px;
+
+//            padding-bottom: 1px;
+
+                border: 1px solid #778899;
+
+//            background-color: #eef2f9;
+
+                background-image: -moz-linear-gradient(
+
+                                top,
+
+                                rgba(255,255,255,0.4) 0%,
+
+                                rgba(255,255,255,0.2) 50%,
+
+                                rgba(255,255,255,0.1) 51%,
+
+                                rgba(255,255,255,0.0) 100%);
+
+                background-image: -webkit-gradient(
+
+                                linear, left top, left bottom,
+
+                                color-stop(0%,rgba(255,255,255,0.4)),
+
+                                color-stop(50%,rgba(255,255,255,0.2)),
+
+                                color-stop(51%,rgba(255,255,255,0.1)),
+
+                                color-stop(100%,rgba(255,255,255,0.0)));
+
+ 
+
+}
