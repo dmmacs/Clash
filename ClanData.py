@@ -154,6 +154,7 @@ if __name__ == '__main__':
     else:
         clan_badge += '_magical'
     clan_badge += '.png'
+    print(clan_badge)
     
     htmlout += '<img style="float:left;margin-bottom:20px;" src="'
     htmlout += clan_badge
