@@ -15,10 +15,13 @@ import sys
 import os
 import platform
 
-def createTD(text, css=''):
+def createTD(text, css='', align=''):
     retVal = '<td '
     if css != '':
         retVal += 'class=' + css 
+    
+    if align!= '':
+        retVal += ' style=text-align:' + align + ';'
     retVal += '>'
     retVal +=  text + '</td>'
     return (retVal)
@@ -168,13 +171,13 @@ if __name__ == '__main__':
 
     htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
     htmlout += "<thead>\n"
+    htmlout += createTH('Clan Rank')
     htmlout += createTH('Name')
     htmlout += createTH('Role')
     htmlout += createTH('Level')
     htmlout += createTH('Last Seen')
     htmlout += createTH('Trophies')
     htmlout += createTH('Arena')
-    htmlout += createTH('Clan Rank')
     htmlout += createTH('Donations')
     htmlout += '</thead>\n'
     
@@ -192,9 +195,10 @@ if __name__ == '__main__':
             css = 'bronzebkd'
         else:
             css = ''
+        htmlout += createTD(str(item['clanRank']), css, 'center')
         htmlout += createTD(item['name'], css)
         htmlout += createTD(item['role'], css)
-        htmlout += createTD(str(item['expLevel']), css)
+        htmlout += createTD(str(item['expLevel']), css, 'center')
 
         last_seen_str = item['lastSeen']
         year = int(last_seen_str[0:4])
@@ -217,11 +221,9 @@ if __name__ == '__main__':
         if rest >= HALF:
             hours += 1
         htmlout += createTD('{} hours ago'.format(hours), css)
-        htmlout += createTD(str(item['trophies']), css)
+        htmlout += createTD(str(item['trophies']), css, 'center')
         htmlout += createTD(item['arena']['name'], css)
-        
-        htmlout += createTD(str(item['clanRank']), css)
-        htmlout += createTD(str(item['donations']), css)
+        htmlout += createTD(str(item['donations']), css, 'center')
         htmlout += '</tr>\n'
         
     htmlout += '</tbody>\n'
