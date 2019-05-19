@@ -48,7 +48,6 @@ if __name__ == '__main__':
         elif platform.system() == 'Linux':
             fname += '/'
         fname += apiFname
-        print(fname)
         fin = open(fname, 'r')
         key = fin.readline().strip()
         fin.close()
@@ -66,15 +65,9 @@ if __name__ == '__main__':
     clan_data = r.json();
     r.close()
     
-    print(json.dumps(clan_data, indent = 4))
+    #print(json.dumps(clan_data, indent = 4))
     
-    #headers={"Accept":"application/json", "authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjAwNzdlMDJjLTVlZGMtNDA1Ni1hZWNhLTZjZWMwMzRiYjQ4NiIsImlhdCI6MTUzNDM0NjYyMCwic3ViIjoiZGV2ZWxvcGVyL2JlYjQ5NzYzLWNhMzMtNTllYy02MTBjLTAzZmM2MzVmN2Y1OCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxOTAuMjI4LjIyMy4xMzMiXSwidHlwZSI6ImNsaWVudCJ9XX0.YAag5hP2ic3-uURi0eqUwHedL9vLaBgVa19BSbEWHdvi2hn4s1QROwqZRQOsKJMTph_G6kHgBUX2vrEmmmQ3vw"    
-    #r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1ODMyYzNlLTQ1YzctNGMwNC1iNTkwLTgyYTI0YzQyMDhiMiIsImlhdCI6MTU1ODIwNTQ5MCwic3ViIjoiZGV2ZWxvcGVyLzE4YzkyMzA4LTE2YzYtZjhmYy0yMjMzLTY0YTM2ZjliZjMyNyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3MC4xNzcuMTY3LjcwIl0sInR5cGUiOiJjbGllbnQifV19.ah33L09g2vdZ0qZYU8gkby60R4x2QhPZefeES9qXkuH4D-t8sqYw1M5p-xzeboSWHune8rKQw2A277QnWlLR-w"})
     r = requests.get(link_members, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    #print(json.dumps(r.json(), indent = 2))
-    
-    json_string = json.dumps(r.json(), indent = 4)
-    #print(json_string)
     
     data_store = r.json()
     r.close()
@@ -83,20 +76,20 @@ if __name__ == '__main__':
     htmlout += '<!DOCTYPE HTML>\n'
     htmlout += '<html>\n<head>\n'
     htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/ >'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>'
-    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/>\n'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>\n'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>\n'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>\n'
+    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>\n'
     
-    htmlout += '<link href=\"css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-    htmlout += '<link href=\"css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+#    htmlout += '<link href=\"css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+#    htmlout += '<link href=\"css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
     htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
     htmlout += '<script src="js/sortable.js"></script>\n'
 
-    htmlout += "<script src=\"js/jquery.fixedheadertable.js\"></script>\n"
-    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
+#    htmlout += "<script src=\"js/jquery.fixedheadertable.js\"></script>\n"
+#    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
 
     htmlout +="<link href=\"css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
     htmlout +="<link href=\"css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
@@ -106,28 +99,74 @@ if __name__ == '__main__':
     htmlout += "<body>\n"
     
     #Clan Name Section
-    htmlout += '<div class="clan_header">\n' 
-    htmlout += '<h1 class="clan_name">'
+    htmlout += '<div style="width:100%;">\n' 
+    htmlout += '<img style="float:left;margin-bottom:20px;" src="https://statsroyale.com/images/clanwars/16000164_silver3.png" height="100px" width="72px">\n'
+    
+    htmlout += '<div style="font-weight:bold;font-size:35px;margin-left:77px;line-height:60px">'
     htmlout +=  clan_data['name']
-    htmlout += '</h1>\n'
-    htmlout += '<p class="clan_description">'
+    htmlout += '</div>\n'
+    htmlout += '<div style="font-size:14px;margin-left=77px">'
     htmlout += clan_data['description']
-    htmlout += '</p>\n'
+    htmlout += '</div>\n'
     htmlout += '</div>\n'
     
+    htmlout += '<div style="clear:both"></div>\n'
+    
     #Clan Information Section
-    htmlout += '<div class="clan_info">\n'
-    htmlout += '<h1 class="clan_name">'
-    htmlout +=  str(clan_data['clanScore'])
-    htmlout += '</h1>\n'
-#    htmlout += '<p class="clan_description">'
-#    htmlout += clan_data['description']
-#    htmlout += '</p>\n'
+    htmlout += '<div style="width:100%;">\n' #Full clan Information Section Div
+    
+    # Left Section for Clan Trophies
+    htmlout += '<div style="float: left; width:33%;">\n'
+    htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/trophy.png" height="51px" width="51px">\n'
+    htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
+    htmlout += str(clan_data['clanScore'])
     htmlout += '</div>\n'
+    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>'
+    htmlout += '</div>\n' #End Left Section Div
 
+    # Middle Section for Clan War Trophies
+    htmlout += '<div style="float: left; width:33%;">\n'
+    htmlout += '<img  style="float:left" src="https://cdn.statsroyale.com/images/clan-trophies.png" height="51px" width="51px">\n'
+    htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
+    htmlout += str(clan_data['clanWarTrophies'])
+    htmlout += '</div>\n'
+    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>'
+
+    htmlout += '</div>\n' # End Middle Section Div
+    
+    #Right Secton (nothing in there yet)
+    htmlout += '<div style="float: left; width:33%;"></div>\n'
+    htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/cards.png" height="51px" width="51px">\n'
+    htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
+    htmlout += str(clan_data['donationsPerWeek'])
+    htmlout += '</div>\n'
+    htmlout += '<div style="line-height:20px;font-size:15px">Donations/week</div>'    
+    
+    htmlout += '</div>\n' # End Clan Information Section Div
+    htmlout += '</div>\n'
+#    htmlout += '<div style="width:100%;"">\n'
+#    htmlout += '<div align="center" style="text-align:left;">\n'
+#    htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/trophy.png" height="51px" width="51px">\n'
+#    htmlout += '<div style="line-height:25px;font-size:23px;font-weight:bold">'
+#    htmlout += str(clan_data['clanScore'])
+#    htmlout += '</div>\n'
+#    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>\n'
+#    
+#    # Clan War Information
+#    htmlout += '<div class="clan_info">\n'
+#    htmlout += '<div style="text-align:center;">\n'
+#    htmlout += '<img style="float:left;margin-bottom:20px" src="https://cdn.statsroyale.com/images/clan-trophies.png" height="51px" width="51px">\n'
+#    htmlout += '<div style="line-height:25px;font-size:23px;font-weight:bold">'
+#    htmlout += str(clan_data['clanWarTrophies'])
+#    htmlout += '</div>\n'
+#    htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>\n'
+#    
+    
+    htmlout += '<div style="clear:both;"></div>\n'
+    
     htmlout += '<div class="container_12">\n'
 
-    htmlout += '<table class="sortable" cellpadding="0" cellspacing="0">\n'
+    htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
     htmlout += "<thead>\n"
     htmlout += createTH('Name')
     htmlout += createTH('Role')
@@ -211,6 +250,22 @@ if __name__ == '__main__':
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
     
+    #Capture weekly data if its time, between 23:55 and 11:59:59
+    midnight = timeNow.replace(hour=23, minute=59, second=59, microsecond=0)
+    eleven_fifty_five = timeNow.replace(hour=23, minute=55, second=0, microsecond=0)
+#    timeNow = timeNow.replace(hour=23, minute=57, second=33, microsecond=0)
+#    print(timeNow)
+#    print(midnight)
+#    print(eleven_fifty_five)
+    if timeNow > eleven_fifty_five and timeNow < midnight:
+        fname = clan_data['name'] 
+        fname += '-'
+        fname += timeNow.strftime('%Y%m%d')
+        fname += '.txt'
+        print('Writing Daily Cland Data to: ' + fname)
+        out = open(fname, 'w', encoding='UTF-8')
+        out.write(json.dumps(clan_data, indent = 4))
+        out.close()
+        #print('Time to save the weekly data', fname)
     
-    print(os.path.realpath(__file__))
     
