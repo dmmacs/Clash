@@ -12,7 +12,8 @@ import json
 import datetime
 import pytz
 import sys
-
+import os
+import platform
 
 def createTD(text, css=''):
     retVal = '<td '
@@ -37,13 +38,22 @@ if __name__ == '__main__':
     #https://api.clashroyale.com/v1/clans/%23QQG200V
     #https://api.clashroyale.com/v1/clans/%23QQG200V/members
 
+    apiFname = 'api_key.txt'
     #Read Key from File
     try:
-        fin = open('api_key.txt', 'r')
+        fname = os.path.dirname(__file__)
+        fname = os.path.dirname(os.path.abspath(__file__))
+        if platform.system() == 'Windows':
+            fname += '\\'
+        elif platform.system() == 'Linux':
+            fname += '/'
+        fname += apiFname
+        print(fname)
+        fin = open(fname, 'r')
         key = fin.readline().strip()
         fin.close()
     except FileNotFoundError:
-        print("Unable to find api key file, " + 'api_key.txt')
+        print("Unable to find api key file, " + os.path.realpath(__file__) + apiFname)
         sys.exit(-1)
         
     _authorization = 'authorization' + ':' + key
@@ -73,16 +83,23 @@ if __name__ == '__main__':
     htmlout += '<!DOCTYPE HTML>\n'
     htmlout += '<html>\n<head>\n'
     htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
-    htmlout += '<link href=\"defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-    htmlout += '<link href=\"myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/ >'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>'
+    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>'
+    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>'
+    
+    htmlout += '<link href=\"css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+    htmlout += '<link href=\"css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
     htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
-    htmlout += '<script src="sortable.js"></script>'
+    htmlout += '<script src="js/sortable.js"></script>\n'
 
-    htmlout += "<script src=\"jquery.fixedheadertable.js\"></script>\n"
+    htmlout += "<script src=\"js/jquery.fixedheadertable.js\"></script>\n"
     htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
 
-    htmlout +="<link href=\"dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-    htmlout +="<link href=\"sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+    htmlout +="<link href=\"css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+    htmlout +="<link href=\"css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
 
     htmlout += "</head>\n"
 
@@ -174,6 +191,16 @@ if __name__ == '__main__':
     htmlout += '</body\n'
     htmlout += '</html>\n'
     
+    # add last update date
+    htmlout += '<div align=\"right\">\n'
+    htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
+    eastern = pytz.timezone("US/Eastern")
+#    print(timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    htmlout += timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += '</p>\n'
+#        htmlBuilder.append("<p style=\"font-size:10px;right:auto\"> Dashboard Version: ").append("v").append(jarVer).append("</p>\n");
+    htmlout += '</div>\n'
+    
     
     out = open('index.html', 'w', encoding='UTF-8')
     out.write(htmlout)
@@ -183,3 +210,7 @@ if __name__ == '__main__':
     out = open('tmp.txt', 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
+    
+    
+    print(os.path.realpath(__file__))
+    
