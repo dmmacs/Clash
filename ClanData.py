@@ -8,15 +8,19 @@ Created on Sat May 18 09:45:50 2019
 import requests
 import json
 #import openpyxl
-import time
 import datetime
 import pytz
 
 
-def createTD(text):
-    return ('<td>' + text + '</td>')
+def createTD(text, css=''):
+    retVal = '<td '
+    if css != '':
+        retVal += 'class=' + css 
+    retVal += '>'
+    retVal +=  text + '</td>'
+    return (retVal)
 
-def createTH(text):
+def createTH(text, css=''):
     return ('<th>' + text + '</tj>')
 
 if __name__ == '__main__':
@@ -37,11 +41,13 @@ if __name__ == '__main__':
     
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
     link_clan = 'https://api.clashroyale.com/v1/clans/%23QQG200V'
-    link_members = 'https://api.clashroyale.com/v1/clans/%23QQG200V/members'
+    link_members = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/members' #23QQG200V/members'
     
+    r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer " + key})
+    clan_data = r.json();
+    r.close()
     
-    
-    
+    print(json.dumps(clan_data, indent = 4))
     
     #headers={"Accept":"application/json", "authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjAwNzdlMDJjLTVlZGMtNDA1Ni1hZWNhLTZjZWMwMzRiYjQ4NiIsImlhdCI6MTUzNDM0NjYyMCwic3ViIjoiZGV2ZWxvcGVyL2JlYjQ5NzYzLWNhMzMtNTllYy02MTBjLTAzZmM2MzVmN2Y1OCIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyIxOTAuMjI4LjIyMy4xMzMiXSwidHlwZSI6ImNsaWVudCJ9XX0.YAag5hP2ic3-uURi0eqUwHedL9vLaBgVa19BSbEWHdvi2hn4s1QROwqZRQOsKJMTph_G6kHgBUX2vrEmmmQ3vw"    
     #r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1ODMyYzNlLTQ1YzctNGMwNC1iNTkwLTgyYTI0YzQyMDhiMiIsImlhdCI6MTU1ODIwNTQ5MCwic3ViIjoiZGV2ZWxvcGVyLzE4YzkyMzA4LTE2YzYtZjhmYy0yMjMzLTY0YTM2ZjliZjMyNyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3MC4xNzcuMTY3LjcwIl0sInR5cGUiOiJjbGllbnQifV19.ah33L09g2vdZ0qZYU8gkby60R4x2QhPZefeES9qXkuH4D-t8sqYw1M5p-xzeboSWHune8rKQw2A277QnWlLR-w"})
@@ -52,12 +58,12 @@ if __name__ == '__main__':
     #print(json_string)
     
     data_store = r.json()
-    
+    r.close()
     
     htmlout = ''
     htmlout += '<!DOCTYPE HTML>\n'
     htmlout += '<html>\n<head>\n'
-    htmlout += '<title>' + 'Clash Royale - BeaverCleavers Clan' + '</title>\n'
+    htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
     htmlout += '<link href=\"defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
     htmlout += '<link href=\"myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
     htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
@@ -72,6 +78,26 @@ if __name__ == '__main__':
     htmlout += "</head>\n"
 
     htmlout += "<body>\n"
+    
+    #Clan Name Section
+    htmlout += '<div class="clan_header">\n' 
+    htmlout += '<h1 class="clan_name">'
+    htmlout +=  clan_data['name']
+    htmlout += '</h1>\n'
+    htmlout += '<p class="clan_description">'
+    htmlout += clan_data['description']
+    htmlout += '</p>\n'
+    htmlout += '</div>\n'
+    
+    #Clan Information Section
+    htmlout += '<div class="clan_info">\n'
+    htmlout += '<h1 class="clan_name">'
+    htmlout +=  str(clan_data['clanScore'])
+    htmlout += '</h1>\n'
+#    htmlout += '<p class="clan_description">'
+#    htmlout += clan_data['description']
+#    htmlout += '</p>\n'
+    htmlout += '</div>\n'
 
     htmlout += '<div class="container_12">\n'
 
@@ -87,19 +113,24 @@ if __name__ == '__main__':
     htmlout += createTH('Donations')
     htmlout += '</thead>\n'
     
-    #print(json_string["items"][3])
-    #print(datastore["office"].get("law"))
-    #print(data_store["items"][3])
     
     htmlout += '<tbody>\n'
     for item in data_store["items"]:
-        #print(item['lastSeen'])
         
         htmlout += '<tr>'
-        htmlout += createTD(item['name'])
-        htmlout += createTD(item['role'])
-        htmlout += createTD(str(item['expLevel']))
-        #2019 05 18 T 23 49 06.000Z
+
+        if item['clanRank'] == 1:
+            css = 'goldbkd'
+        elif item['clanRank'] == 2:
+            css = 'silverbkd'
+        elif item['clanRank'] == 3:
+            css = 'bronzebkd'
+        else:
+            css = ''
+        htmlout += createTD(item['name'], css)
+        htmlout += createTD(item['role'], css)
+        htmlout += createTD(str(item['expLevel']), css)
+
         last_seen_str = item['lastSeen']
         year = int(last_seen_str[0:4])
         month = int(last_seen_str[4:6])
@@ -110,37 +141,24 @@ if __name__ == '__main__':
         timezone = pytz.timezone('UTC')
         
         last_seen= datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=pytz.utc)
-#            print(last_seen)
-#        timezone = pytz.timezone(tz=pytz.UTC)
-#            print(last_seen.astimezone(tz=eastern))
-#            print(last_seen.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p'))
+
         timeNow = datetime.datetime.now().replace(microsecond=0)
         timeNow = timeNow.astimezone(tz=timezone)
         timediff = timeNow -  last_seen
-            
+        
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
         rest = rest % SECONDS_PER_HOUR
 
         if rest >= HALF:
             hours += 1
-#                        
-#            print(timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p'))
-#            print('{} hours ago'.format(hours))
-            
-            #hours,rest = divmod(timediff, 3600)
-            #print(hours)
-        htmlout += createTD('{} hours ago'.format(hours))
-            
-            
-#        last_seen = datetime.datetime()
-        #time.time(item['lastSeen'])
-        htmlout += createTD(str(item['trophies']))
-        htmlout += createTD(item['arena']['name'])
-        htmlout += createTD(str(item['clanRank']))
-        htmlout += createTD(str(item['donations']))
+        htmlout += createTD('{} hours ago'.format(hours), css)
+        htmlout += createTD(str(item['trophies']), css)
+        htmlout += createTD(item['arena']['name'], css)
+        
+        htmlout += createTD(str(item['clanRank']), css)
+        htmlout += createTD(str(item['donations']), css)
         htmlout += '</tr>\n'
         
-        #print(item['name'])
     htmlout += '</tbody>\n'
 
     htmlout += '</table>\n'
@@ -148,10 +166,6 @@ if __name__ == '__main__':
     htmlout += '</html>\n'
     
     
-#    f = open('tmp.txt', 'w')
-#    f.write(json.dumps(r.json(), indent = 2))
-#    f.close()
-
     out = open('index.html', 'w', encoding='UTF-8')
     out.write(htmlout)
     out.close()

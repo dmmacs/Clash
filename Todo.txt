@@ -1,2 +1,5 @@
--Add Formatting for top 3 people (gold, silver, bronze)
+X-Add Formatting for top 3 people (gold, silver, bronze)
 -Add formatting for remainder of cells(center, etc.)
+-Add date last updated
+-Figure out how to add Clan Icon
+-
