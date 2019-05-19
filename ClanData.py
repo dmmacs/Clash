@@ -39,6 +39,7 @@ if __name__ == '__main__':
 
     hash_sign = '%23'
     clan_tag = 'QQG200V'
+    output_folder = 'output'
 
     #https://api.clashroyale.com/v1/clans/%23QQG200V
     #https://api.clashroyale.com/v1/clans/%23QQG200V/members
@@ -50,8 +51,10 @@ if __name__ == '__main__':
         fname = os.path.dirname(os.path.abspath(__file__))
         if platform.system() == 'Windows':
             fname += '\\'
+            output_folder += '\\'
         elif platform.system() == 'Linux':
             fname += '/'
+            output_folder == '/'
         fname += apiFname
         fin = open(fname, 'r')
         key = fin.readline().strip()
@@ -282,28 +285,64 @@ if __name__ == '__main__':
     out.close()
     
     #Save Clan Data
-    out = open('clan_data.txt', 'w', encoding='UTF-8')
+    fname = output_folder
+    fname += clan_data['name'] 
+    fname += '-'
+    fname += 'clan_data.txt'
+    fname += '-'
+    fname += timeNow.strftime('%Y%m%d')
+    fname += '.txt'
+    print(fname)
+    out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
     
     #Save Clan Member Data
-    out = open('clan_member_data.txt', 'w', encoding='UTF-8')
+    fname = output_folder
+    fname += clan_data['name'] 
+    fname += '-'
+    fname += 'clan_member_data.txt'
+    fname += '-'
+    fname += timeNow.strftime('%Y%m%d')
+    fname += '.txt'
+    out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_member_data, indent = 4))
     out.close()
     
     
     #Save Warlog Data
-    out = open('warlog.txt', 'w', encoding='UTF-8')
+    fname = output_folder
+    fname += clan_data['name'] 
+    fname += '-'
+    fname += 'warlog.txt'
+    fname += '-'
+    fname += timeNow.strftime('%Y%m%d')
+    fname += '.txt'
+    out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_warlog, indent = 4))
     out.close()
 
     #Save Current War Data
-    out = open('currentwar.txt', 'w', encoding='UTF-8')
+    fname = output_folder
+    fname += clan_data['name'] 
+    fname += '-'
+    fname += 'currentwar.txt'
+    fname += '-'
+    fname += timeNow.strftime('%Y%m%d')
+    fname += '.txt'
+    out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_current_war, indent = 4))
     out.close()
 
     #Save Global Tournament Data
-    out = open('tourn_global_data.txt', 'w', encoding='UTF-8')
+    fname = output_folder
+    fname += clan_data['name'] 
+    fname += '-'
+    fname += 'tourn_global_data.txt'
+    fname += '-'
+    fname += timeNow.strftime('%Y%m%d')
+    fname += '.txt'
+    out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(tourn_global_data, indent = 4))
     out.close()
     

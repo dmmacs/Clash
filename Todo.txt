@@ -2,8 +2,15 @@ X-Add Formatting for top 3 people (gold, silver, bronze)
 X-Add formatting for remainder of cells(center, etc.)
 X-Add date last updated
 X-Figure out how to add Clan Icon
--Adjust Clan Icon to cover Bronze, Silver, Gold
+X-Modify file save logica to include the date
+X-Put saved files in an output folder
+
+X-Adjust Clan Icon to cover Bronze, Silver, Gold
 -Add argparse
 --Add Option to pass in clan tag on command line
 --Add Option to pass in key api on command line
---
+-Setup domain on Digital Ocean
+
+-History
+--Add history per player per week for donations and war participation
+--Split column heading across donations and war?
