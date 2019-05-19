@@ -38,6 +38,7 @@ if __name__ == '__main__':
 
     hash_sign = '%23'
     clan_tag = 'QQG200V'
+
     #https://api.clashroyale.com/v1/clans/%23QQG200V
     #https://api.clashroyale.com/v1/clans/%23QQG200V/members
 
@@ -61,7 +62,7 @@ if __name__ == '__main__':
     _authorization = 'authorization' + ':' + key
     
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
-    link_clan = 'https://api.clashroyale.com/v1/clans/%23QQG200V'
+    link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
     link_members = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/members' #23QQG200V/members'
     
     r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer " + key})
@@ -103,7 +104,23 @@ if __name__ == '__main__':
     
     #Clan Name Section
     htmlout += '<div style="width:100%;">\n' 
-    htmlout += '<img style="float:left;margin-bottom:20px;" src="https://statsroyale.com/images/clanwars/16000164_silver3.png" height="100px" width="72px">\n'
+    
+    clan_badge = 'https://statsroyale.com/images/clanwars/'
+    clan_badge += str(clan_data['badgeId'])
+    
+    if clan_data['clanWarTrophies'] < 600:
+        clan_badge += '_bronze3'
+    elif clan_data['clanWarTrophies'] < 1500:
+        clan_badge += '_silver3'
+    elif clan_data['clanWarTrophies'] < 3000:
+        clan_badge += '_gold3'
+    else:
+        clan_badge += '_magical'
+    clan_badge += '.png'
+    
+    htmlout += '<img style="float:left;margin-bottom:20px;" src="'
+    htmlout += clan_badge
+    htmlout += '" height="100px" width="72px">\n'
     
     htmlout += '<div style="font-weight:bold;font-size:35px;margin-left:77px;line-height:60px">'
     htmlout +=  clan_data['name']

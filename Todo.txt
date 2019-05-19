@@ -1,5 +1,9 @@
 X-Add Formatting for top 3 people (gold, silver, bronze)
--Add formatting for remainder of cells(center, etc.)
--Add date last updated
--Figure out how to add Clan Icon
--
+X-Add formatting for remainder of cells(center, etc.)
+X-Add date last updated
+X-Figure out how to add Clan Icon
+-Adjust Clan Icon to cover Bronze, Silver, Gold
+-Add argparse
+--Add Option to pass in clan tag on command line
+--Add Option to pass in key api on command line
+--
