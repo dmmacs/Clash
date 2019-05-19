@@ -1,29 +1,245 @@
 td.nameBold {font-weight: bold}
-td.redbkd {background-color:#FF0000; font-weight: bold}
-td.ornbkd {background-color:#F79646; font-weight: bold}
-td.yelbkd {background-color:#FFFF00; font-weight: bold}
-td.grnbkd {background-color:#00FF00; font-weight: bold}
-p.yelbkd {background-color:#FFFF00; font-weight: bold}
-p.redbkd {background-color:#FF0000; font-weight: bold}
-p.ornbkd {background-color:#F79646; font-weight: bold}
+
+td.redbkd {background-color:#FF0000; font-weight: bold; text-align: center;}
+
+td.ornbkd {background-color:#F79646; font-weight: bold; text-align: center;}
+
+td.yelbkd {background-color:#FFFF00; font-weight: bold; text-align: center;}
+
+td.grnbkd {background-color:#00FF00; font-weight: bold; text-align: center;}
+
+td.blubkd {background-color:#0000FF; font-weight: bold; color:white; text-align: center;}
+
+p.yelbkd {background-color:#FFFF00; font-weight: bold; text-align: center;}
+
+p.redbkd {background-color:#FF0000; font-weight: bold; text-align: center;}
+
+p.ornbkd {background-color:#F79646; font-weight: bold; text-align: center;}
+
+ 
+
+a:link {color:inherit}
+
+a:visited {color:inherit}
+
+a:hover {color:inherit}
+
+a:active{color:inherit}
+
+ 
+
+a.blue:link {color:inherit}
+
+a.blue:visited {color:inherit}
+
+a.blue:hover {color:inherit}
+
+a.blue:active{color:inherit}
+
+ 
+
+ 
+
+ 
+
+ 
 
 .container_12{
-		margin-left: auto;
-		margin-right: auto;
-		width: 99%;
-		}
-		
+
+                                margin-left: auto;
+
+                                margin-right: auto;
+
+                                width: 99%;
+
+                                }
+
+                               
+
 .container_legend{
-		margin-left: auto;
-		margin-right: auto;
-		width: 50%;
-		font-size: 13px;
-		}
+
+                                margin-left: auto;
+
+                                margin-right: auto;
+
+                                width: 50%;
+
+                                font-size: 13px;
+
+                                }
+
+ 
 
 .container_metrics{
-		margin-left: 10%;
-		margin-right: auto;
-		width: 50%;
-		font-size: 15px;
-		}
 
+                                margin-left: 10%;
+
+                                margin-right: auto;
+
+                                width: 50%;
+
+                                font-size: 15px;
+
+                                }
+
+ 
+
+ 
+
+.metricsTable {
+
+                /* text */
+
+                /*font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; */
+
+                font-family: 'Courier new';
+
+                border: 2px solid #000000;
+
+                }
+
+ 
+
+.metricsTable td, .metricsTable th {
+
+                /* appearance */
+
+                border: 1px solid #778899;
+
+               
+
+                /* size */
+
+                padding: 5px;
+
+                }
+
+ 
+
+.metricsTable tbody tr td {
+
+                /* appearance */
+
+/*           background-color: #eef2f9; */
+
+                background-image: -moz-linear-gradient(
+
+                                top,
+
+                                rgba(255,255,255,0.4) 0%,
+
+                                rgba(255,255,255,0.2) 50%,
+
+                                rgba(255,255,255,0.1) 51%,
+
+                                rgba(255,255,255,0.0) 100%);
+
+               
+
+                background-image: -webkit-gradient(
+
+                                linear, left top, left bottom,
+
+                                color-stop(0%,rgba(255,255,255,0.4)),
+
+                                color-stop(50%,rgba(255,255,255,0.2)),
+
+                                color-stop(51%,rgba(255,255,255,0.1)),
+
+                                color-stop(100%,rgba(255,255,255,0.0)));
+
+                               
+
+                /* text */
+
+                color: #262c31;
+
+                font-size: 11px;
+
+                }
+
+ 
+
+.metricsTable tbody tr.odd td {
+
+                /* appearance */
+
+/*           background-color: #d6e0ef; */
+
+                background-image: -moz-linear-gradient(
+
+                                top,
+
+                                rgba(255,255,255,0.4) 0%,
+
+                                rgba(255,255,255,0.2) 50%,
+
+                                rgba(255,255,255,0.1) 51%,
+
+                                rgba(255,255,255,0.0) 100%);
+
+               
+
+                background-image: -webkit-gradient(
+
+                                linear, left top, left bottom,
+
+                                color-stop(0%,rgba(255,255,255,0.4)),
+
+                                color-stop(50%,rgba(255,255,255,0.2)),
+
+                                color-stop(51%,rgba(255,255,255,0.1)),
+
+                                color-stop(100%,rgba(255,255,255,0.0)));
+
+                }
+
+ 
+
+.metricsTable thead tr th,
+
+.metricsTable tfoot tr td {
+
+                /* appearance */
+
+                background-color: #8ca9cf;
+
+                background-image: -moz-linear-gradient(
+
+                                top,
+
+                                rgba(255,255,255,0.4) 0%,
+
+                                rgba(255,255,255,0.2) 50%,
+
+                                rgba(255,255,255,0.1) 51%,
+
+                                rgba(255,255,255,0.0) 100%);
+
+               
+
+                background-image: -webkit-gradient(
+
+                                linear, left top, left bottom,
+
+                                color-stop(0%,rgba(255,255,255,0.4)),
+
+                                color-stop(50%,rgba(255,255,255,0.2)),
+
+                                color-stop(51%,rgba(255,255,255,0.1)),
+
+                                color-stop(100%,rgba(255,255,255,0.0)));
+
+                               
+
+                /* text */
+
+                color: #121517;
+
+                font-size: 12px;
+
+                font-weight: bold;
+
+                text-shadow: 0 1px 1px #e8ebee;
+
+                }
