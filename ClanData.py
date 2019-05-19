@@ -30,8 +30,27 @@ def createTD(text, css='', align=''):
 def createTH(text, css=''):
     return ('<th>' + text + '</tj>')
 
+def processClashDate(tmpStr):
+    year = int(tmpStr[0:4])
+    month = int(tmpStr[4:6])
+    day = int(tmpStr[6:8])
+    hour = int(tmpStr[9:11])
+    minute = int(tmpStr[11:13])
+    seconds = int(tmpStr[13:15])
+    
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=pytz.utc)
+    return retVal
+    
+
+
+
 if __name__ == '__main__':
 
+    #Timezones
+    UTC_TZ = pytz.timezone('UTC')
+    Eastern_TZ = pytz.timezone("US/Eastern")
+
+    
     SECONDS_PER_HOUR = 3600
     THREE_QUARTERS = (SECONDS_PER_HOUR / 4 * 3)
     HALF = (SECONDS_PER_HOUR / 4 * 2)
@@ -88,18 +107,18 @@ if __name__ == '__main__':
     print('total Clan Members = ' + str(clan_data['members']))
     
     # Get Clan warlog Data
-    print('Getting Clan Member Data')
+    print('Getting WarLog Data')
     r = requests.get(link_warlog, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_warlog = r.json()
     r.close()
     print('total Clan Members = ' + str(clan_data['members']))
     
     # Get Clan Current War Data
-    print('Getting Clan Member Data')
+    print('Getting Current War Data')
     r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_current_war = r.json()
     r.close()
-    print('total Clan Members = ' + str(clan_data['members']))
+    print('Clan War State = ' + str(clan_current_war['state']) + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
@@ -107,8 +126,9 @@ if __name__ == '__main__':
     r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     tourn_global_data = r.json()
     r.close()
-    print('total Clan Members = ' + str(clan_data['members']))
-    
+    print('Global Tournament Title: ' + tourn_global_data['items'][0]['title'] + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+#    print(json.dumps(tourn_global_data, indent = 4))
+    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     
@@ -238,19 +258,10 @@ if __name__ == '__main__':
         htmlout += createTD(item['role'], css)
         htmlout += createTD(str(item['expLevel']), css, 'center')
 
-        last_seen_str = item['lastSeen']
-        year = int(last_seen_str[0:4])
-        month = int(last_seen_str[4:6])
-        day = int(last_seen_str[6:8])
-        hour = int(last_seen_str[9:11])
-        minute = int(last_seen_str[11:13])
-        seconds = int(last_seen_str[13:15])
-        timezone = pytz.timezone('UTC')
+        last_seen = processClashDate(item['lastSeen'])
         
-        last_seen= datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=pytz.utc)
-
         timeNow = datetime.datetime.now().replace(microsecond=0)
-        timeNow = timeNow.astimezone(tz=timezone)
+        timeNow = timeNow.astimezone(tz=UTC_TZ)
         timediff = timeNow -  last_seen
         
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
@@ -273,9 +284,8 @@ if __name__ == '__main__':
     # add last update date
     htmlout += '<div align=\"right\">\n'
     htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
-    eastern = pytz.timezone("US/Eastern")
 
-    htmlout += timeNow.astimezone(tz=eastern).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += timeNow.astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
     htmlout += '</p>\n'
 
     htmlout += '</div>\n'
@@ -293,7 +303,7 @@ if __name__ == '__main__':
     fname += '-'
     fname += timeNow.strftime('%Y%m%d')
     fname += '.txt'
-    print(fname)
+    print('Saving Clan Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
@@ -306,6 +316,7 @@ if __name__ == '__main__':
     fname += '-'
     fname += timeNow.strftime('%Y%m%d')
     fname += '.txt'
+    print('Saving Clan Member Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_member_data, indent = 4))
     out.close()
@@ -319,6 +330,7 @@ if __name__ == '__main__':
     fname += '-'
     fname += timeNow.strftime('%Y%m%d')
     fname += '.txt'
+    print('Saving Warlog Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_warlog, indent = 4))
     out.close()
@@ -331,6 +343,7 @@ if __name__ == '__main__':
     fname += '-'
     fname += timeNow.strftime('%Y%m%d')
     fname += '.txt'
+    print('Saving Current War Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_current_war, indent = 4))
     out.close()
@@ -343,6 +356,7 @@ if __name__ == '__main__':
     fname += '-'
     fname += timeNow.strftime('%Y%m%d')
     fname += '.txt'
+    print('Saving Global Tournament Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(tourn_global_data, indent = 4))
     out.close()
@@ -367,5 +381,5 @@ if __name__ == '__main__':
     
     
     
-    for item in clan_warlog['items']:
-        print(item['seasonId'])
+#    for item in clan_warlog['items']:
+#        print(item['seasonId'])
