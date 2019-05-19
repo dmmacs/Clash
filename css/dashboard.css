@@ -1,5 +1,6 @@
-h1.clan_name {font-weight:bold;font-size:x-large;}
-p.clan_description{font-size:medium}
+h1.clan_name {font-weight:bold;font-size:xx-large;margin-left:77px}
+p.clan_trophies {font-weight:bold;font-size:23px;margin-left:56px;line-height:4px}
+p.clan_description{font-size:small}
 
 td.nameBold {font-weight: bold}
 td.redbkd {background-color:#FF0000; font-weight: bold; text-align: center;}
