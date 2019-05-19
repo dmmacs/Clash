@@ -1,3 +1,4 @@
+#! /home/dmmacs/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
 """
 Created on Sat May 18 09:45:50 2019
@@ -10,6 +11,7 @@ import json
 #import openpyxl
 import datetime
 import pytz
+import sys
 
 
 def createTD(text, css=''):
@@ -34,9 +36,16 @@ if __name__ == '__main__':
     clan_tag = 'QQG200V'
     #https://api.clashroyale.com/v1/clans/%23QQG200V
     #https://api.clashroyale.com/v1/clans/%23QQG200V/members
-    
-    key = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjY1ODMyYzNlLTQ1YzctNGMwNC1iNTkwLTgyYTI0YzQyMDhiMiIsImlhdCI6MTU1ODIwNTQ5MCwic3ViIjoiZGV2ZWxvcGVyLzE4YzkyMzA4LTE2YzYtZjhmYy0yMjMzLTY0YTM2ZjliZjMyNyIsInNjb3BlcyI6WyJyb3lhbGUiXSwibGltaXRzIjpbeyJ0aWVyIjoiZGV2ZWxvcGVyL3NpbHZlciIsInR5cGUiOiJ0aHJvdHRsaW5nIn0seyJjaWRycyI6WyI3MC4xNzcuMTY3LjcwIl0sInR5cGUiOiJjbGllbnQifV19.ah33L09g2vdZ0qZYU8gkby60R4x2QhPZefeES9qXkuH4D-t8sqYw1M5p-xzeboSWHune8rKQw2A277QnWlLR-w'
-    
+
+    #Read Key from File
+    try:
+        fin = open('api_key.txt', 'r')
+        key = fin.readline().strip()
+        fin.close()
+    except FileNotFoundError:
+        print("Unable to find api key file, " + 'api_key.txt')
+        sys.exit(-1)
+        
     _authorization = 'authorization' + ':' + key
     
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
@@ -171,3 +180,6 @@ if __name__ == '__main__':
     out.close()
     
     
+    out = open('tmp.txt', 'w', encoding='UTF-8')
+    out.write(json.dumps(clan_data, indent = 4))
+    out.close()
