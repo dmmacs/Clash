@@ -19,3 +19,9 @@ X-Adjust Clan Icon to cover Bronze, Silver, Gold
 -History
 --Add history per player per week for donations and war participation
 --Split column heading across donations and war?
+
+
+-Folders
+--Add a folder for each clan
+--
+
