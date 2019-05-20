@@ -1,0 +1,1961 @@
+{
+    "items": [
+        {
+            "seasonId": 29,
+            "createdDate": "20190518T132831.000Z",
+            "participants": [
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#28R9LRVGL",
+                    "name": "M1111",
+                    "cardsEarned": 140,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#LP02PYC",
+                    "name": "bruno",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82L20VJ8V",
+                    "name": "BlackShadow",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 650,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 680,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 2,
+                    "wins": 2,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#JVRYV92",
+                        "name": "anzali",
+                        "badgeId": 16000064,
+                        "clanScore": 910,
+                        "participants": 18,
+                        "battlesPlayed": 17,
+                        "wins": 14,
+                        "crowns": 30
+                    },
+                    "trophyChange": 114
+                },
+                {
+                    "clan": {
+                        "tag": "#GC0QQ9Y",
+                        "name": "chachurrios",
+                        "badgeId": 16000172,
+                        "clanScore": 1379,
+                        "participants": 18,
+                        "battlesPlayed": 18,
+                        "wins": 9,
+                        "crowns": 17
+                    },
+                    "trophyChange": 59
+                },
+                {
+                    "clan": {
+                        "tag": "#2RV980Y9",
+                        "name": "the rebelion",
+                        "badgeId": 16000000,
+                        "clanScore": 1185,
+                        "participants": 18,
+                        "battlesPlayed": 15,
+                        "wins": 8,
+                        "crowns": 20
+                    },
+                    "trophyChange": -14
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1297,
+                        "participants": 17,
+                        "battlesPlayed": 13,
+                        "wins": 8,
+                        "crowns": 20
+                    },
+                    "trophyChange": -22
+                },
+                {
+                    "clan": {
+                        "tag": "#9GC80JYL",
+                        "name": "\u7687\u5bb6\u5408\u4f5c\u90e8\u843d|||",
+                        "badgeId": 16000144,
+                        "clanScore": 1334,
+                        "participants": 18,
+                        "battlesPlayed": 14,
+                        "wins": 6,
+                        "crowns": 10
+                    },
+                    "trophyChange": -74
+                }
+            ]
+        },
+        {
+            "seasonId": 29,
+            "createdDate": "20190516T061756.000Z",
+            "participants": [
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 300,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 840,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 2,
+                    "wins": 2,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#LP02PYC",
+                    "name": "bruno",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 840,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#222RJ88V",
+                    "name": "assassin2000",
+                    "cardsEarned": 840,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#YPRRY9P0",
+                    "name": "Slusherk1ller69",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2CCV8PYJR",
+                    "name": "Mutant Giant",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 260,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#PCG9JU20J",
+                    "name": "DatOneGuy",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#8YU8V2J",
+                        "name": "\u30e9\u30fc\u30e1\u30f3\u611b\u597d\u4f1a",
+                        "badgeId": 16000145,
+                        "clanScore": 962,
+                        "participants": 19,
+                        "battlesPlayed": 20,
+                        "wins": 13,
+                        "crowns": 21
+                    },
+                    "trophyChange": 113
+                },
+                {
+                    "clan": {
+                        "tag": "#9JQY8G0Y",
+                        "name": "\u4eac\u671d562\u9662",
+                        "badgeId": 16000143,
+                        "clanScore": 1189,
+                        "participants": 20,
+                        "battlesPlayed": 19,
+                        "wins": 12,
+                        "crowns": 18
+                    },
+                    "trophyChange": 62
+                },
+                {
+                    "clan": {
+                        "tag": "#99J9Y2R8",
+                        "name": "ForFun-Czech",
+                        "badgeId": 16000028,
+                        "clanScore": 1453,
+                        "participants": 20,
+                        "battlesPlayed": 16,
+                        "wins": 11,
+                        "crowns": 27
+                    },
+                    "trophyChange": -9
+                },
+                {
+                    "clan": {
+                        "tag": "#99UVJJC0",
+                        "name": "\u6606\u4ed1\u8bad\u7ec3\u8425",
+                        "badgeId": 16000012,
+                        "clanScore": 1264,
+                        "participants": 20,
+                        "battlesPlayed": 17,
+                        "wins": 9,
+                        "crowns": 16
+                    },
+                    "trophyChange": -31
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1319,
+                        "participants": 18,
+                        "battlesPlayed": 17,
+                        "wins": 6,
+                        "crowns": 16
+                    },
+                    "trophyChange": -74
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190514T025605.000Z",
+            "participants": [
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#222RJ88V",
+                    "name": "assassin2000",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P2PYJ0ULQ",
+                    "name": "alfred spider",
+                    "cardsEarned": 440,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 650,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PCG9JU20J",
+                    "name": "DatOneGuy",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 160,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 960,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2CCV8PYJR",
+                    "name": "Mutant Giant",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 780,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1393,
+                        "participants": 17,
+                        "battlesPlayed": 17,
+                        "wins": 10,
+                        "crowns": 19
+                    },
+                    "trophyChange": 110
+                },
+                {
+                    "clan": {
+                        "tag": "#8CRPLY2P",
+                        "name": "Hunters Elite",
+                        "badgeId": 16000163,
+                        "clanScore": 1522,
+                        "participants": 17,
+                        "battlesPlayed": 15,
+                        "wins": 7,
+                        "crowns": 18
+                    },
+                    "trophyChange": 57
+                },
+                {
+                    "clan": {
+                        "tag": "#VG2Q8P",
+                        "name": "Black-Flag507",
+                        "badgeId": 16000162,
+                        "clanScore": 1392,
+                        "participants": 15,
+                        "battlesPlayed": 12,
+                        "wins": 7,
+                        "crowns": 16
+                    },
+                    "trophyChange": -13
+                },
+                {
+                    "clan": {
+                        "tag": "#RQ8YGL",
+                        "name": "Bolivia del 94",
+                        "badgeId": 16000083,
+                        "clanScore": 1176,
+                        "participants": 16,
+                        "battlesPlayed": 14,
+                        "wins": 5,
+                        "crowns": 8
+                    },
+                    "trophyChange": -35
+                },
+                {
+                    "clan": {
+                        "tag": "#Y8PV2P2J",
+                        "name": "FBI",
+                        "badgeId": 16000162,
+                        "clanScore": 1398,
+                        "participants": 16,
+                        "battlesPlayed": 14,
+                        "wins": 4,
+                        "crowns": 7
+                    },
+                    "trophyChange": -76
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190512T025207.000Z",
+            "participants": [
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#UL9QL8CR",
+                    "name": "Serpii 2",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P2PYJ0ULQ",
+                    "name": "alfred spider",
+                    "cardsEarned": 440,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 300,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 900,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 420,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 420,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 240,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PUL0QPRQG",
+                    "name": "ram",
+                    "cardsEarned": 120,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2CCV8PYJR",
+                    "name": "Mutant Giant",
+                    "cardsEarned": 360,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#P8VU92RU",
+                        "name": "SIKARIUS TEAM",
+                        "badgeId": 16000005,
+                        "clanScore": 1609,
+                        "participants": 18,
+                        "battlesPlayed": 16,
+                        "wins": 10,
+                        "crowns": 18
+                    },
+                    "trophyChange": 110
+                },
+                {
+                    "clan": {
+                        "tag": "#2LLC2U",
+                        "name": "age of chileII\u2122",
+                        "badgeId": 16000038,
+                        "clanScore": 1505,
+                        "participants": 18,
+                        "battlesPlayed": 15,
+                        "wins": 8,
+                        "crowns": 16
+                    },
+                    "trophyChange": 58
+                },
+                {
+                    "clan": {
+                        "tag": "#UGLJQ9R",
+                        "name": "KAOS PERU 2.0",
+                        "badgeId": 16000124,
+                        "clanScore": 1269,
+                        "participants": 18,
+                        "battlesPlayed": 17,
+                        "wins": 7,
+                        "crowns": 16
+                    },
+                    "trophyChange": -13
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1283,
+                        "participants": 18,
+                        "battlesPlayed": 15,
+                        "wins": 7,
+                        "crowns": 14
+                    },
+                    "trophyChange": -33
+                },
+                {
+                    "clan": {
+                        "tag": "#P929UGJ0",
+                        "name": "la botica",
+                        "badgeId": 16000163,
+                        "clanScore": 1132,
+                        "participants": 18,
+                        "battlesPlayed": 14,
+                        "wins": 6,
+                        "crowns": 13
+                    },
+                    "trophyChange": -74
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190510T024549.000Z",
+            "participants": [
+                {
+                    "tag": "#28R9LRVGL",
+                    "name": "M1111",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 780,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2CCV8PYJR",
+                    "name": "Mutant Giant",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PUL0QPRQG",
+                    "name": "ram",
+                    "cardsEarned": 240,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 2,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 300,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#2PUUYCQQ",
+                        "name": "The Killers",
+                        "badgeId": 16000124,
+                        "clanScore": 992,
+                        "participants": 17,
+                        "battlesPlayed": 14,
+                        "wins": 9,
+                        "crowns": 21
+                    },
+                    "trophyChange": 109
+                },
+                {
+                    "clan": {
+                        "tag": "#P0LJ08CC",
+                        "name": "FOBOS",
+                        "badgeId": 16000009,
+                        "clanScore": 1112,
+                        "participants": 16,
+                        "battlesPlayed": 15,
+                        "wins": 8,
+                        "crowns": 21
+                    },
+                    "trophyChange": 58
+                },
+                {
+                    "clan": {
+                        "tag": "#PGVVQ9CR",
+                        "name": "BOLIVIA KILLER2",
+                        "badgeId": 16000024,
+                        "clanScore": 1357,
+                        "participants": 18,
+                        "battlesPlayed": 15,
+                        "wins": 6,
+                        "crowns": 15
+                    },
+                    "trophyChange": -14
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1316,
+                        "participants": 17,
+                        "battlesPlayed": 14,
+                        "wins": 5,
+                        "crowns": 15
+                    },
+                    "trophyChange": -35
+                },
+                {
+                    "clan": {
+                        "tag": "#9J0GPL8Y",
+                        "name": "os melhores",
+                        "badgeId": 16000137,
+                        "clanScore": 1128,
+                        "participants": 16,
+                        "battlesPlayed": 14,
+                        "wins": 4,
+                        "crowns": 5
+                    },
+                    "trophyChange": -76
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190508T011538.000Z",
+            "participants": [
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 150,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 900,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 780,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#28R9LRVGL",
+                    "name": "M1111",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 700,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 1020,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 900,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#JRQVQRP",
+                        "name": "clashers",
+                        "badgeId": 16000146,
+                        "clanScore": 1496,
+                        "participants": 13,
+                        "battlesPlayed": 12,
+                        "wins": 6,
+                        "crowns": 15
+                    },
+                    "trophyChange": 106
+                },
+                {
+                    "clan": {
+                        "tag": "#PQJJYLG",
+                        "name": "StrategyCasters",
+                        "badgeId": 16000159,
+                        "clanScore": 1358,
+                        "participants": 14,
+                        "battlesPlayed": 14,
+                        "wins": 6,
+                        "crowns": 10
+                    },
+                    "trophyChange": 21
+                },
+                {
+                    "clan": {
+                        "tag": "#8GRQV2UV",
+                        "name": "SJP Gangsta",
+                        "badgeId": 16000012,
+                        "clanScore": 1243,
+                        "participants": 13,
+                        "battlesPlayed": 13,
+                        "wins": 6,
+                        "crowns": 10
+                    },
+                    "trophyChange": 21
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1351,
+                        "participants": 14,
+                        "battlesPlayed": 11,
+                        "wins": 6,
+                        "crowns": 8
+                    },
+                    "trophyChange": -34
+                },
+                {
+                    "clan": {
+                        "tag": "#P2R98G8L",
+                        "name": "terro dos noobs",
+                        "badgeId": 16000026,
+                        "clanScore": 1290,
+                        "participants": 14,
+                        "battlesPlayed": 10,
+                        "wins": 5,
+                        "crowns": 9
+                    },
+                    "trophyChange": -75
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190506T005456.000Z",
+            "participants": [
+                {
+                    "tag": "#PLQUUUC8P",
+                    "name": "fuqwan",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 1020,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 480,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 960,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#8280JR9UR",
+                    "name": "huf",
+                    "cardsEarned": 780,
+                    "battlesPlayed": 2,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#LUGVLU",
+                        "name": "POGI 4 POGI",
+                        "badgeId": 16000148,
+                        "clanScore": 1153,
+                        "participants": 12,
+                        "battlesPlayed": 12,
+                        "wins": 9,
+                        "crowns": 17
+                    },
+                    "trophyChange": 109
+                },
+                {
+                    "clan": {
+                        "tag": "#9CJ8PYLJ",
+                        "name": "Game Of Thrones",
+                        "badgeId": 16000100,
+                        "clanScore": 1466,
+                        "participants": 12,
+                        "battlesPlayed": 9,
+                        "wins": 7,
+                        "crowns": 13
+                    },
+                    "trophyChange": 57
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1385,
+                        "participants": 12,
+                        "battlesPlayed": 12,
+                        "wins": 6,
+                        "crowns": 15
+                    },
+                    "trophyChange": -14
+                },
+                {
+                    "clan": {
+                        "tag": "#V8PGJQ",
+                        "name": "the walk dead",
+                        "badgeId": 16000026,
+                        "clanScore": 1247,
+                        "participants": 13,
+                        "battlesPlayed": 13,
+                        "wins": 5,
+                        "crowns": 15
+                    },
+                    "trophyChange": -35
+                },
+                {
+                    "clan": {
+                        "tag": "#9ULPL9GY",
+                        "name": "trumpety bois",
+                        "badgeId": 16000008,
+                        "clanScore": 1313,
+                        "participants": 13,
+                        "battlesPlayed": 9,
+                        "wins": 3,
+                        "crowns": 7
+                    },
+                    "trophyChange": -77
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190503T201324.000Z",
+            "participants": [
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 1020,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P2PYJ0ULQ",
+                    "name": "alfred spider",
+                    "cardsEarned": 330,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 300,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 720,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 560,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 900,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PLQUUUC8P",
+                    "name": "fuqwan",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#2Y0P2PPJ",
+                        "name": "TrueCanada",
+                        "badgeId": 16000017,
+                        "clanScore": 1518,
+                        "participants": 15,
+                        "battlesPlayed": 13,
+                        "wins": 11,
+                        "crowns": 25
+                    },
+                    "trophyChange": 111
+                },
+                {
+                    "clan": {
+                        "tag": "#2P8GUQQC",
+                        "name": "cz pohoda",
+                        "badgeId": 16000169,
+                        "clanScore": 1487,
+                        "participants": 15,
+                        "battlesPlayed": 15,
+                        "wins": 11,
+                        "crowns": 22
+                    },
+                    "trophyChange": 61
+                },
+                {
+                    "clan": {
+                        "tag": "#8Q2G8VCP",
+                        "name": "yazd",
+                        "badgeId": 16000003,
+                        "clanScore": 976,
+                        "participants": 14,
+                        "battlesPlayed": 12,
+                        "wins": 6,
+                        "crowns": 12
+                    },
+                    "trophyChange": -9
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1399,
+                        "participants": 14,
+                        "battlesPlayed": 12,
+                        "wins": 5,
+                        "crowns": 17
+                    },
+                    "trophyChange": -35
+                },
+                {
+                    "clan": {
+                        "tag": "#22UPL8UQ",
+                        "name": "MG",
+                        "badgeId": 16000136,
+                        "clanScore": 1265,
+                        "participants": 14,
+                        "battlesPlayed": 12,
+                        "wins": 5,
+                        "crowns": 9
+                    },
+                    "trophyChange": -75
+                }
+            ]
+        },
+        {
+            "seasonId": 28,
+            "createdDate": "20190501T201144.000Z",
+            "participants": [
+                {
+                    "tag": "#202J89QQ",
+                    "name": "Emili",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8VG2RLCU",
+                    "name": "rotting corpse",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 2
+                },
+                {
+                    "tag": "#LP02PYC",
+                    "name": "bruno",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9C9JVYGY",
+                    "name": "brock",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PLQUUUC8P",
+                    "name": "fuqwan",
+                    "cardsEarned": 900,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 840,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YPJLVYY9",
+                    "name": "soccermaster",
+                    "cardsEarned": 390,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P2PYJ0ULQ",
+                    "name": "alfred spider",
+                    "cardsEarned": 400,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 680,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#2JUUPCGJ",
+                    "name": "cubehead",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1434,
+                        "participants": 14,
+                        "battlesPlayed": 13,
+                        "wins": 7,
+                        "crowns": 15
+                    },
+                    "trophyChange": 107
+                },
+                {
+                    "clan": {
+                        "tag": "#8CL9LVJ9",
+                        "name": "CR Raiders",
+                        "badgeId": 16000161,
+                        "clanScore": 1326,
+                        "participants": 14,
+                        "battlesPlayed": 13,
+                        "wins": 7,
+                        "crowns": 12
+                    },
+                    "trophyChange": 57
+                },
+                {
+                    "clan": {
+                        "tag": "#UG8G908",
+                        "name": "Bubba and Budz",
+                        "badgeId": 16000166,
+                        "clanScore": 617,
+                        "participants": 14,
+                        "battlesPlayed": 12,
+                        "wins": 7,
+                        "crowns": 10
+                    },
+                    "trophyChange": -3
+                },
+                {
+                    "clan": {
+                        "tag": "#29GPJLVV",
+                        "name": "NoAguantasNada",
+                        "badgeId": 16000162,
+                        "clanScore": 1422,
+                        "participants": 14,
+                        "battlesPlayed": 12,
+                        "wins": 6,
+                        "crowns": 9
+                    },
+                    "trophyChange": -34
+                },
+                {
+                    "clan": {
+                        "tag": "#P8YY0QCG",
+                        "name": "T\u00dcRK\u0130YE",
+                        "badgeId": 16000030,
+                        "clanScore": 1135,
+                        "participants": 14,
+                        "battlesPlayed": 8,
+                        "wins": 6,
+                        "crowns": 7
+                    },
+                    "trophyChange": -54
+                }
+            ]
+        },
+        {
+            "seasonId": 27,
+            "createdDate": "20190429T175214.000Z",
+            "participants": [
+                {
+                    "tag": "#PUL0QPRQG",
+                    "name": "ram",
+                    "cardsEarned": 220,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 1
+                },
+                {
+                    "tag": "#L29YR0R",
+                    "name": "craka",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 0,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P99Y00YCG",
+                    "name": "blulobster",
+                    "cardsEarned": 440,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#8YGUPVPR",
+                    "name": "Highland",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#P2PYJ0ULQ",
+                    "name": "alfred spider",
+                    "cardsEarned": 500,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82UGGCC0",
+                    "name": "iwnt2punchurfac",
+                    "cardsEarned": 850,
+                    "battlesPlayed": 1,
+                    "wins": 1,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#29C2V0098",
+                    "name": "biff",
+                    "cardsEarned": 640,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PLQUUUC8P",
+                    "name": "fuqwan",
+                    "cardsEarned": 450,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9G90LJQGJ",
+                    "name": "Ri13y",
+                    "cardsEarned": 600,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#9RGJQG9QQ",
+                    "name": "REIDEGER",
+                    "cardsEarned": 750,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#PVRJ98009",
+                    "name": "jswizzle38",
+                    "cardsEarned": 520,
+                    "battlesPlayed": 1,
+                    "wins": 0,
+                    "collectionDayBattlesPlayed": 3
+                },
+                {
+                    "tag": "#82JLCYVCR",
+                    "name": "Balthazar",
+                    "cardsEarned": 800,
+                    "battlesPlayed": 2,
+                    "wins": 2,
+                    "collectionDayBattlesPlayed": 3
+                }
+            ],
+            "standings": [
+                {
+                    "clan": {
+                        "tag": "#2YUCJQUR",
+                        "name": "We Clan't",
+                        "badgeId": 16000001,
+                        "clanScore": 1546,
+                        "participants": 13,
+                        "battlesPlayed": 12,
+                        "wins": 9,
+                        "crowns": 22
+                    },
+                    "trophyChange": 109
+                },
+                {
+                    "clan": {
+                        "tag": "#VC08CYV",
+                        "name": "made in France",
+                        "badgeId": 16000078,
+                        "clanScore": 1157,
+                        "participants": 13,
+                        "battlesPlayed": 13,
+                        "wins": 5,
+                        "crowns": 14
+                    },
+                    "trophyChange": 55
+                },
+                {
+                    "clan": {
+                        "tag": "#99LR98Q8",
+                        "name": "posedion",
+                        "badgeId": 16000030,
+                        "clanScore": 1099,
+                        "participants": 13,
+                        "battlesPlayed": 8,
+                        "wins": 5,
+                        "crowns": 9
+                    },
+                    "trophyChange": -10
+                },
+                {
+                    "clan": {
+                        "tag": "#9JL2CQQC",
+                        "name": "Saints",
+                        "badgeId": 16000077,
+                        "clanScore": 1329,
+                        "participants": 13,
+                        "battlesPlayed": 9,
+                        "wins": 4,
+                        "crowns": 8
+                    },
+                    "trophyChange": -36
+                },
+                {
+                    "clan": {
+                        "tag": "#QQG200V",
+                        "name": "beavercleavers",
+                        "badgeId": 16000164,
+                        "clanScore": 1327,
+                        "participants": 12,
+                        "battlesPlayed": 11,
+                        "wins": 4,
+                        "crowns": 6
+                    },
+                    "trophyChange": -76
+                }
+            ]
+        }
+    ],
+    "paging": {
+        "cursors": {}
+    }
+}

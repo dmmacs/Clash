@@ -1,0 +1,157 @@
+{
+    "items": [
+        {
+            "tag": "#URP0L0RPP",
+            "title": "Draft Global Tournament",
+            "startTime": "20190521T070000.000Z",
+            "endTime": "20190524T070000.000Z",
+            "milestoneRewards": [
+                {
+                    "wins": 1,
+                    "type": "chest",
+                    "chest": "Legendary"
+                },
+                {
+                    "wins": 2,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "legendary"
+                },
+                {
+                    "wins": 3,
+                    "type": "resource",
+                    "amount": 10000,
+                    "resource": "gold"
+                },
+                {
+                    "wins": 4,
+                    "type": "chest",
+                    "chest": "Giant"
+                },
+                {
+                    "wins": 5,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "rare"
+                },
+                {
+                    "wins": 6,
+                    "type": "resource",
+                    "amount": 10000,
+                    "resource": "gold"
+                },
+                {
+                    "wins": 7,
+                    "type": "chest",
+                    "chest": "Epic"
+                },
+                {
+                    "wins": 8,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "epic"
+                },
+                {
+                    "wins": 9,
+                    "type": "chest",
+                    "chest": "Magic"
+                },
+                {
+                    "wins": 10,
+                    "type": "resource",
+                    "amount": 10000,
+                    "resource": "gold"
+                },
+                {
+                    "wins": 11,
+                    "type": "chest",
+                    "chest": "Lightning"
+                },
+                {
+                    "wins": 12,
+                    "type": "chest",
+                    "chest": "Kings"
+                }
+            ],
+            "freeTierRewards": [
+                {
+                    "wins": 1,
+                    "type": "resource",
+                    "amount": 500,
+                    "resource": "gold"
+                },
+                {
+                    "wins": 2,
+                    "type": "chest",
+                    "chest": "Silver"
+                },
+                {
+                    "wins": 3,
+                    "type": "chest",
+                    "chest": "Gold"
+                },
+                {
+                    "wins": 4,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "common"
+                },
+                {
+                    "wins": 5,
+                    "type": "cardStackRandom",
+                    "amount": 100,
+                    "rarity": "common"
+                },
+                {
+                    "wins": 6,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "rare"
+                },
+                {
+                    "wins": 7,
+                    "type": "cardStackRandom",
+                    "amount": 25,
+                    "rarity": "rare"
+                },
+                {
+                    "wins": 8,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "epic"
+                },
+                {
+                    "wins": 9,
+                    "type": "cardStackRandom",
+                    "amount": 5,
+                    "rarity": "epic"
+                },
+                {
+                    "wins": 10,
+                    "type": "tradeToken",
+                    "amount": 1,
+                    "rarity": "legendary"
+                },
+                {
+                    "wins": 11,
+                    "type": "chest",
+                    "chest": "Lightning"
+                }
+            ],
+            "topRankReward": [
+                {
+                    "type": "resource",
+                    "amount": 100000,
+                    "resource": "gold"
+                }
+            ],
+            "maxTopRewardRank": 50,
+            "gameMode": {
+                "id": 72000005
+            },
+            "maxLosses": 5,
+            "minExpLevel": 8,
+            "tournamentLevel": 9
+        }
+    ]
+}

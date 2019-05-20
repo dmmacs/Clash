@@ -9,7 +9,12 @@ X-Adjust Clan Icon to cover Bronze, Silver, Gold
 -Add argparse
 --Add Option to pass in clan tag on command line
 --Add Option to pass in key api on command line
+--Update logic to find api key file to check if the arg is an absolute path
 -Setup domain on Digital Ocean
+
+-Add folder to output for each clan name
+
+-Figure out how to build index (list of clan Tags instead of a single clan Tag?)
 
 -History
 --Add history per player per week for donations and war participation
