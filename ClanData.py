@@ -14,7 +14,8 @@ import pytz
 import sys
 import os
 import platform
-#import argparse
+import glob
+import argparse
 
 def createTD(text, css='', align=''):
     retVal = '<td '
@@ -38,14 +39,34 @@ def processClashDate(tmpStr):
     minute = int(tmpStr[11:13])
     seconds = int(tmpStr[13:15])
     
-    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=pytz.utc)
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
     return retVal
+
+
+def processHistory():
+    print('\nProcessHistory\n')
+    
+    base_fname = '-clan_data-'
+    file_filter = output_folder + '*' + base_fname + '*.txt'
+    files = glob.glob(file_filter)
+    print(files)
+
+    # Determine day of files
+    for file in files:
+        print(file)
+        idx = file.find(base_fname) + len(base_fname)
+        print(str(idx), file)#file[idx:len(base_fname)])
+        
+    
+    
     
 
 
 
+# Start of main
 if __name__ == '__main__':
 
+    # ***** Constants *****
     #Timezones
     UTC_TZ = pytz.timezone('UTC')
     Eastern_TZ = pytz.timezone("US/Eastern")
@@ -59,11 +80,27 @@ if __name__ == '__main__':
     hash_sign = '%23'
     clan_tag = 'QQG200V'
     output_folder = 'output'
-
-    #https://api.clashroyale.com/v1/clans/%23QQG200V
-    #https://api.clashroyale.com/v1/clans/%23QQG200V/members
-
+    history_folder = 'history'
     apiFname = 'api_key.txt'
+
+    parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
+    parser.add_argument('-k','--key', default='')#, required=False)
+    parser.add_argument('-c','--clantag', default='')
+    parser.add_argument('-o','--output', default='')
+    
+    args = parser.parse_args()
+    
+    if args.key:
+        apiFname = args.key
+    if args.clantag:
+        clan_tag = args.clantag
+    if args.output:
+        output_folder = args.output
+        
+#    print(args)
+    
+
+#    print(apiFname)
     #Read Key from File
     try:
         fname = os.path.dirname(__file__)
@@ -71,9 +108,11 @@ if __name__ == '__main__':
         if platform.system() == 'Windows':
             fname += '\\'
             output_folder += '\\'
+            history_folder += '\\'
         elif platform.system() == 'Linux':
             fname += '/'
             output_folder == '/'
+            history_folder += '/'
         fname += apiFname
         fin = open(fname, 'r')
         key = fin.readline().strip()
@@ -97,28 +136,28 @@ if __name__ == '__main__':
     r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_data = r.json();
     r.close()
-    print('Clan Data for ' + clan_data['name'])
+    print('\tClan Data for ' + clan_data['name'])
     
     # Get Clan member Data
     print('Getting Clan Member Data')
     r = requests.get(link_members, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_member_data = r.json()
     r.close()
-    print('total Clan Members = ' + str(clan_data['members']))
+    print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan warlog Data
     print('Getting WarLog Data')
     r = requests.get(link_warlog, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_warlog = r.json()
     r.close()
-    print('total Clan Members = ' + str(clan_data['members']))
+    print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan Current War Data
     print('Getting Current War Data')
     r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_current_war = r.json()
     r.close()
-    print('Clan War State = ' + str(clan_current_war['state']) + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    print('\tClan War State = ' + str(clan_current_war['state']) + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
@@ -126,9 +165,9 @@ if __name__ == '__main__':
     r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     tourn_global_data = r.json()
     r.close()
-    print('Global Tournament Title: ' + tourn_global_data['items'][0]['title'] + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'] + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
-    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+#    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     
@@ -174,7 +213,7 @@ if __name__ == '__main__':
     else:
         clan_badge += '_magical'
     clan_badge += '.png'
-    print(clan_badge)
+#    print(clan_badge)
     
     htmlout += '<img style="float:left;margin-bottom:20px;" src="'
     htmlout += clan_badge
@@ -290,96 +329,106 @@ if __name__ == '__main__':
 
     htmlout += '</div>\n'
     
-    
+    # Write HTML File    
     out = open('index.html', 'w', encoding='UTF-8')
     out.write(htmlout)
     out.close()
     
+    #Capture weekly data if its time, between 23:55 and 11:59:59
+    midnight = timeNow.replace(hour=23, minute=59, second=59, microsecond=0)
+    eleven_fifty_five = timeNow.replace(hour=23, minute=55, second=0, microsecond=0)
+    
+    
+    file_time_stamp = timeNow.astimezone(tz=Eastern_TZ).strftime('%Y%m%d')
     #Save Clan Data
     fname = output_folder
     fname += clan_data['name'] 
     fname += '-'
-    fname += 'clan_data.txt'
+    fname += 'clan_data'
     fname += '-'
-    fname += timeNow.strftime('%Y%m%d')
+    fname += file_time_stamp
     fname += '.txt'
     print('Saving Clan Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
+
+    if timeNow > eleven_fifty_five and timeNow < midnight:
+        fname = fname.replace(output_folder, history_folder)
+        out = open(fname, 'w', encoding='UTF-8')
+        out.write(json.dumps(clan_data, indent = 4))
+        out.close()
     
     #Save Clan Member Data
     fname = output_folder
     fname += clan_data['name'] 
     fname += '-'
-    fname += 'clan_member_data.txt'
+    fname += 'clan_member_data'
     fname += '-'
-    fname += timeNow.strftime('%Y%m%d')
+    fname += file_time_stamp
     fname += '.txt'
     print('Saving Clan Member Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_member_data, indent = 4))
     out.close()
+    if timeNow > eleven_fifty_five and timeNow < midnight:
+        fname = fname.replace(output_folder, history_folder)
+        out = open(fname, 'w', encoding='UTF-8')
+        out.write(json.dumps(clan_data, indent = 4))
+        out.close()
     
     
     #Save Warlog Data
     fname = output_folder
     fname += clan_data['name'] 
     fname += '-'
-    fname += 'warlog.txt'
+    fname += 'warlog'
     fname += '-'
-    fname += timeNow.strftime('%Y%m%d')
+    fname += file_time_stamp
     fname += '.txt'
     print('Saving Warlog Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_warlog, indent = 4))
     out.close()
+    if timeNow > eleven_fifty_five and timeNow < midnight:
+        fname = fname.replace(output_folder, history_folder)
+        out = open(fname, 'w', encoding='UTF-8')
+        out.write(json.dumps(clan_data, indent = 4))
+        out.close()
 
     #Save Current War Data
     fname = output_folder
     fname += clan_data['name'] 
     fname += '-'
-    fname += 'currentwar.txt'
+    fname += 'currentwar'
     fname += '-'
-    fname += timeNow.strftime('%Y%m%d')
+    fname += file_time_stamp
     fname += '.txt'
     print('Saving Current War Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_current_war, indent = 4))
     out.close()
+    if timeNow > eleven_fifty_five and timeNow < midnight:
+        fname = fname.replace(output_folder, history_folder)
+        out = open(fname, 'w', encoding='UTF-8')
+        out.write(json.dumps(clan_data, indent = 4))
+        out.close()
 
     #Save Global Tournament Data
     fname = output_folder
     fname += clan_data['name'] 
     fname += '-'
-    fname += 'tourn_global_data.txt'
+    fname += 'tourn_global_data'
     fname += '-'
-    fname += timeNow.strftime('%Y%m%d')
+    fname += file_time_stamp
     fname += '.txt'
     print('Saving Global Tournament Data' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(tourn_global_data, indent = 4))
     out.close()
-    
-
-    
-    #Capture weekly data if its time, between 23:55 and 11:59:59
-    midnight = timeNow.replace(hour=23, minute=59, second=59, microsecond=0)
-    eleven_fifty_five = timeNow.replace(hour=23, minute=55, second=0, microsecond=0)
-
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = clan_data['name'] 
-        fname += '-'
-        fname += timeNow.strftime('%Y%m%d')
-        fname += '.txt'
-        print('Writing Daily Cland Data to: ' + fname)
+        fname = fname.replace(output_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
     
-    
-    
-    
-    
-#    for item in clan_warlog['items']:
-#        print(item['seasonId'])
