@@ -1,27 +1,38 @@
+Completed
 X-Add Formatting for top 3 people (gold, silver, bronze)
 X-Add formatting for remainder of cells(center, etc.)
 X-Add date last updated
 X-Figure out how to add Clan Icon
 X-Modify file save logica to include the date
 X-Put saved files in an output folder
-
+X-organize to do list by priority
 X-Adjust Clan Icon to cover Bronze, Silver, Gold
--Add argparse
---Add Option to pass in clan tag on command line
---Add Option to pass in key api on command line
+X-Add argparse
+X--Add Option to pass in clan tag on command line
+X--Add Option to pass in key api on command line
+X-Setup domain on Digital Ocean
+
+-update ssh alias to add -X
+
+Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
--Setup domain on Digital Ocean
+-Folders
+--Add a folder for each clan
+-add error handling for api calls
 
--Add folder to output for each clan name
 
--Figure out how to build index (list of clan Tags instead of a single clan Tag?)
-
+Priority 2
 -History
 --Add history per player per week for donations and war participation
 --Split column heading across donations and war?
 
+-Figure out how to build index (list of clan Tags instead of a single clan Tag?)
 
--Folders
---Add a folder for each clan
---
+
+Priority 3
+-Log
+--add log file 
+-add log entry for missing key file
+-add log entry for failed api call, include return code and data
+-add mechanism for pruning log file
 

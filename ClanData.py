@@ -6,6 +6,7 @@ Created on Sat May 18 09:45:50 2019
 @author: dmmacs
 """
 
+from _version import __version__
 import requests
 import json
 #import openpyxl
@@ -83,12 +84,19 @@ if __name__ == '__main__':
     history_folder = 'history'
     apiFname = 'api_key.txt'
 
+#    parser.add_argument('-o', '--output', default='.', required=True, help='Output Folder for HTML and excel files')
+#    parser.add_argument('-e', '--excel', action='store_true', default=False, required=False, help='Enables Excel File output')
+#    parser.add_argument('-s', '--silent', action='store_true', default=False, required=False, help='Turns on silent mode which will only output error messages to stdout')
+#    parser.add_argument('--verbose', default=0, type=int,required=False, help='Enables LoggingLevel Mode')
+
     parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
     parser.add_argument('-k','--key', default='')#, required=False)
     parser.add_argument('-c','--clantag', default='')
     parser.add_argument('-o','--output', default='')
+    parser.add_argument('-v', '--version', action='version', version='Version: ' + __version__)
     
     args = parser.parse_args()
+    
     
     if args.key:
         apiFname = args.key
@@ -111,7 +119,7 @@ if __name__ == '__main__':
             history_folder += '\\'
         elif platform.system() == 'Linux':
             fname += '/'
-            output_folder == '/'
+            output_folder += '/'
             history_folder += '/'
         fname += apiFname
         fin = open(fname, 'r')
@@ -120,7 +128,8 @@ if __name__ == '__main__':
     except FileNotFoundError:
         print("Unable to find api key file, " + os.path.realpath(__file__) + apiFname)
         sys.exit(-1)
-        
+
+    print('Output Folder = ' + output_folder)
     _authorization = 'authorization' + ':' + key
     
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
@@ -157,7 +166,8 @@ if __name__ == '__main__':
     r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_current_war = r.json()
     r.close()
-    print('\tClan War State = ' + str(clan_current_war['state']) + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    print(json.dumps(clan_current_war, indent = 4))
+    print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
@@ -165,7 +175,7 @@ if __name__ == '__main__':
     r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     tourn_global_data = r.json()
     r.close()
-    print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'] + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
 #    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
@@ -325,6 +335,7 @@ if __name__ == '__main__':
     htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
 
     htmlout += timeNow.astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += ' with Version: ' + __version__
     htmlout += '</p>\n'
 
     htmlout += '</div>\n'
