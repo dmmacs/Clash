@@ -71,6 +71,8 @@ def DirSlash():
 # Start of main
 if __name__ == '__main__':
 
+    print('Python Version is: ' + platform.python_version())
+    print('Script Version is: ' + __version__)
     # ***** Constants *****
     #Timezones
     UTC_TZ = pytz.timezone('UTC')
@@ -347,30 +349,32 @@ if __name__ == '__main__':
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
         rest = rest % SECONDS_PER_HOUR
         
+        print(dateutil.__version__)
         if rest >= HALF:
             hours += 1
         
-        r = dateutil.relativedelta.relativedelta(timeNow, last_seen)
+        #r = dateutil.relativedelta.relativedelta(timeNow, last_seen)
         
-        if item['name'] == 'Highland':
-            print(r)
-        if r.years > 0:
-            dateDiffStr = '> 1 year'
-        elif r.months > 0:
-            dateDiffStr = str(r.months) + ' months ago'
-        elif r.days > 0:
-            dateDiffStr = str(r.days) + ' days ago'
-        elif r.hours > 0:
-            dateDiffStr = str(r.hours) + ' hours ago'
-        elif r.minutes > 0:
-            dateDiffStr = str(r.minutes) + ' minutes ago'
-        else:
-            dateDiffStr = 'On Now'
+#        if item['name'] == 'Highland':
+#            print(r)
+#        if r.years > 0:
+#            dateDiffStr = '> 1 year'
+#        elif r.months > 0:
+#            dateDiffStr = str(r.months) + ' months ago'
+#        elif r.days > 0:
+#            dateDiffStr = str(r.days) + ' days ago'
+#        elif r.hours > 0:
+#            dateDiffStr = str(r.hours) + ' hours ago'
+#        elif r.minutes > 0:
+#            dateDiffStr = str(r.minutes) + ' minutes ago'
+#        else:
+#            dateDiffStr = 'On Now'
         
             
             
 #        htmlout += createTD('{} hours ago'.format(int(hours)), css)
-        htmlout += createTD(dateDiffStr, css)
+#        htmlout += createTD(dateDiffStr, css)
+        htmlout += createTD('{} hours ago'.format(hours), css)        
         htmlout += createTD(str(item['trophies']), css, 'center')
         htmlout += createTD(item['arena']['name'], css)
         htmlout += createTD(str(item['donations']), css, 'center')
