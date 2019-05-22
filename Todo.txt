@@ -11,13 +11,13 @@ X-Add argparse
 X--Add Option to pass in clan tag on command line
 X--Add Option to pass in key api on command line
 X-Setup domain on Digital Ocean
+X-Folders
+X--Add a folder for each clan
 
 -update ssh alias to add -X
 
 Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
--Folders
---Add a folder for each clan
 -add error handling for api calls
 
 

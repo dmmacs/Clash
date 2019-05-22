@@ -48,7 +48,7 @@ def processHistory():
     print('\nProcessHistory\n')
     
     base_fname = '-clan_data-'
-    file_filter = output_folder + '*' + base_fname + '*.txt'
+    file_filter = record_folder + '*' + base_fname + '*.txt'
     files = glob.glob(file_filter)
     print(files)
 
@@ -59,8 +59,11 @@ def processHistory():
         print(str(idx), file)#file[idx:len(base_fname)])
         
     
-    
-    
+def DirSlash():
+    if platform.system() == 'Windows':
+        return ('\\')
+    elif platform.system() == 'Linux':
+        return('/')
 
 
 
@@ -80,7 +83,7 @@ if __name__ == '__main__':
 
     hash_sign = '%23'
     clan_tag = 'QQG200V'
-    output_folder = 'output'
+    record_folder = 'record'
     history_folder = 'history'
     apiFname = 'api_key.txt'
 
@@ -103,7 +106,7 @@ if __name__ == '__main__':
     if args.clantag:
         clan_tag = args.clantag
     if args.output:
-        output_folder = args.output
+        record_folder = args.output
         
 #    print(args)
     
@@ -113,14 +116,8 @@ if __name__ == '__main__':
     try:
         fname = os.path.dirname(__file__)
         fname = os.path.dirname(os.path.abspath(__file__))
-        if platform.system() == 'Windows':
-            fname += '\\'
-            output_folder += '\\'
-            history_folder += '\\'
-        elif platform.system() == 'Linux':
-            fname += '/'
-            output_folder += '/'
-            history_folder += '/'
+        fname += DirSlash()
+
         fname += apiFname
         fin = open(fname, 'r')
         key = fin.readline().strip()
@@ -129,7 +126,40 @@ if __name__ == '__main__':
         print("Unable to find api key file, " + os.path.realpath(__file__) + apiFname)
         sys.exit(-1)
 
-    print('Output Folder = ' + output_folder)
+    htmlFname = clan_tag + DirSlash() + 'index.html'
+
+    # Check to see if the clan_tag folder exists:
+    if os.path.isdir(clan_tag) is False:
+        # Directory does not exist, create it
+        try:
+            os.makedirs(clan_tag)
+        except OSError as exc:
+            print(exc.errno)
+
+    record_folder = clan_tag + DirSlash() + record_folder + DirSlash()
+    history_folder = clan_tag + DirSlash() + history_folder + DirSlash()
+
+    #Check to see if record_folder exists:
+    if os.path.isdir(record_folder) is False:
+        # Directory does not exist, create it
+        try:
+            os.makedirs(record_folder)
+        except OSError as exc:
+            print(exc.errno)
+
+    #Check to see if record_folder exists:
+    if os.path.isdir(history_folder) is False:
+        # Directory does not exist, create it
+        try:
+            os.makedirs(history_folder)
+        except OSError as exc:
+            print(exc.errno)
+        
+
+
+
+
+    print('Record Folder = ' + record_folder)
     _authorization = 'authorization' + ':' + key
     
     link = 'https://api.clashroyale.com/v1/clans/QQG200V/members'
@@ -166,7 +196,7 @@ if __name__ == '__main__':
     r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
     clan_current_war = r.json()
     r.close()
-    print(json.dumps(clan_current_war, indent = 4))
+#    print(json.dumps(clan_current_war, indent = 4))
     print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
@@ -180,7 +210,7 @@ if __name__ == '__main__':
 #    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
-    
+    #Generate HTML Output
     
     htmlout = ''
     htmlout += '<!DOCTYPE HTML>\n'
@@ -193,16 +223,16 @@ if __name__ == '__main__':
     htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>\n'
     htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>\n'
     
-#    htmlout += '<link href=\"css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-#    htmlout += '<link href=\"css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+#    htmlout += '<link href=\"../css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+#    htmlout += '<link href=\"../css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
     htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
-    htmlout += '<script src="js/sortable.js"></script>\n'
+    htmlout += '<script src="../js/sortable.js"></script>\n'
 
-#    htmlout += "<script src=\"js/jquery.fixedheadertable.js\"></script>\n"
+#    htmlout += "<script src=\"../js/jquery.fixedheadertable.js\"></script>\n"
 #    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
 
-    htmlout +="<link href=\"css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-    htmlout +="<link href=\"css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+    htmlout +="<link href=\"../css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+    htmlout +="<link href=\"../css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
 
     htmlout += "</head>\n"
 
@@ -340,8 +370,10 @@ if __name__ == '__main__':
 
     htmlout += '</div>\n'
     
-    # Write HTML File    
-    out = open('index.html', 'w', encoding='UTF-8')
+    # Write HTML File
+#    htmlFname = #clan_tag
+    
+    out = open(htmlFname, 'w', encoding='UTF-8')
     out.write(htmlout)
     out.close()
     
@@ -352,93 +384,93 @@ if __name__ == '__main__':
     
     file_time_stamp = timeNow.astimezone(tz=Eastern_TZ).strftime('%Y%m%d')
     #Save Clan Data
-    fname = output_folder
+    fname = record_folder
     fname += clan_data['name'] 
     fname += '-'
     fname += 'clan_data'
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Clan Data' + fname)
+    print('Saving Clan Data ' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
 
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = fname.replace(output_folder, history_folder)
+        fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
     
     #Save Clan Member Data
-    fname = output_folder
+    fname = record_folder
     fname += clan_data['name'] 
     fname += '-'
     fname += 'clan_member_data'
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Clan Member Data' + fname)
+    print('Saving Clan Member Data ' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_member_data, indent = 4))
     out.close()
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = fname.replace(output_folder, history_folder)
+        fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
     
     
     #Save Warlog Data
-    fname = output_folder
+    fname = record_folder
     fname += clan_data['name'] 
     fname += '-'
     fname += 'warlog'
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Warlog Data' + fname)
+    print('Saving Warlog Data ' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_warlog, indent = 4))
     out.close()
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = fname.replace(output_folder, history_folder)
+        fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
 
     #Save Current War Data
-    fname = output_folder
+    fname = record_folder
     fname += clan_data['name'] 
     fname += '-'
     fname += 'currentwar'
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Current War Data' + fname)
+    print('Saving Current War Data ' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_current_war, indent = 4))
     out.close()
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = fname.replace(output_folder, history_folder)
+        fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
 
     #Save Global Tournament Data
-    fname = output_folder
+    fname = record_folder
     fname += clan_data['name'] 
     fname += '-'
     fname += 'tourn_global_data'
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Global Tournament Data' + fname)
+    print('Saving Global Tournament Data ' + fname)
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(tourn_global_data, indent = 4))
     out.close()
     if timeNow > eleven_fifty_five and timeNow < midnight:
-        fname = fname.replace(output_folder, history_folder)
+        fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
