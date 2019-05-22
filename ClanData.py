@@ -11,6 +11,7 @@ import requests
 import json
 #import openpyxl
 import datetime
+import dateutil
 import pytz
 import sys
 import os
@@ -345,10 +346,31 @@ if __name__ == '__main__':
         
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
         rest = rest % SECONDS_PER_HOUR
-
+        
         if rest >= HALF:
             hours += 1
-        htmlout += createTD('{} hours ago'.format(hours), css)
+        
+        r = dateutil.relativedelta.relativedelta(timeNow, last_seen)
+        
+        if item['name'] == 'Highland':
+            print(r)
+        if r.years > 0:
+            dateDiffStr = '> 1 year'
+        elif r.months > 0:
+            dateDiffStr = str(r.months) + ' months ago'
+        elif r.days > 0:
+            dateDiffStr = str(r.days) + ' days ago'
+        elif r.hours > 0:
+            dateDiffStr = str(r.hours) + ' hours ago'
+        elif r.minutes > 0:
+            dateDiffStr = str(r.minutes) + ' minutes ago'
+        else:
+            dateDiffStr = 'On Now'
+        
+            
+            
+#        htmlout += createTD('{} hours ago'.format(int(hours)), css)
+        htmlout += createTD(dateDiffStr, css)
         htmlout += createTD(str(item['trophies']), css, 'center')
         htmlout += createTD(item['arena']['name'], css)
         htmlout += createTD(str(item['donations']), css, 'center')

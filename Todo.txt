@@ -13,6 +13,9 @@ X--Add Option to pass in key api on command line
 X-Setup domain on Digital Ocean
 X-Folders
 X--Add a folder for each clan
+X-Update Time Display to cover more than just hours.
+
+
 
 -update ssh alias to add -X
 
@@ -27,6 +30,7 @@ Priority 2
 --Split column heading across donations and war?
 
 -Figure out how to build index (list of clan Tags instead of a single clan Tag?)
+
 
 
 Priority 3
