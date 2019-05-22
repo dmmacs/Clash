@@ -14,6 +14,7 @@ X-Setup domain on Digital Ocean
 X-Folders
 X--Add a folder for each clan
 X-Update Time Display to cover more than just hours.
+X-- Add War Status to right pane of Clan Info
 
 
 
@@ -22,7 +23,6 @@ X-Update Time Display to cover more than just hours.
 Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
 -add error handling for api calls
-
 
 Priority 2
 -History
@@ -39,4 +39,5 @@ Priority 3
 -add log entry for missing key file
 -add log entry for failed api call, include return code and data
 -add mechanism for pruning log file
-
+-add Icons to Table output (tower level, arena)
+-Check to see if clan tag starts with # (remove if it is or replace with %23?)

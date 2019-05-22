@@ -243,6 +243,7 @@ if __name__ == '__main__':
     
     #Clan Name Section
     htmlout += '<div style="width:100%;">\n' 
+    htmlout += '<div style="float: left; width:50%;">'
     
     clan_badge = 'https://statsroyale.com/images/clanwars/'
     clan_badge += str(clan_data['badgeId'])
@@ -258,6 +259,7 @@ if __name__ == '__main__':
     clan_badge += '.png'
 #    print(clan_badge)
     
+    
     htmlout += '<img style="float:left;margin-bottom:20px;" src="'
     htmlout += clan_badge
     htmlout += '" height="100px" width="72px">\n'
@@ -269,6 +271,30 @@ if __name__ == '__main__':
     htmlout += clan_data['description']
     htmlout += '</div>\n'
     htmlout += '</div>\n'
+    htmlout += '</div>\n'
+
+    htmlout += '<div style="float: left; width:50%;">'
+    htmlout += '<img  style="float:left" src="../img/War_Shield.png" height="100px" width="86px">'
+    htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">Current War Status: '
+    htmlout += clan_current_war['state']
+    htmlout += '</div>'
+    htmlout += '<div style="line-height:20px;font-size:15px">'
+    if clan_current_war['state'] == 'warDay':
+        warEndTime = processClashDate(clan_current_war['warEndTime'])
+        htmlout += 'War Ends:'
+        htmlout += warEndTime.astimezone(tz=Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+        htmlout += ' </div></div>'
+    elif clan_current_war['state'] == 'collectionDay':
+        warEndTime = processClashDate(clan_current_war['collectionEndTime'])
+        htmlout += 'Collection Ends:'
+        htmlout += warEndTime.astimezone(tz=Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+        htmlout += ' </div></div>'
+    
+    
+    htmlout += '</div>\n'
+    
+    
+    
     
     htmlout += '<div style="clear:both"></div>\n'
     
@@ -349,7 +375,7 @@ if __name__ == '__main__':
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
         rest = rest % SECONDS_PER_HOUR
         
-        print(dateutil.__version__)
+        #print(dateutil.__version__)
         if rest >= HALF:
             hours += 1
         
