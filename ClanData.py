@@ -19,6 +19,8 @@ import platform
 import glob
 import argparse
 
+import ClanHistory
+
 def createTD(text, css='', align=''):
     retVal = '<td '
     if css != '':
@@ -45,19 +47,19 @@ def processClashDate(tmpStr):
     return retVal
 
 
-def processHistory():
-    print('\nProcessHistory\n')
-    
-    base_fname = '-clan_data-'
-    file_filter = record_folder + '*' + base_fname + '*.txt'
-    files = glob.glob(file_filter)
-    print(files)
-
-    # Determine day of files
-    for file in files:
-        print(file)
-        idx = file.find(base_fname) + len(base_fname)
-        print(str(idx), file)#file[idx:len(base_fname)])
+#def processHistory():
+#    print('\nProcessHistory\n')
+#    
+#    base_fname = '-clan_data-'
+#    file_filter = record_folder + '*' + base_fname + '*.txt'
+#    files = glob.glob(file_filter)
+#    print(files)
+#
+#    # Determine day of files
+#    for file in files:
+#        print(file)
+#        idx = file.find(base_fname) + len(base_fname)
+#        print(str(idx), file)#file[idx:len(base_fname)])
         
     
 def DirSlash():
@@ -96,10 +98,11 @@ if __name__ == '__main__':
 #    parser.add_argument('--verbose', default=0, type=int,required=False, help='Enables LoggingLevel Mode')
 
     parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
-    parser.add_argument('-k','--key', default='')#, required=False)
-    parser.add_argument('-c','--clantag', default='')
-    parser.add_argument('-o','--output', default='')
+    parser.add_argument('-k','--key', default='api_key.txt', required=False, help='File that contains the api key')
+    parser.add_argument('-c','--clantag', default='QQG200V', required=False, help='Clan Tag to get data for')
+    parser.add_argument('-o','--output', default='record', required=False, help='Folder to store raw data')
     parser.add_argument('-v', '--version', action='version', version='Version: ' + __version__)
+    parser.add_argument('-H', '--history', action='store_true', default=False, required=False,help='Build History Tables for Donations and War')
     
     args = parser.parse_args()
     
@@ -110,6 +113,9 @@ if __name__ == '__main__':
         clan_tag = args.clantag
     if args.output:
         record_folder = args.output
+    if args.history:
+        ClanHistory.processHistory(clan_tag)
+        sys.exit(0)
         
 #    print(args)
     

@@ -11,6 +11,15 @@ import datetime
 import pytz
 import json
 
+import myTimer
+
+def DirSlash():
+    if platform.system() == 'Windows':
+        return ('\\')
+    elif platform.system() == 'Linux':
+        return('/')
+
+
 def getFileNameDate(fname_date):
     year = int(fname_date[0:4])
     month = int(fname_date[4:6])
@@ -22,34 +31,84 @@ def getFileNameDate(fname_date):
     retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
     return retVal
     
-
-
-def processHistory():
-    print('\nProcessHistory\n')
-    
-    base_fname = '-clan_data-'
-    file_filter = output_folder + '*' + base_fname + '*.txt'
-    files = glob.glob(file_filter)
-    print(files)
-
-    # Determine day of files
-    for file in files:
-        idx1 = file.find(base_fname) + len(base_fname)
-        idx2 = file.find('.', idx1)
-        fTime = getFileNameDate(file[idx1:idx2])
+class memberData:
+    def __init__(self, name):
+        self.name = name
+        self.donations = []
         
-        if fTime.weekday() == SUN:
-            print(file)
-            fin = open(file, 'r')
-            
-            clan_data = json.load(fin);
-            fin.close()
-            print(json.dumps(clan_data, indent = 4))
+    def __str__(self):
+        return('member: ' + self.name + ' donations: ' + str(self.donations))
+        
 
+def processHistory(clan_tag):
+    print('\nProcessHistory for Clan Tag {}\n'.format(clan_tag))
+    
+    myTimer.start()
+    clan_data = []
+    
+    record_folder = 'record' + DirSlash()
+    # List all the files in the Clan History directory
+    file_filter = record_folder + '*' + '*.txt'
+    files = glob.glob(file_filter)
+    
+    fDates = []
+    for file in files:
+        if file.find('clan_data') > -1:
+#            print(file)
+            fin = open(file, 'r')
+            clan_data.append(json.load(fin))
+            fin.close()
+            idx1 = file.rfind('-') + 1
+            idx2 = file.rfind('.')
+            fDates.append(getFileNameDate(file[idx1:idx2]))
+            #print(clan_data)
+
+    members = []
+    
+    for j,data in enumerate(clan_data):
+        found = False
+        for i,person in enumerate(data['memberList']):
+            for member in members:
+                if member.name == person['name']:
+                    member.donations.append(person['donations'])
+                    found = True
+                    break
+            if found is False:
+                members.append(memberData(person['name']))
+                members[i].donations.append(person['donations'])
+                
+
+    #Build Table
+    
+    #Headings
+#    fout = open('tmp.csv', 'w', encoding='UTF-8')
+    tmpStr = 'Name'
+    for fDate in fDates:
+        tmpStr += ',' + fDate.strftime("%d-%b-%Y")
+    
+#    fout.write(tmpStr + '\n')
+    print(tmpStr)
+    
+    for member in members:
+        tmpStr = member.name
+        for donation in member.donations:
+            tmpStr += ',' + str(donation)
+        print(tmpStr)
+#        fout.write(tmpStr + '\n')
+
+#    for member in members:
+#        print(member)
+
+#    print(fDates)
+            
+#            print(json.dumps(data, indent = 4))
+    myTimer.end()
+    print('Completed in {}'.format(myTimer.elapsedTime()))
 
 
 # Start of main
 if __name__ == '__main__':
+    
     
     #Timezones
     UTC_TZ = pytz.timezone('UTC')
@@ -73,7 +132,8 @@ if __name__ == '__main__':
 
     
     
-    processHistory()
+    processHistory('QQG200V')
+
     
     
     
