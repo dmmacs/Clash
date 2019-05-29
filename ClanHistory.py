@@ -1,4 +1,4 @@
-#!! /usr/bin/python3
+#! /home/dmmacs/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
 """
 Created on Sun May 19 17:10:54 2019
@@ -8,8 +8,8 @@ Created on Sun May 19 17:10:54 2019
 import glob
 import platform
 import datetime
-import pytz
 import json
+import ClanCommon
 
 import myTimer
 
@@ -28,7 +28,7 @@ def getFileNameDate(fname_date):
     minute = 0
     seconds = 0
     
-    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=ClanCommon.UTC_TZ)
     return retVal
     
 class memberData:
@@ -40,13 +40,17 @@ class memberData:
         return('member: ' + self.name + ' donations: ' + str(self.donations))
         
 
-def processHistory(clan_tag):
-    print('\nProcessHistory for Clan Tag {}\n'.format(clan_tag))
+def processDailyHistory(clan_tag):
+    
+    ClanCommon.init()
+    
+    record_folder = 'record' + DirSlash()
+#    record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
+    print('\nProcessHistory for Clan Tag {} in {}\n'.format(clan_tag, record_folder))
     
     myTimer.start()
     clan_data = []
     
-    record_folder = 'record' + DirSlash()
     # List all the files in the Clan History directory
     file_filter = record_folder + '*' + '*.txt'
     files = glob.glob(file_filter)
@@ -70,69 +74,77 @@ def processHistory(clan_tag):
         for i,person in enumerate(data['memberList']):
             for member in members:
                 if member.name == person['name']:
-                    member.donations.append(person['donations'])
+                    member.donations.append(str(person['donations']))
                     found = True
                     break
             if found is False:
                 members.append(memberData(person['name']))
-                members[i].donations.append(person['donations'])
+                if j > 0:
+                    members[i].donations.append('N/A')
+                else:
+                    members[i].donations.append(str(person['donations']))
                 
 
     #Build Table
     
-    #Headings
-#    fout = open('tmp.csv', 'w', encoding='UTF-8')
-    tmpStr = 'Name'
+    htmlout = ''
+    htmlout += ClanCommon.buildhtmlHeader(clan_data[0]['name'])
+    
+    #Add Table Headings
+    htmlout += '<div style="clear:both;"></div>\n'
+    htmlout += '<div class="container_12">\n'
+    htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
+    htmlout += "<thead>\n"
+    htmlout += ClanCommon.createTH('Name')
     for fDate in fDates:
-        tmpStr += ',' + fDate.strftime("%d-%b-%Y")
+        print(fDate.strftime("%d-%b-%Y"))
+        htmlout += ClanCommon.createTH(fDate.strftime("%d-%b-%Y"))
+    htmlout += '</thead>\n'
     
-#    fout.write(tmpStr + '\n')
-    print(tmpStr)
+ 
+    for i,member in enumerate(members):
+        htmlout += '<tr>'
+        if i == 0:
+            css = 'goldbkd'
+        elif i == 1:
+            css = 'silverbkd'
+        elif i == 2:
+            css = 'bronzebkd'
+        else:
+            css = ''
+        htmlout += ClanCommon.createTD(member.name, css)
+        for j, donation in enumerate(member.donations):
+#            print(i, member.name, j, str(donation))
+            htmlout += ClanCommon.createTD(donation, css, 'center')
+        
+        htmlout += '</tr>\n'
+        
+        
+    htmlout += ClanCommon.buildhtmlFooter()
+    print(htmlout)
     
-    for member in members:
-        tmpStr = member.name
-        for donation in member.donations:
-            tmpStr += ',' + str(donation)
-        print(tmpStr)
-#        fout.write(tmpStr + '\n')
-
-#    for member in members:
-#        print(member)
-
-#    print(fDates)
-            
-#            print(json.dumps(data, indent = 4))
+    
+    htmlFname = clan_tag + DirSlash() + clan_tag + '_daily_donations' + '.html'
+    out = open(htmlFname, 'w', encoding='UTF-8')
+    out.write(htmlout)
+    out.close()
+    
     myTimer.end()
     print('Completed in {}'.format(myTimer.elapsedTime()))
 
 
+def processWeeklyHistory(clan_tag):
+    history_folder = 'history' + DirSlash()
+#    record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
+    print('\nProcessHistory for Clan Tag {} in {}\n'.format(clan_tag, history_folder))
+
+
 # Start of main
 if __name__ == '__main__':
-    
-    
-    #Timezones
-    UTC_TZ = pytz.timezone('UTC')
-    EASTERN_TZ = pytz.timezone("US/Eastern")
-    
-    MON = 0
-    TUE = 1
-    WED = 2
-    THU = 3
-    FRI = 4
-    SAT = 5
-    SUN = 6
-    
 
-
-    output_folder = 'output'
-    if platform.system() == 'Windows':
-        output_folder += '\\'
-    elif platform.system() == 'Linux':
-        output_folder == '/'
-
-    
-    
-    processHistory('QQG200V')
+#    modInit()    
+    #processDailyHistory('QQG200V')
+    processWeeklyHistory('QQG200V')
 
     
     
