@@ -211,13 +211,13 @@ if __name__ == '__main__':
     
     # Get Global Tournament Data
     print('Getting Global Tournament Data')
-    r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    tourn_global_data = r.json()
-    r.close()
-    if (r.json is None):
+    result = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
+    tourn_global_data = result.json()
+    result.close()
+    if len(tourn_global_data['items']) == 0:
         print('NO Global Tournament')
-#    else:
-#        print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    else:
+        print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
 #    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
