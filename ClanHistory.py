@@ -58,18 +58,33 @@ def processDailyHistory(clan_tag):
     file_filter = record_folder + '*' + '*.txt'
     files = glob.glob(file_filter)
     
+    
+    start_of_week  = datetime.datetime.now()
+    
+    print(start_of_week .weekday(), start_of_week .day)
+    
+    start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
+          
+    print(start_of_week )
+    print()
+        
+    
     fDates = []
     for file in files:
         if file.find('clan_data') > -1:
 #            print(file)
-            fin = open(file, 'r')
-            clan_data.append(json.load(fin))
-            fin.close()
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
-            fDates.append(getFileNameDate(file[idx1:idx2]))
+            fTime = getFileNameDate(file[idx1:idx2])
+            if fTime >= start_of_week :
+                fin = open(file, 'r')
+                clan_data.append(json.load(fin))
+                fin.close()
+                fDates.append(fTime)
             #print(clan_data)
-
+    for fDate in fDates:
+        print(fDate)
+        
     members = []
     for i, data in enumerate(clan_data):
 #        print(i)
@@ -79,49 +94,25 @@ def processDailyHistory(clan_tag):
             for member in members:
                 #print(j, person['name'], member['name'])
                 if person['name'] == member.name:
-                    member.donations.append(str(person['donations']))
+                    member.donations[i] = str(person['donations'])
                     found = True
                     break;
             if found == False:
-                if person['name'] == 'bugalibe star':
-                    print("Got Here")
-                    print(i)
-                if person['name'] == 'alfred spider':
-                    print('Got Here:' + person['name'])
-                    print(i)
-
                 members.append(memberData(person['name'],person['clanRank'], len(fDates)))
-                if i > 0:
-                    for k in range(0,i+1):
-                        members[len(members)-1].donations.append('N/A')
-                else:
-                    members[j].donations.append(str(person['donations']))
-    
-    for i,member in enumerate(members):
-        print(i, len(member.donations),member)
-    
-    sys.exit()    
-    for j,data in enumerate(clan_data):
-        found = False
-        for i,person in enumerate(data['memberList']):
-            for member in members:
-                if member.name == person['name']:
-                    member.donations.append(str(person['donations']))
-                    found = True
-                    break
-            if found is False:
-                members.append(memberData(person['name']))
-                if j > 0:
-                    members[i].donations.append('N/A')
-                else:
-                    members[i].donations.append(str(person['donations']))
+                members[len(members)-1].donations[i] = str(person['donations'])
+#                    members[j].donations.append(str(person['donations']))
+
                 
 
-    #Build Table
     
     htmlout = ''
     htmlout += ClanCommon.buildhtmlHeader(clan_data[0]['name'])
     
+    # Add Clan Data
+    
+    
+    
+    #Build Table
     #Add Table Headings
     htmlout += '<div style="clear:both;"></div>\n'
     htmlout += '<div class="container_12">\n'
@@ -153,7 +144,7 @@ def processDailyHistory(clan_tag):
         
         
     htmlout += ClanCommon.buildhtmlFooter()
-    print(htmlout)
+#    print(htmlout)
     
     
     htmlFname = clan_tag + DirSlash() + clan_tag + '_daily_donations' + '.html'

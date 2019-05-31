@@ -85,10 +85,11 @@ if __name__ == '__main__':
 #    parser.add_argument('--verbose', default=0, type=int,required=False, help='Enables LoggingLevel Mode')
 
     parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
-    parser.add_argument('-k','--key', default='')#, required=False)
-    parser.add_argument('-c','--clantag', default='')
-    parser.add_argument('-o','--output', default='')
+    parser.add_argument('-k','--key', default='api_key.txt', required=False, help='File that contains the api key')
+    parser.add_argument('-c','--clantag', default='QQG200V', required=False, help='Clan Tag to get data for')
+    parser.add_argument('-o','--output', default='record', required=False, help='Folder to store raw data')
     parser.add_argument('-v', '--version', action='version', version='Version: ' + __version__)
+    parser.add_argument('-H', '--history', action='store_true', default=False, required=False,help='Build History Tables for Donations and War')
     
     args = parser.parse_args()
     
@@ -402,6 +403,7 @@ if __name__ == '__main__':
     htmlout += '</tbody>\n'
 
     htmlout += '</table>\n'
+    htmlout += '</div>\n'
     
     # add last update date
     htmlout += '<div align=\"right\">\n'
