@@ -50,7 +50,7 @@ def processDailyHistory(clan_tag):
     
     record_folder = 'record' + DirSlash()
     record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
-    print('\nProcessHistory for Clan Tag {} in {}\n'.format(clan_tag, record_folder))
+    print('\nProcess Daily History for Clan Tag {} in {}'.format(clan_tag, record_folder))
     
     myTimer.start()
     clan_data = []
@@ -61,13 +61,8 @@ def processDailyHistory(clan_tag):
     
     
     start_of_week  = datetime.datetime.now()
-    
-    print(start_of_week .weekday(), start_of_week .day)
-    
     start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
           
-    print(start_of_week )
-    print()
         
     
     fDates = []
@@ -77,26 +72,18 @@ def processDailyHistory(clan_tag):
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
             fTime = getFileNameDate(file[idx1:idx2])
-            print('File Time: {}'.format(fTime))
             if fTime >= start_of_week :
                 fin = open(file, 'r')
                 clan_data.append(json.load(fin))
                 fin.close()
                 fDates.append(fTime)
-            #print(clan_data)
             
             
-    for fDate in fDates:
-        print(fDate)
-        
     members = []
     for i, data in enumerate(clan_data):
-#        print(i)
         for j, person in enumerate(data['memberList']):
-#            print(j, person['name'])
             found = False
             for member in members:
-                #print(j, person['name'], member['name'])
                 if person['name'] == member.name:
                     member.donations[i] = str(person['donations'])
                     member.rank = person['clanRank']
@@ -202,7 +189,6 @@ def processDailyHistory(clan_tag):
     htmlout += "<thead>\n"
     htmlout += ClanCommon.createTH('Name')
     for fDate in fDates:
-        print(fDate.strftime("%d-%b-%Y"))
         htmlout += ClanCommon.createTH(fDate.strftime("%d-%b-%Y"))
     htmlout += '</thead>\n'
     
@@ -219,7 +205,6 @@ def processDailyHistory(clan_tag):
             css = ''
         htmlout += ClanCommon.createTD(member.name, css)
         for j, donation in enumerate(member.donations):
-#            print(i, member.name, j, str(donation))
             htmlout += ClanCommon.createTD(donation, css, 'center')
         
         htmlout += '</tr>\n'
@@ -236,7 +221,6 @@ def processDailyHistory(clan_tag):
     htmlout += '</div>\n'
         
     htmlout += ClanCommon.buildhtmlFooter()
-#    print(htmlout)
     
     
     htmlFname = clan_tag + DirSlash() + clan_tag + '_daily_donations' + '.html'
@@ -254,7 +238,7 @@ def processWeeklyHistory(clan_tag):
     
     record_folder = 'record' + DirSlash()
     record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
-    print('\nProcessHistory for Clan Tag {} in {}\n'.format(clan_tag, record_folder))
+    print('\nProcess Weekly History for Clan Tag {} in {}'.format(clan_tag, record_folder))
     
     myTimer.start()
     
@@ -291,10 +275,7 @@ def processWeeklyHistory(clan_tag):
             clan_data = json.load(fin)
             fin.close()
 
-#            for i, data in enumerate(clan_data):
-        #        print(i)
             for j, person in enumerate(clan_data['memberList']):
-    #            print(j, person['name'])
                 found = False
                 for member in members:
                     #print(j, person['name'], member['name'])
@@ -307,9 +288,6 @@ def processWeeklyHistory(clan_tag):
                     members.append(memberData(person['name'],person['clanRank'], len(fDates)))
                     members[len(members)-1].donations[fidx] = str(person['donations'])
         
-    for member in members:
-        print(member)
-
     htmlout = ''
     htmlout += ClanCommon.buildhtmlHeader(clan_data['name'])
     
@@ -407,8 +385,6 @@ def processWeeklyHistory(clan_tag):
     htmlout += "<thead>\n"
     htmlout += ClanCommon.createTH('Name')
     for fidx, fDate in enumerate(fDates):
-#        if fDate.weekday() == ClanCommon.FRI:
-#        print(fDate.strftime("%d-%b-%Y"))
         htmlout += ClanCommon.createTH(fDate.strftime("%d-%b-%Y"))
     htmlout += '</thead>\n'
     
@@ -426,7 +402,6 @@ def processWeeklyHistory(clan_tag):
             css = ''
         htmlout += ClanCommon.createTD(member.name, css)
         for j, donation in enumerate(member.donations):
-#            print(i, member.name, j, str(donation))
             htmlout += ClanCommon.createTD(donation, css, 'center')
         
         htmlout += '</tr>\n'
@@ -442,7 +417,6 @@ def processWeeklyHistory(clan_tag):
 
     htmlout += '</div>\n'
     htmlout += ClanCommon.buildhtmlFooter()
-#    print(htmlout)
     
     
     htmlFname = clan_tag + DirSlash() + clan_tag + '_weekly_donations' + '.html'
