@@ -30,7 +30,7 @@ def buildhtmlHeader (title):
     retVal = ''
     retVal += '<!DOCTYPE HTML>\n'
     retVal += '<html>\n<head>\n'
-    retVal += '<meta charset="UTF-8">'
+    retVal += '<meta charset="UTF-8">\n'
     retVal += '<title>' + 'Clash Royale - ' + title + ' Clan' + '</title>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'

@@ -265,7 +265,6 @@ if __name__ == '__main__':
     htmlout += clan_data['description']
     htmlout += '</div>\n'
     htmlout += '</div>\n'
-    htmlout += '</div>\n'
 
     htmlout += '<div style="float: left; width:50%;">'
     htmlout += '<img  style="float:left" src="../img/War_Shield.png" height="100px" width="86px">'
@@ -285,6 +284,7 @@ if __name__ == '__main__':
         htmlout += ' </div></div>'
     
     
+    htmlout += '</div>\n'
     htmlout += '</div>\n'
     
     
@@ -339,7 +339,7 @@ if __name__ == '__main__':
     htmlout += ClanCommon.createTH('Trophies')
     htmlout += ClanCommon.createTH('Arena')
     htmlout += ClanCommon.createTH('Donations')
-    htmlout += '</thead>\n'
+    htmlout += '\n</thead>\n'
     
     
     htmlout += '<tbody>\n'
