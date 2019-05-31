@@ -12,21 +12,32 @@ import pytz
 def init():
     global UTC_TZ
     global Eastern_TZ
+    global MON
+    global TUE
+    global WED
+    global THU
     global FRI
+    global SAT
     global SUN
     
     UTC_TZ = pytz.timezone('UTC')
     Eastern_TZ = pytz.timezone("US/Eastern")
     
+    MON = 0
+    TUE = 1
+    WED = 2
+    THU = 3
     FRI = 4
+    SAT = 5
     SUN = 6
 
 def buildhtmlHeader (title):
     retVal = ''
     retVal += '<!DOCTYPE HTML>\n'
     retVal += '<html>\n<head>\n'
+    retVal += '<meta charset="UTF-8">\n'
     retVal += '<title>' + 'Clash Royale - ' + title + ' Clan' + '</title>\n'
-    retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/>\n'
+    retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>\n'
@@ -53,7 +64,7 @@ def buildhtmlHeader (title):
 
 
 def buildhtmlFooter():
-    retVal = '</body\n'
+    retVal = '</body>\n'
     retVal += '</html>\n'
 
     return retVal
@@ -70,5 +81,5 @@ def createTD(text, css='', align=''):
     return (retVal)
 
 def createTH(text, css=''):
-    return ('<th>' + text + '</tj>')
+    return ('<th>' + text + '</th>')
 
