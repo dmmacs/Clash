@@ -12,7 +12,12 @@ import pytz
 def init():
     global UTC_TZ
     global Eastern_TZ
+    global MON
+    global TUE
+    global WED
+    global THU
     global FRI
+    global SAT
     global SUN
     
     UTC_TZ = pytz.timezone('UTC')
