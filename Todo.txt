@@ -43,3 +43,8 @@ Priority 3
 -add Icons to Table output (tower level, arena)
 -Check to see if clan tag starts with # (remove if it is or replace with %23?)
 -Continue to build out ClanCommon.py
+
+
+
+bugalibe star: joined
+alfred spider: left

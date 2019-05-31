@@ -10,6 +10,7 @@ import platform
 import datetime
 import json
 import ClanCommon
+import sys
 
 import myTimer
 
@@ -32,12 +33,14 @@ def getFileNameDate(fname_date):
     return retVal
     
 class memberData:
-    def __init__(self, name):
+    def __init__(self, name, rank, numMonths):
         self.name = name
-        self.donations = []
+        self.donations = ['N/A'] * numMonths
+        self.rank = rank
+        
         
     def __str__(self):
-        return('member: ' + self.name + ' donations: ' + str(self.donations))
+        return('member:' + self.name + ' rank:' + str(self.rank) + ' donations:' + str(self.donations))
         
 
 def processDailyHistory(clan_tag):
@@ -45,7 +48,7 @@ def processDailyHistory(clan_tag):
     ClanCommon.init()
     
     record_folder = 'record' + DirSlash()
-#    record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
+    record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
     print('\nProcessHistory for Clan Tag {} in {}\n'.format(clan_tag, record_folder))
     
     myTimer.start()
@@ -68,7 +71,36 @@ def processDailyHistory(clan_tag):
             #print(clan_data)
 
     members = []
+    for i, data in enumerate(clan_data):
+#        print(i)
+        for j, person in enumerate(data['memberList']):
+#            print(j, person['name'])
+            found = False
+            for member in members:
+                #print(j, person['name'], member['name'])
+                if person['name'] == member.name:
+                    member.donations.append(str(person['donations']))
+                    found = True
+                    break;
+            if found == False:
+                if person['name'] == 'bugalibe star':
+                    print("Got Here")
+                    print(i)
+                if person['name'] == 'alfred spider':
+                    print('Got Here:' + person['name'])
+                    print(i)
+
+                members.append(memberData(person['name'],person['clanRank'], len(fDates)))
+                if i > 0:
+                    for k in range(0,i+1):
+                        members[len(members)-1].donations.append('N/A')
+                else:
+                    members[j].donations.append(str(person['donations']))
     
+    for i,member in enumerate(members):
+        print(i, len(member.donations),member)
+    
+    sys.exit()    
     for j,data in enumerate(clan_data):
         found = False
         for i,person in enumerate(data['memberList']):
@@ -143,8 +175,8 @@ def processWeeklyHistory(clan_tag):
 if __name__ == '__main__':
 
 #    modInit()    
-    #processDailyHistory('QQG200V')
-    processWeeklyHistory('QQG200V')
+    processDailyHistory('QQG200V')
+    #processWeeklyHistory('QQG200V')
 
     
     
