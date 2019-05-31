@@ -5,12 +5,13 @@ Created on Sun May 19 17:10:54 2019
 
 @author: dmmacs
 """
+from _version import __version__
 import glob
 import platform
 import datetime
 import json
 import ClanCommon
-import sys
+#import sys
 
 import myTimer
 
@@ -205,7 +206,7 @@ def processDailyHistory(clan_tag):
         htmlout += ClanCommon.createTH(fDate.strftime("%d-%b-%Y"))
     htmlout += '</thead>\n'
     
- 
+    htmlout += '<tbody>\n'
     for i,member in enumerate(members):
         htmlout += '<tr>'
         if i == 0:
@@ -223,6 +224,16 @@ def processDailyHistory(clan_tag):
         
         htmlout += '</tr>\n'
         
+    htmlout += '</tbody>\n'
+    htmlout += '</table>\n'
+    htmlout += '<div align=\"right\">\n'
+    htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
+
+    htmlout += datetime.datetime.now().astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += ' with Version: ' + __version__
+    htmlout += '</p>\n'
+
+    htmlout += '</div>\n'
         
     htmlout += ClanCommon.buildhtmlFooter()
 #    print(htmlout)
@@ -402,6 +413,7 @@ def processWeeklyHistory(clan_tag):
     htmlout += '</thead>\n'
     
  
+    htmlout += '<tbody>\n'
     for i,member in enumerate(members):
         htmlout += '<tr>'
         if i == 0:
@@ -419,7 +431,16 @@ def processWeeklyHistory(clan_tag):
         
         htmlout += '</tr>\n'
         
-        
+    htmlout += '</tbody>\n'
+    htmlout += '</table>\n'
+    htmlout += '<div align=\"right\">\n'
+    htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
+
+    htmlout += datetime.datetime.now().astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += ' with Version: ' + __version__
+    htmlout += '</p>\n'
+
+    htmlout += '</div>\n'
     htmlout += ClanCommon.buildhtmlFooter()
 #    print(htmlout)
     
