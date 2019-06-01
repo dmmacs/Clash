@@ -8,6 +8,7 @@ Created on Sat May 18 09:45:50 2019
 
 from _version import __version__
 import pytz
+import platform
 
 def init():
     global UTC_TZ
@@ -31,11 +32,19 @@ def init():
     SAT = 5
     SUN = 6
 
+def DirSlash():
+    if platform.system() == 'Windows':
+        return ('\\')
+    elif platform.system() == 'Linux':
+        return('/')
+
+
 def buildhtmlHeader (title):
     retVal = ''
     retVal += '<!DOCTYPE HTML>\n'
     retVal += '<html>\n<head>\n'
     retVal += '<meta charset="UTF-8">\n'
+    retVal += '<meta scriptVersion="' + __version__ + '">\n'
     retVal += '<title>' + 'Clash Royale - ' + title + ' Clan' + '</title>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
     retVal += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'

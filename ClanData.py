@@ -15,7 +15,7 @@ import platform
 #import glob
 import argparse
 import ClanCommon
-
+import myTimer
 import ClanHistory
 
 def processClashDate(tmpStr):
@@ -41,6 +41,8 @@ def DirSlash():
 
 # Start of main
 if __name__ == '__main__':
+
+    myTimer.start()
 
     print('Python Version is: ' + platform.python_version())
     print('Script Version is: ' + __version__)
@@ -81,10 +83,6 @@ if __name__ == '__main__':
     if args.output:
         record_folder = args.output
         
-#    print(args)
-    
-
-#    print(apiFname)
     #Read Key from File
     try:
         fname = os.path.dirname(__file__)
@@ -129,9 +127,6 @@ if __name__ == '__main__':
             print(exc.errno)
         
 
-
-
-
     print('Record Folder = ' + record_folder)
     _authorization = 'authorization' + ':' + key
     
@@ -142,42 +137,56 @@ if __name__ == '__main__':
     link_current_war = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/currentwar'
     link_tourn_global = 'https://api.clashroyale.com/v1/globaltournaments'
 
-    
+    reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
     # Get Clan Data
     print('Getting Clan Data')
-    r = requests.get(link_clan, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    clan_data = r.json();
-    r.close()
+    req = requests.get(link_clan, headers=reqHeaders, timeout=2)
+    clan_data = req.json()
+    req.close()
+    if (req.status_code != 200):
+        print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
+        sys.exit(-1)
     print('\tClan Data for ' + clan_data['name'])
     
     # Get Clan member Data
     print('Getting Clan Member Data')
-    r = requests.get(link_members, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    clan_member_data = r.json()
-    r.close()
+    req = requests.get(link_members, headers=reqHeaders)
+    clan_member_data = req.json()
+    req.close()
+    if (req.status_code != 200):
+        print('Could not read Clan Member Data Api, Response Code {}'.format(req.status_code))
+        sys.exit(-1)
     print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan warlog Data
     print('Getting WarLog Data')
-    r = requests.get(link_warlog, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    clan_warlog = r.json()
-    r.close()
+    req = requests.get(link_warlog, headers=reqHeaders)
+    clan_warlog = req.json()
+    req.close()
+    if (req.status_code != 200):
+        print('Could not read War Log Api, Response Code {}'.format(req.status_code))
+        sys.exit(-1)
     print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan Current War Data
     print('Getting Current War Data')
-    r = requests.get(link_current_war, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    clan_current_war = r.json()
-    r.close()
-#    print(json.dumps(clan_current_war, indent = 4))
+    req = requests.get(link_current_war, headers=reqHeaders)
+    clan_current_war = req.json()
+    req.close()
+    if (req.status_code != 200):
+        print('Could not read Current War Api, Response Code {}'.format(req.status_code))
+        sys.exit(-1)
     print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
     print('Getting Global Tournament Data')
-    r = requests.get(link_tourn_global, headers={"Accept":"application/json", "authorization":"Bearer " + key})
-    tourn_global_data = r.json()
-    r.close()
+    req = requests.get(link_tourn_global, headers=reqHeaders)
+    tourn_global_data = req.json()
+    if (req.status_code != 200):
+        print('Could not read Global Tournament Data Api, Response Code {}'.format(req.status_code))
+        sys.exit(-1)
+    req.close()
     print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
 #    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=ClanCommon.).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
@@ -510,4 +519,7 @@ if __name__ == '__main__':
     if args.history:
         ClanHistory.processWeeklyHistory(clan_tag)
         ClanHistory.processDailyHistory(clan_tag)
+
+    myTimer.end()
+    print('Completed ClanData in {}'.format(myTimer.elapsedTime()))
     

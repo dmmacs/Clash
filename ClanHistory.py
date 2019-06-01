@@ -56,7 +56,6 @@ def processDailyHistory(clan_tag):
     record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
     print('\nProcess Daily History for Clan Tag {} in {}'.format(clan_tag, record_folder))
     
-    myTimer.start()
     clan_data = []
     
     # List all the files in the Clan History directory
@@ -232,9 +231,6 @@ def processDailyHistory(clan_tag):
     out.write(htmlout)
     out.close()
     
-    myTimer.end()
-    print('Completed in {}'.format(myTimer.elapsedTime()))
-
 
 def processWeeklyHistory(clan_tag):
 
@@ -244,7 +240,6 @@ def processWeeklyHistory(clan_tag):
     record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
     print('\nProcess Weekly History for Clan Tag {} in {}'.format(clan_tag, record_folder))
     
-    myTimer.start()
     
     # List all the files in the Clan History directory
     file_filter = record_folder + '*' + '*.txt'
@@ -423,17 +418,14 @@ def processWeeklyHistory(clan_tag):
     out.write(htmlout)
     out.close()
     
-    myTimer.end()
-    print('Completed in {}'.format(myTimer.elapsedTime()))
-
-            
 # Start of main
 if __name__ == '__main__':
 
 #    modInit()    
+    myTimer.start()
     processDailyHistory('QQG200V')
     processWeeklyHistory('QQG200V')
 
-    
-    
-    
+    myTimer.end()
+    print('Completed Clan History in {}'.format(myTimer.elapsedTime()))
+

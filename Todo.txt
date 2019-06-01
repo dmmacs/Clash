@@ -15,24 +15,21 @@ X-Folders
 X--Add a folder for each clan
 X-Update Time Display to cover more than just hours.
 X-- Add War Status to right pane of Clan Info
+X-Fix order of weekly donation columns
+X-update ssh alias to add -X
+X-add error handling for api calls
+X-Continue to build out ClanCommon.py
+X--Add history per player per week for donations
+X--Add weekly history html output
 
-
-
--update ssh alias to add -X
 
 Priority 1
--Fix order of weekly donation columns
 --Update logic to find api key file to check if the arg is an absolute path
--add error handling for api calls
+--Add history per player per week for war participation
 
 Priority 2
 -History
---Add history per player per week for donations and war participation
---Split column heading across donations and war?
---Add weekly history html output
-
 -Figure out how to build index (list of clan Tags instead of a single clan Tag?)
-
 
 
 Priority 3
@@ -43,9 +40,4 @@ Priority 3
 -add mechanism for pruning log file
 -add Icons to Table output (tower level, arena)
 -Check to see if clan tag starts with # (remove if it is or replace with %23?)
--Continue to build out ClanCommon.py
 
-
-
-bugalibe star: joined
-alfred spider: left
