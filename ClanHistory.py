@@ -252,9 +252,10 @@ def processWeeklyHistory(clan_tag):
           
     
     fDates = []
+    fNames = []
     for file in files:
         if file.find('clan_data') > -1:
-#            print(file)
+            print(file)
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
             fTime = getFileNameDate(file[idx1:idx2])
@@ -264,16 +265,21 @@ def processWeeklyHistory(clan_tag):
 #                fin.close()
             if fTime.weekday() == ClanCommon.FRI:
                 fDates.append(fTime)
+                fNames.append(file)
             #print(clan_data)
 
     members = []
-            
+
+    #print(files)            
     for fidx, fDate in enumerate(fDates):
+        print(fidx, files[fidx])
         if fDate.weekday() == ClanCommon.FRI:
-            
-            fin = open(files[fidx], 'r')
+            #print(fidx, files[fidx])
+            fin = open(fNames[fidx], 'r')
             clan_data = json.load(fin)
             fin.close()
+#            print(clan_data)
+#            print(clan_data['memberList'])
 
             for j, person in enumerate(clan_data['memberList']):
                 found = False
