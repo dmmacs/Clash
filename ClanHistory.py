@@ -60,15 +60,16 @@ def processDailyHistory(clan_tag):
     files = glob.glob(file_filter)
     
     
-    start_of_week  = datetime.datetime.now()
-    start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
+    start_of_week  = datetime.datetime.now(ClanCommon.UTC_TZ)
+    start_of_week = start_of_week - datetime.timedelta(start_of_week.weekday())
+    #start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
           
         
     
     fDates = []
+    fNames = []
     for file in files:
         if file.find('clan_data') > -1:
-#            print(file)
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
             fTime = getFileNameDate(file[idx1:idx2])
@@ -77,6 +78,7 @@ def processDailyHistory(clan_tag):
                 clan_data.append(json.load(fin))
                 fin.close()
                 fDates.append(fTime)
+                fNames.append(file)
             
             
     members = []
@@ -247,15 +249,16 @@ def processWeeklyHistory(clan_tag):
     files = glob.glob(file_filter)
     
     
-    start_of_week  = datetime.datetime.now()
-    start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
+    start_of_week  = datetime.datetime.now(ClanCommon.UTC_TZ)
+    start_of_week = start_of_week - datetime.timedelta(start_of_week.weekday())
+
+    #start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
           
     
     fDates = []
     fNames = []
     for file in files:
         if file.find('clan_data') > -1:
-            print(file)
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
             fTime = getFileNameDate(file[idx1:idx2])
@@ -272,7 +275,6 @@ def processWeeklyHistory(clan_tag):
 
     #print(files)            
     for fidx, fDate in enumerate(fDates):
-        print(fidx, files[fidx])
         if fDate.weekday() == ClanCommon.FRI:
             #print(fidx, files[fidx])
             fin = open(fNames[fidx], 'r')
