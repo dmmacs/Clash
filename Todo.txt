@@ -21,6 +21,7 @@ X-- Add War Status to right pane of Clan Info
 -update ssh alias to add -X
 
 Priority 1
+-Fix order of weekly donation columns
 --Update logic to find api key file to check if the arg is an absolute path
 -add error handling for api calls
 
