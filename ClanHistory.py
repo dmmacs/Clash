@@ -1,10 +1,6 @@
 #! /home/dmmacs/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sun May 19 17:10:54 2019
-
-@author: dmmacs
-"""
+"""ClanHistory"""
 from _version import __version__
 import glob
 import platform
@@ -12,6 +8,7 @@ import datetime
 import json
 import ClanCommon
 #import sys
+import operator
 
 import myTimer
 
@@ -32,13 +29,20 @@ def getFileNameDate(fname_date):
     
     retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=ClanCommon.UTC_TZ)
     return retVal
+
+class historyFnames:
+    def __init__(self,fName, fDate):
+        self.fName = fName
+        self.fDate = fDate
+    
+    def __str__(self):
+        return ('FName:' + self.fName + ' FDate:' + self.fDate.strftime('%I:%M:%S %p %Z %d-%b-%Y'))
     
 class memberData:
     def __init__(self, name, rank, numMonths):
         self.name = name
         self.donations = ['N/A'] * numMonths
         self.rank = rank
-        
         
     def __str__(self):
         return('member:' + self.name + ' rank:' + str(self.rank) + ' donations:' + str(self.donations))
@@ -65,7 +69,6 @@ def processDailyHistory(clan_tag):
     #start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
           
         
-    
     fDates = []
     fNames = []
     for file in files:
@@ -79,8 +82,7 @@ def processDailyHistory(clan_tag):
                 fin.close()
                 fDates.append(fTime)
                 fNames.append(file)
-            
-            
+
     members = []
     for i, data in enumerate(clan_data):
         for j, person in enumerate(data['memberList']):
@@ -248,40 +250,29 @@ def processWeeklyHistory(clan_tag):
     file_filter = record_folder + '*' + '*.txt'
     files = glob.glob(file_filter)
     
-    
+    # Back to the start of the week (Monday)    
     start_of_week  = datetime.datetime.now(ClanCommon.UTC_TZ)
     start_of_week = start_of_week - datetime.timedelta(start_of_week.weekday())
 
-    #start_of_week = start_of_week .replace(day = start_of_week .day - start_of_week .weekday(), hour=0, minute=0, second=0, microsecond=0, tzinfo=ClanCommon.UTC_TZ)
-          
     
-    fDates = []
     fNames = []
     for file in files:
         if file.find('clan_data') > -1:
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
             fTime = getFileNameDate(file[idx1:idx2])
-#            print('File Time: {}'.format(fTime))
-#                fin = open(file, 'r')
-#                clan_data.append(json.load(fin))
-#                fin.close()
             if fTime.weekday() == ClanCommon.FRI:
-                fDates.append(fTime)
-                fNames.append(file)
-            #print(clan_data)
+                fNames.append(historyFnames(file,fTime))
+
+    fNames.sort(key=operator.attrgetter('fDate'))
 
     members = []
 
-    #print(files)            
-    for fidx, fDate in enumerate(fDates):
-        if fDate.weekday() == ClanCommon.FRI:
-            #print(fidx, files[fidx])
-            fin = open(fNames[fidx], 'r')
+    for fidx, fName in enumerate(fNames):
+        if fName.fDate.weekday() == ClanCommon.FRI:
+            fin = open(fName.fName , 'r')
             clan_data = json.load(fin)
             fin.close()
-#            print(clan_data)
-#            print(clan_data['memberList'])
 
             for j, person in enumerate(clan_data['memberList']):
                 found = False
@@ -293,7 +284,7 @@ def processWeeklyHistory(clan_tag):
                         found = True
                         break;
                 if found == False:
-                    members.append(memberData(person['name'],person['clanRank'], len(fDates)))
+                    members.append(memberData(person['name'],person['clanRank'], len(fNames)))
                     members[len(members)-1].donations[fidx] = str(person['donations'])
         
     htmlout = ''
@@ -392,8 +383,8 @@ def processWeeklyHistory(clan_tag):
     htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
     htmlout += "<thead>\n"
     htmlout += ClanCommon.createTH('Name')
-    for fidx, fDate in enumerate(fDates):
-        htmlout += ClanCommon.createTH(fDate.strftime("%d-%b-%Y"))
+    for fidx, fName in enumerate(fNames):
+        htmlout += ClanCommon.createTH(fName.fDate.strftime("%d-%b-%Y"))
     htmlout += '</thead>\n'
     
  

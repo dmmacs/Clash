@@ -1,10 +1,6 @@
 #! /home/dmmacs/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
-"""
-Created on Sat May 18 09:45:50 2019
-
-@author: dmmacs
-"""
+"""ClanData"""
 
 from _version import __version__
 import requests
