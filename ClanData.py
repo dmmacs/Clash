@@ -11,27 +11,16 @@ import requests
 import json
 #import openpyxl
 import datetime
-import dateutil
-import pytz
+#import dateutil
+#import pytz
 import sys
 import os
 import platform
-import glob
+#import glob
 import argparse
+import ClanCommon
 
-def createTD(text, css='', align=''):
-    retVal = '<td '
-    if css != '':
-        retVal += 'class=' + css 
-    
-    if align!= '':
-        retVal += ' style=text-align:' + align + ';'
-    retVal += '>'
-    retVal +=  text + '</td>'
-    return (retVal)
-
-def createTH(text, css=''):
-    return ('<th>' + text + '</tj>')
+import ClanHistory
 
 def processClashDate(tmpStr):
     year = int(tmpStr[0:4])
@@ -41,24 +30,10 @@ def processClashDate(tmpStr):
     minute = int(tmpStr[11:13])
     seconds = int(tmpStr[13:15])
     
-    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=ClanCommon.UTC_TZ)
     return retVal
 
 
-def processHistory():
-    print('\nProcessHistory\n')
-    
-    base_fname = '-clan_data-'
-    file_filter = record_folder + '*' + base_fname + '*.txt'
-    files = glob.glob(file_filter)
-    print(files)
-
-    # Determine day of files
-    for file in files:
-        print(file)
-        idx = file.find(base_fname) + len(base_fname)
-        print(str(idx), file)#file[idx:len(base_fname)])
-        
     
 def DirSlash():
     if platform.system() == 'Windows':
@@ -74,10 +49,8 @@ if __name__ == '__main__':
     print('Python Version is: ' + platform.python_version())
     print('Script Version is: ' + __version__)
     # ***** Constants *****
-    #Timezones
-    UTC_TZ = pytz.timezone('UTC')
-    Eastern_TZ = pytz.timezone("US/Eastern")
 
+    ClanCommon.init()
     
     SECONDS_PER_HOUR = 3600
     THREE_QUARTERS = (SECONDS_PER_HOUR / 4 * 3)
@@ -96,10 +69,11 @@ if __name__ == '__main__':
 #    parser.add_argument('--verbose', default=0, type=int,required=False, help='Enables LoggingLevel Mode')
 
     parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
-    parser.add_argument('-k','--key', default='')#, required=False)
-    parser.add_argument('-c','--clantag', default='')
-    parser.add_argument('-o','--output', default='')
+    parser.add_argument('-k','--key', default='api_key.txt', required=False, help='File that contains the api key')
+    parser.add_argument('-c','--clantag', default='QQG200V', required=False, help='Clan Tag to get data for')
+    parser.add_argument('-o','--output', default='record', required=False, help='Folder to store raw data')
     parser.add_argument('-v', '--version', action='version', version='Version: ' + __version__)
+    parser.add_argument('-H', '--history', action='store_true', default=False, required=False,help='Build History Tables for Donations and War')
     
     args = parser.parse_args()
     
@@ -210,36 +184,37 @@ if __name__ == '__main__':
     r.close()
     print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
-#    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+#    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=ClanCommon.).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     #Generate HTML Output
     
     htmlout = ''
-    htmlout += '<!DOCTYPE HTML>\n'
-    htmlout += '<html>\n<head>\n'
-    htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>\n'
-    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>\n'
-    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>\n'
-    
-#    htmlout += '<link href=\"../css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-#    htmlout += '<link href=\"../css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-    htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
-    htmlout += '<script src="../js/sortable.js"></script>\n'
-
-#    htmlout += "<script src=\"../js/jquery.fixedheadertable.js\"></script>\n"
-#    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
-
-    htmlout +="<link href=\"../css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-    htmlout +="<link href=\"../css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-
-    htmlout += "</head>\n"
-
-    htmlout += "<body>\n"
+    htmlout = ClanCommon.buildhtmlHeader(clan_data['name'])
+#    htmlout += '<!DOCTYPE HTML>\n'
+#    htmlout += '<html>\n<head>\n'
+#    htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
+#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/>\n'
+#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
+#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>\n'
+#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>\n'
+#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>\n'
+#    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>\n'
+#    
+##    htmlout += '<link href=\"../css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+##    htmlout += '<link href=\"../css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
+#    htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
+#    htmlout += '<script src="../js/sortable.js"></script>\n'
+#
+##    htmlout += "<script src=\"../js/jquery.fixedheadertable.js\"></script>\n"
+##    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
+#
+#    htmlout +="<link href=\"../css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+#    htmlout +="<link href=\"../css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
+#
+#    htmlout += "</head>\n"
+#
+#    htmlout += "<body>\n"
     
     #Clan Name Section
     htmlout += '<div style="width:100%;">\n' 
@@ -271,7 +246,6 @@ if __name__ == '__main__':
     htmlout += clan_data['description']
     htmlout += '</div>\n'
     htmlout += '</div>\n'
-    htmlout += '</div>\n'
 
     htmlout += '<div style="float: left; width:50%;">'
     htmlout += '<img  style="float:left" src="../img/War_Shield.png" height="100px" width="86px">'
@@ -282,15 +256,16 @@ if __name__ == '__main__':
     if clan_current_war['state'] == 'warDay':
         warEndTime = processClashDate(clan_current_war['warEndTime'])
         htmlout += 'War Ends:'
-        htmlout += warEndTime.astimezone(tz=Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+        htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
         htmlout += ' </div></div>'
     elif clan_current_war['state'] == 'collectionDay':
         warEndTime = processClashDate(clan_current_war['collectionEndTime'])
         htmlout += 'Collection Ends:'
-        htmlout += warEndTime.astimezone(tz=Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+        htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
         htmlout += ' </div></div>'
     
     
+    htmlout += '</div>\n'
     htmlout += '</div>\n'
     
     
@@ -337,15 +312,15 @@ if __name__ == '__main__':
 
     htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
     htmlout += "<thead>\n"
-    htmlout += createTH('Clan Rank')
-    htmlout += createTH('Name')
-    htmlout += createTH('Role')
-    htmlout += createTH('Level')
-    htmlout += createTH('Last Seen')
-    htmlout += createTH('Trophies')
-    htmlout += createTH('Arena')
-    htmlout += createTH('Donations')
-    htmlout += '</thead>\n'
+    htmlout += ClanCommon.createTH('Clan Rank')
+    htmlout += ClanCommon.createTH('Name')
+    htmlout += ClanCommon.createTH('Role')
+    htmlout += ClanCommon.createTH('Level')
+    htmlout += ClanCommon.createTH('Last Seen')
+    htmlout += ClanCommon.createTH('Trophies')
+    htmlout += ClanCommon.createTH('Arena')
+    htmlout += ClanCommon.createTH('Donations')
+    htmlout += '\n</thead>\n'
     
     
     htmlout += '<tbody>\n'
@@ -361,15 +336,15 @@ if __name__ == '__main__':
             css = 'bronzebkd'
         else:
             css = ''
-        htmlout += createTD(str(item['clanRank']), css, 'center')
-        htmlout += createTD(item['name'], css)
-        htmlout += createTD(item['role'], css)
-        htmlout += createTD(str(item['expLevel']), css, 'center')
+        htmlout += ClanCommon.createTD(str(item['clanRank']), css, 'center')
+        htmlout += ClanCommon.createTD(item['name'], css)
+        htmlout += ClanCommon.createTD(item['role'], css)
+        htmlout += ClanCommon.createTD(str(item['expLevel']), css, 'center')
 
         last_seen = processClashDate(item['lastSeen'])
         
         timeNow = datetime.datetime.now().replace(microsecond=0)
-        timeNow = timeNow.astimezone(tz=UTC_TZ)
+        timeNow = timeNow.astimezone(tz=ClanCommon.UTC_TZ)
         timediff = timeNow -  last_seen
         
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
@@ -398,29 +373,29 @@ if __name__ == '__main__':
         
             
             
-#        htmlout += createTD('{} hours ago'.format(int(hours)), css)
-#        htmlout += createTD(dateDiffStr, css)
-        htmlout += createTD('{} hours ago'.format(hours), css)        
-        htmlout += createTD(str(item['trophies']), css, 'center')
-        htmlout += createTD(item['arena']['name'], css)
-        htmlout += createTD(str(item['donations']), css, 'center')
+#        htmlout += ClanCommon.createTD('{} hours ago'.format(int(hours)), css)
+#        htmlout += ClanCommon.createTD(dateDiffStr, css)
+        htmlout += ClanCommon.createTD('{} hours ago'.format(hours), css)        
+        htmlout += ClanCommon.createTD(str(item['trophies']), css, 'center')
+        htmlout += ClanCommon.createTD(item['arena']['name'], css)
+        htmlout += ClanCommon.createTD(str(item['donations']), css, 'center')
         htmlout += '</tr>\n'
         
     htmlout += '</tbody>\n'
 
     htmlout += '</table>\n'
-    htmlout += '</body\n'
-    htmlout += '</html>\n'
+    htmlout += '</div>\n'
     
     # add last update date
     htmlout += '<div align=\"right\">\n'
     htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
 
-    htmlout += timeNow.astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += timeNow.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
     htmlout += ' with Version: ' + __version__
     htmlout += '</p>\n'
 
     htmlout += '</div>\n'
+    htmlout += ClanCommon.buildhtmlFooter()
     
     # Write HTML File
 #    htmlFname = #clan_tag
@@ -434,7 +409,7 @@ if __name__ == '__main__':
     eleven_fifty_five = timeNow.replace(hour=23, minute=55, second=0, microsecond=0)
     
     
-    file_time_stamp = timeNow.astimezone(tz=Eastern_TZ).strftime('%Y%m%d')
+    file_time_stamp = timeNow.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%Y%m%d')
     #Save Clan Data
     fname = record_folder
     fname += clan_data['name'] 
@@ -447,12 +422,22 @@ if __name__ == '__main__':
     out = open(fname, 'w', encoding='UTF-8')
     out.write(json.dumps(clan_data, indent = 4))
     out.close()
-
+    
+    
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
+        
+        # If it Sunday, put a copy of the data in the history folder
+        if timeNow.weekday() == 2:#ClanCommon.SUN
+            fname = fname.replace('.txt', '_weekly.txt')
+            out = open(fname, 'w', encoding='UTF-8')
+            out.write(json.dumps(clan_data, indent = 4))
+            out.close()
+    
+        
     
     #Save Clan Member Data
     fname = record_folder
@@ -471,8 +456,7 @@ if __name__ == '__main__':
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
-    
-    
+        
     #Save Warlog Data
     fname = record_folder
     fname += clan_data['name'] 
@@ -526,4 +510,8 @@ if __name__ == '__main__':
         out = open(fname, 'w', encoding='UTF-8')
         out.write(json.dumps(clan_data, indent = 4))
         out.close()
+    
+    if args.history:
+        ClanHistory.processWeeklyHistory(clan_tag)
+        ClanHistory.processDailyHistory(clan_tag)
     
