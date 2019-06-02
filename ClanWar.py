@@ -240,9 +240,14 @@ def processClanWar(clan_tag, clan_data):
         tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
     else:
         tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+    
+    clan_rank = 0
+    for i, clan in enumerate(currentWar['clans']):
+        if clan['tag'] == '#'+ clan_tag:
+            clan_rank = i
 
     htmlout += ClanCommon.createTD(tmpStr,'','')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'','center')
+    htmlout += ClanCommon.createTD(str(clan_rank),'','center')
     htmlout += ClanCommon.createTD(str(currentWar['clan']['participants']),'', 'center')
     htmlout += ClanCommon.createTD(str(currentWar['clan']['battlesPlayed']),'', 'center')
     htmlout += ClanCommon.createTD(str(currentWar['clan']['wins']),'', 'center')
