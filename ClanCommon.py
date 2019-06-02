@@ -9,6 +9,7 @@ Created on Sat May 18 09:45:50 2019
 from _version import __version__
 import pytz
 import platform
+import datetime
 
 def init():
     global UTC_TZ
@@ -37,6 +38,26 @@ def DirSlash():
         return ('\\')
     elif platform.system() == 'Linux':
         return('/')
+
+def getFileNameDate(fname_date):
+#    init()
+    year = int(fname_date[0:4])
+    month = int(fname_date[4:6])
+    day = int(fname_date[6:8])
+    hour = 0
+    minute = 0
+    seconds = 0
+    
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
+    return retVal
+
+class myFnames:
+    def __init__(self,fName, fDate):
+        self.fName = fName
+        self.fDate = fDate
+    
+    def __str__(self):
+        return ('FName:' + self.fName + ' FDate:' + self.fDate.strftime('%I:%M:%S %p %Z %d-%b-%Y'))
 
 
 def buildhtmlHeader (title):
