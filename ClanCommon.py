@@ -116,7 +116,7 @@ def createTD(text, css='', align=''):
 def createTH(text, css=''):
     return ('<th>' + text + '</th>')
 
-def getAPIData(clan_tag, dataType):
+def getAPIData(param, dataType):
 
     apiFname = 'api_key.txt'
     
@@ -130,20 +130,29 @@ def getAPIData(clan_tag, dataType):
     key = fin.readline().strip()
     fin.close()
 
-
+    
     if dataType == 'ClanData':
-        link = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag
+        link = 'https://api.clashroyale.com/v1/clans/%23' + param
     elif dataType == 'ClanMembers':
-        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/members'
+        link = 'https://api.clashroyale.com/v1/clans/%' + param + '/members'
     elif dataType == 'WarLog':
-        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/warlog'
+        link = 'https://api.clashroyale.com/v1/clans/%' + param + '/warlog'
     elif dataType == 'CurrentWar':
-        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/currentwar'
+        link = 'https://api.clashroyale.com/v1/clans/%' + param + '/currentwar'
     elif dataType == 'GlobalTournament':
         link = 'https://api.clashroyale.com/v1/globaltournaments'
+    elif dataType == 'Locations':
+        link = 'https://api.clashroyale.com/v1/locations'
+    elif dataType == 'Location':
+        link = 'https://api.clashroyale.com/v1/location/' + param
+    elif dataType == 'LocationRankingsClan':
+        link = 'https://api.clashroyale.com/v1/locations/' + param + '/rankings/clans'
+    elif dataType == 'LocationRankingsPlayers':
+        link = 'https://api.clashroyale.com/v1/locations/' + param + '/rankings/players'
+    else:
+        link = 'https://api.clashroyale.com/v1'
 
-
-
+    print(link)
     reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
     req = requests.get(link, headers=reqHeaders, timeout=2)
     
