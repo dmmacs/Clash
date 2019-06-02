@@ -247,7 +247,7 @@ def processClanWar(clan_tag, clan_data):
             tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + ' CW</a>'
             tmpStr = ''
         else:
-            tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+            tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + ' CW</a>'
         
         clan_rank = 0
         if warState == 'warDay':
