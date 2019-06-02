@@ -26,9 +26,10 @@ X--Add weekly history html output
 Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
 -War
---Add summary of battles
---Add Section for each  batlle with participation status
---Figure out how to build a local link location in html (anchor, i.e. <a name="raptors"></a>)
+X--Add summary of battles
+X--Add Section for each  batlle with participation status
+X--Figure out how to build a local link location in html (anchor, i.e. <a name="raptors"></a>)
+--Finish Adding Curret War
 
 Priority 2
 -History
