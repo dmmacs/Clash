@@ -3,7 +3,6 @@
 """ClanData"""
 
 from _version import __version__
-import requests
 import json
 #import openpyxl
 import datetime

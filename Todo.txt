@@ -29,11 +29,11 @@ X--Fix heading information (get Clan Data to complete?)
 X-History
 X-Figure out how to build index (list of clan Tags instead of a single clan Tag?)
 X-Sort participants in war data (sort by battles won then cards earned)
+X-Add Titles on pages (only in title bar, difficult to see which page you are on)
 
 
 Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
--Add Titles on pages (only in title bar, difficult to see which page you are on)
 
 Priority 2
 

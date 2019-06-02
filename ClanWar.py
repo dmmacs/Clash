@@ -41,6 +41,8 @@ def processClanWar(clan_tag, clan_data):
     print('\nProcess Clan War History for Clan Tag {} in {}'.format(clan_tag, record_folder))
 
 
+    warState = 'notinWar'
+
 
     clan_war = []
     fNames = []
@@ -72,13 +74,15 @@ def processClanWar(clan_tag, clan_data):
     currentWar = json.load(fin)
     fin.close()
 
+    warState = currentWar['state']
 
 
-    CwParticipants = currentWar['participants']
-    if currentWar['state'] == 'warDay':
-        CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
-    else:
-        CwParticipants .sort(key=lambda k: (k['cardsEarned']), reverse=True)
+    if warState != 'notInWar':
+        CwParticipants = currentWar['participants']
+        if currentWar['state'] == 'warDay':
+            CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
+        else:
+            CwParticipants .sort(key=lambda k: (k['cardsEarned']), reverse=True)
 
     fNames.sort(key=operator.attrgetter('fDate'))
     
@@ -237,26 +241,29 @@ def processClanWar(clan_tag, clan_data):
 #    else:
 #        print('Collection End Time: ' + currentWar['collectionEndTime'])
 
-    htmlout += '<tr>'
-    if currentWar['state'] == 'warDay':
-        tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
-    else:
-        tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+    if warState != 'notInWar':
+        htmlout += '<tr>'
+        if warState == 'warDay':
+            tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + ' CW</a>'
+            tmpStr = ''
+        else:
+            tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+        
+        clan_rank = 0
+        if warState == 'warDay':
+            for i, clan in enumerate(currentWar['clans']):
+                if clan['tag'] == '#'+ clan_tag:
+                    clan_rank = i
     
-    clan_rank = 0
-    for i, clan in enumerate(currentWar['clans']):
-        if clan['tag'] == '#'+ clan_tag:
-            clan_rank = i
-
-    htmlout += ClanCommon.createTD(tmpStr,'','')
-    htmlout += ClanCommon.createTD(str(clan_rank),'','center')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['participants']),'', 'center')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['battlesPlayed']),'', 'center')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['wins']),'', 'center')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['crowns']),'', 'center')
-    htmlout += ClanCommon.createTD('N/A','', 'center')
-    htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'', 'center')
-    
+        htmlout += ClanCommon.createTD(tmpStr,'','')
+        htmlout += ClanCommon.createTD(str(clan_rank),'','center')
+        htmlout += ClanCommon.createTD(str(currentWar['clan']['participants']),'', 'center')
+        htmlout += ClanCommon.createTD(str(currentWar['clan']['battlesPlayed']),'', 'center')
+        htmlout += ClanCommon.createTD(str(currentWar['clan']['wins']),'', 'center')
+        htmlout += ClanCommon.createTD(str(currentWar['clan']['crowns']),'', 'center')
+        htmlout += ClanCommon.createTD('N/A','', 'center')
+        htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'', 'center')
+        
 
 #    htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['trophyChange']), '', 'center')
 #    htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['clan']['clanScore']), '', 'center')
@@ -281,50 +288,51 @@ def processClanWar(clan_tag, clan_data):
     htmlout += '</div>\n'
 
     #Add Current War Details Here.
-    if currentWar['state'] == 'warDay':
-        htmlout += '<div style="clear:both;"><a name="' + currentWar['warEndTime'] + '"></a><p>' + 'Curent War: ' + currentWarTime.strftime('%d-%b-%Y') + '</p></div>\n'
-    else:
-        htmlout += '<div style="clear:both;"><a name="' + currentWar['collectionEndTime'] + '"></a><p>' + 'Curent War: ' + currentWarTime.strftime('%d-%b-%Y') + '</p></div>\n'
-        
-
-    if currentWar['state'] == 'warDay':
-        htmlout += '<div class="container_12" name="' + currentWar['warEndTime'] + '">\n'
-    else:
-        htmlout += '<div class="container_12" name="' + currentWar['collectionEndTime'] + '">\n'
-        
-    htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
-    htmlout += "<thead>\n"
-    htmlout += ClanCommon.createTH('Participants', '')
-    htmlout += ClanCommon.createTH('Collection Battles', '')
-    htmlout += ClanCommon.createTH('Cards Earned', '')
-    htmlout += ClanCommon.createTH('Battles Played', '')
-    htmlout += ClanCommon.createTH('Wins', '')
-    htmlout += ClanCommon.createTH('Num Battles', '')
-    htmlout += '</thead>\n'
-
-    htmlout += '<tbody>\n'
-    for person in CwParticipants:
-        htmlout += '<tr>'
-        htmlout += ClanCommon.createTD(person['name'],'','')
-        htmlout += ClanCommon.createTD(str(person['collectionDayBattlesPlayed']),'','center')
-        htmlout += ClanCommon.createTD(str(person['cardsEarned']),'','center')
-        if person['battlesPlayed'] == 0:
-            css = 'yelbkd'
+    if warState != 'notInWar':
+        if currentWar['state'] == 'warDay':
+            htmlout += '<div style="clear:both;"><a name="' + currentWar['warEndTime'] + '"></a><p>' + 'Curent War: ' + currentWarTime.strftime('%d-%b-%Y') + '</p></div>\n'
         else:
-            css = ''
-        htmlout += ClanCommon.createTD(str(person['battlesPlayed']),css,'center')
-        htmlout += ClanCommon.createTD(str(person['wins']),'','center')
-        try:
-            htmlout += ClanCommon.createTD(str(person['numberOfBattles']),'','center')
-        except KeyError:
-            htmlout += ClanCommon.createTD('1','','center')
-        
-        htmlout += '</tr>\n'
-
-    htmlout += '</tbody>\n'
-    htmlout += '</table>\n'
-    htmlout += '</div>\n'
-    htmlout += '</div>\n'
+            htmlout += '<div style="clear:both;"><a name="' + currentWar['collectionEndTime'] + '"></a><p>' + 'Curent War: ' + currentWarTime.strftime('%d-%b-%Y') + '</p></div>\n'
+            
+    
+        if currentWar['state'] == 'warDay':
+            htmlout += '<div class="container_12" name="' + currentWar['warEndTime'] + '">\n'
+        else:
+            htmlout += '<div class="container_12" name="' + currentWar['collectionEndTime'] + '">\n'
+            
+        htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
+        htmlout += "<thead>\n"
+        htmlout += ClanCommon.createTH('Participants', '')
+        htmlout += ClanCommon.createTH('Collection Battles', '')
+        htmlout += ClanCommon.createTH('Cards Earned', '')
+        htmlout += ClanCommon.createTH('Battles Played', '')
+        htmlout += ClanCommon.createTH('Wins', '')
+        htmlout += ClanCommon.createTH('Num Battles', '')
+        htmlout += '</thead>\n'
+    
+        htmlout += '<tbody>\n'
+        for person in CwParticipants:
+            htmlout += '<tr>'
+            htmlout += ClanCommon.createTD(person['name'],'','')
+            htmlout += ClanCommon.createTD(str(person['collectionDayBattlesPlayed']),'','center')
+            htmlout += ClanCommon.createTD(str(person['cardsEarned']),'','center')
+            if person['battlesPlayed'] == 0:
+                css = 'yelbkd'
+            else:
+                css = ''
+            htmlout += ClanCommon.createTD(str(person['battlesPlayed']),css,'center')
+            htmlout += ClanCommon.createTD(str(person['wins']),'','center')
+            try:
+                htmlout += ClanCommon.createTD(str(person['numberOfBattles']),'','center')
+            except KeyError:
+                htmlout += ClanCommon.createTD('1','','center')
+            
+            htmlout += '</tr>\n'
+    
+        htmlout += '</tbody>\n'
+        htmlout += '</table>\n'
+        htmlout += '</div>\n'
+        htmlout += '</div>\n'
 
     for war in wars:
 #        print(war.warId)
