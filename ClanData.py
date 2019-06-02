@@ -17,6 +17,7 @@ import argparse
 import ClanCommon
 import myTimer
 import ClanHistory
+import ClanWar
 
 def processClashDate(tmpStr):
     year = int(tmpStr[0:4])
@@ -519,6 +520,8 @@ if __name__ == '__main__':
     if args.history:
         ClanHistory.processWeeklyHistory(clan_tag)
         ClanHistory.processDailyHistory(clan_tag)
+        
+    ClanWar.processClanWar(clan_tag, clan_data)
 
     myTimer.end()
     print('Completed ClanData in {}'.format(myTimer.elapsedTime()))
