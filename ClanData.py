@@ -151,9 +151,6 @@ if __name__ == '__main__':
     
     # Get Clan member Data
     print('Getting Clan Member Data')
-#    req = requests.get(link_members, headers=reqHeaders)
-#    clan_member_data = req.json()
-#    req.close()
     req = ClanCommon.getAPIData(clan_tag, 'ClanMembers')
     if (req.status_code != 200):
         print('Could not read Clan Member Data Api, Response Code {}'.format(req.status_code))
@@ -163,9 +160,6 @@ if __name__ == '__main__':
     
     # Get Clan warlog Data
     print('Getting WarLog Data')
-#    req = requests.get(link_warlog, headers=reqHeaders)
-#    clan_warlog = req.json()
-#    req.close()
     req = ClanCommon.getAPIData(clan_tag, 'WarLog')
     if (req.status_code != 200):
         print('Could not read War Log Api, Response Code {}'.format(req.status_code))
@@ -175,9 +169,6 @@ if __name__ == '__main__':
     
     # Get Clan Current War Data
     print('Getting Current War Data')
-#    req = requests.get(link_current_war, headers=reqHeaders)
-#    clan_current_war = req.json()
-#    req.close()
     req = ClanCommon.getAPIData(clan_tag, 'CurrentWar')
     if (req.status_code != 200):
         print('Could not read Current War Api, Response Code {}'.format(req.status_code))
@@ -188,17 +179,12 @@ if __name__ == '__main__':
     
     # Get Global Tournament Data
     print('Getting Global Tournament Data')
-#    req = requests.get(link_tourn_global, headers=reqHeaders)
-#    tourn_global_data = req.json()
-#    req.close()
     req = ClanCommon.getAPIData(clan_tag, 'GlobalTournament')
     if (req.status_code != 200):
         print('Could not read Global Tournament Data Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
     tourn_global_data = req.json()
     print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
-#    print(json.dumps(tourn_global_data, indent = 4))
-#    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=ClanCommon.).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     #Generate HTML Output
@@ -207,30 +193,6 @@ if __name__ == '__main__':
     htmlout = ClanCommon.buildhtmlHeader(clan_data['name'])
     htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Clan Data for ' + clan_data['name'] + '</div><br/>\n'
     
-#    htmlout += '<!DOCTYPE HTML>\n'
-#    htmlout += '<html>\n<head>\n'
-#    htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
-#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16/>\n'
-#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-16x16.16d92b.png" sizes=16x16>\n'
-#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-32x32.09ad6d.png" sizes=32x32>\n'
-#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-96x96.0fce98.png" sizes=96x96>\n'
-#    htmlout += '<link rel="icon" type="image/png" href="https://developer.clashroyale.com/favicon-192x192.6f82ec.png" sizes=192x192>\n'
-#    htmlout += '<link rel="shortcut icon" href=https://developer.clashroyale.com/favicon.673a60.ico>\n'
-#    
-##    htmlout += '<link href=\"../css/defaultTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-##    htmlout += '<link href=\"../css/myTheme.css\" rel=\"stylesheet\" media=\"screen\" />\n'
-#    htmlout += '<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js\"></script>\n'
-#    htmlout += '<script src="../js/sortable.js"></script>\n'
-#
-##    htmlout += "<script src=\"../js/jquery.fixedheadertable.js\"></script>\n"
-##    htmlout += "<script>$(document).ready(function() {\n$('.myTable01').fixedHeaderTable({ height: '600', footer: false, cloneHeadToFoot: false, themeClass: 'fancyTable', autoShow: true })\n});\n</script>\n"
-#
-#    htmlout +="<link href=\"../css/dashboard.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-#    htmlout +="<link href=\"../css/sortable_table.css\" rel=\"stylesheet\" media=\"screen\" />\n"
-#
-#    htmlout += "</head>\n"
-#
-#    htmlout += "<body>\n"
     
     #Clan Name Section
     htmlout += '<div style="width:100%;">\n' 
@@ -248,7 +210,6 @@ if __name__ == '__main__':
     else:
         clan_badge += '_magical'
     clan_badge += '.png'
-#    print(clan_badge)
     
     
     htmlout += '<img style="float:left;margin-bottom:20px;" src="'
@@ -366,31 +327,10 @@ if __name__ == '__main__':
         hours,rest = divmod(timediff.total_seconds(), SECONDS_PER_HOUR)
         rest = rest % SECONDS_PER_HOUR
         
-        #print(dateutil.__version__)
         if rest >= HALF:
             hours += 1
         
-        #r = dateutil.relativedelta.relativedelta(timeNow, last_seen)
-        
-#        if item['name'] == 'Highland':
-#            print(r)
-#        if r.years > 0:
-#            dateDiffStr = '> 1 year'
-#        elif r.months > 0:
-#            dateDiffStr = str(r.months) + ' months ago'
-#        elif r.days > 0:
-#            dateDiffStr = str(r.days) + ' days ago'
-#        elif r.hours > 0:
-#            dateDiffStr = str(r.hours) + ' hours ago'
-#        elif r.minutes > 0:
-#            dateDiffStr = str(r.minutes) + ' minutes ago'
-#        else:
-#            dateDiffStr = 'On Now'
-        
-            
-            
-#        htmlout += ClanCommon.createTD('{} hours ago'.format(int(hours)), css)
-#        htmlout += ClanCommon.createTD(dateDiffStr, css)
+
         htmlout += ClanCommon.createTD('{} hours ago'.format(hours), css)        
         htmlout += ClanCommon.createTD(str(item['trophies']), css, 'center')
         htmlout += ClanCommon.createTD(item['arena']['name'], css)
@@ -414,7 +354,6 @@ if __name__ == '__main__':
     htmlout += ClanCommon.buildhtmlFooter()
     
     # Write HTML File
-#    htmlFname = #clan_tag
     
     out = open(htmlFname, 'w', encoding='UTF-8')
     out.write(htmlout)

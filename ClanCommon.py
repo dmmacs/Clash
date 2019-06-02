@@ -118,7 +118,6 @@ def createTH(text, css=''):
 
 def getAPIData(clan_tag, dataType):
 
-    #clan_tag = 'QQG200V'
     apiFname = 'api_key.txt'
     
     
@@ -146,15 +145,7 @@ def getAPIData(clan_tag, dataType):
 
 
     reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
-#    link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
-    print('Getting Clan Data')
     req = requests.get(link, headers=reqHeaders, timeout=2)
-#    clan_data = req.json()
-#    req.close()
-#    if (req.status_code != 200):
-#        print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
-#        sys.exit(-1)
-#    print('\tClan Data for ' + clan_data['name'])
     
     return req
 
