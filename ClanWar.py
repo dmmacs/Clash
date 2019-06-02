@@ -43,6 +43,7 @@ def processClanWar(clan_tag):
 
     clan_war = []
     fNames = []
+    currentWarFname = ''
 
     file_filter = record_folder + '*' + '*.txt'
     files = glob.glob(file_filter)
@@ -54,7 +55,21 @@ def processClanWar(clan_tag):
             fTime = ClanCommon.getFileNameDate(file[idx1:idx2])
 #            if fTime.weekday() == ClanCommon.FRI:
             fNames.append(ClanCommon.myFnames(file,fTime))
-    
+            
+        if file.find('currentwar') > -1:
+            idx1 = file.rfind('-') + 1
+            idx2 = file.rfind('.')
+            idx3 = currentWarFname.rfind('-') + 1
+            idx4 = currentWarFname.rfind('.')
+            if currentWarFname == '':
+                currentWarFname = file
+            elif ClanCommon.getFileNameDate(file[idx1:idx2]) > ClanCommon.getFileNameDate(currentWarFname[idx3:idx4]):
+                currentWarFname = file
+                currentWarTime = ClanCommon.getFileNameDate(currentWarFname[idx3:idx4])
+
+    fin = open(currentWarFname, 'r')
+    currentWar = json.load(fin)
+    fin.close()
     fNames.sort(key=operator.attrgetter('fDate'))
 
     for fName in fNames:
@@ -65,7 +80,8 @@ def processClanWar(clan_tag):
 
     wars = []
     
-    for data in  clan_war:
+    for i, data in  enumerate(clan_war):
+#        print('File = ' + fNames[i].fName)
         for item in data['items']:
             found = False
             for war in wars:
@@ -73,22 +89,29 @@ def processClanWar(clan_tag):
                     found = True
                     break;
             if found is False:
+#                print("This is the current War: " + item['createdDate'] + ', ' + fNames[i].fName)
+##                if item['createdDate'] == '20190520T151400.000Z':
+#                print("Got Here: " + item['createdDate'] + ', ' + fNames[i].fName)
+#                try:
+#                    print(item['createdDate'],item['participants'][0]['numberofBattles'])
                 wars.append(warData(item['createdDate'], 0, item))
+#                except KeyError:
+#                    print('Missing numberof Battles')
 
 #    for data in clan_war:
     wars.sort(key=operator.attrgetter('warDate'), reverse=True)
     for war in wars:
-        print(war.warId)
+#        print(war.warId)
         for i,clan in enumerate(war.warData['standings']):
             #print(clan['clan']['tag'])
             if clan['clan']['tag'] == '#' + clan_tag:
-                print(clan['clan']['participants'],clan['clan']['battlesPlayed'], clan['clan']['wins'], clan['clan']['crowns'],clan['trophyChange'])
+#                print(clan['clan']['participants'],clan['clan']['battlesPlayed'], clan['clan']['wins'], clan['clan']['crowns'],clan['trophyChange'])
                 clan_name = clan['clan']['name']
                 clan_score = clan['clan']['clanScore']
                 war.rank = i
 #        print(war.warData['standings'])
 
-    print(len(wars))
+#    print()
 
     clan_badge = 'https://statsroyale.com/images/clanwars/16000164_silver3.png'
 
@@ -130,6 +153,8 @@ def processClanWar(clan_tag):
     htmlout += '</div>\n'
     
     htmlout += '<div style="clear:both"></div>\n'    
+    htmlout += '<div style="width:100%;">\n' 
+    
     # Left Section for Clan Trophies
     htmlout += '<div style="float: left; width:33%;">\n'
     htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/trophy.png" height="51px" width="51px">\n'
@@ -166,7 +191,6 @@ def processClanWar(clan_tag):
     
     #Build Table
     #Add Table Headings
-    htmlout += '<div style="clear:both;"></div>\n'
     htmlout += '<div class="container_12">\n'
     htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
     htmlout += "<thead>\n"
@@ -184,9 +208,35 @@ def processClanWar(clan_tag):
     
     htmlout += '<tbody>\n'
 
+    print(currentWar['collectionEndTime'])
+    print(currentWar['clan']['clanScore'])
+    print(currentWar['clan']['participants'])
+    print(currentWar['clan']['battlesPlayed'])
+    print(currentWar['clan']['wins'])
+    print(currentWar['clan']['crowns'])
+    print('N/A')
+    print('N/A')
+
+    htmlout += '<tr>'
+    tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+    htmlout += ClanCommon.createTD(tmpStr,'','')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'','center')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['participants']),'', 'center')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['battlesPlayed']),'', 'center')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['wins']),'', 'center')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['crowns']),'', 'center')
+    htmlout += ClanCommon.createTD('N/A','', 'center')
+    htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'', 'center')
+    
+
+#    htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['trophyChange']), '', 'center')
+#    htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['clan']['clanScore']), '', 'center')
+    htmlout += '</tr>\n'
+
     for war in wars:
         htmlout += '<tr>'
-        htmlout += ClanCommon.createTD(war.warDate.strftime('%d-%b-%Y'),'','')
+        tmpStr = '<a href="#' + war.warId + '">' + war.warDate.strftime('%d-%b-%Y') + '</a>'
+        htmlout += ClanCommon.createTD(tmpStr,'','')
         htmlout += ClanCommon.createTD(str(war.rank),'','center')
         htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['clan']['participants']), '', 'center')
         htmlout += ClanCommon.createTD(str(war.warData['standings'][war.rank]['clan']['battlesPlayed']), '', 'center')
@@ -198,6 +248,95 @@ def processClanWar(clan_tag):
 
     htmlout += '</tbody>\n'
     htmlout += '</table>\n'
+    htmlout += '</div>\n'
+    htmlout += '</div>\n'
+
+    #Add Current War Details Here.
+
+
+    for war in wars:
+#        print(war.warId)
+#    war = wars[0]
+    
+        # Add Division for first War Table
+        htmlout += '<div style="clear:both;"><a name="' + war.warId + '"></a><p>' + war.warDate.strftime('%d-%b-%Y') + '</p></div>\n'
+        htmlout += '<div class="container_12" name="' + war.warId + '">\n'
+        htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
+        htmlout += "<thead>\n"
+        htmlout += ClanCommon.createTH('Participants', '')
+        htmlout += ClanCommon.createTH('Collection Battles', '')
+        htmlout += ClanCommon.createTH('Cards Earned', '')
+        htmlout += ClanCommon.createTH('Battles Played', '')
+        htmlout += ClanCommon.createTH('Wins', '')
+        htmlout += ClanCommon.createTH('Num Battles', '')
+        htmlout += '</thead>\n'
+        
+        htmlout += '<tbody>\n'
+        
+        for person in war.warData['participants']:
+#            print(person)
+            htmlout += '<tr>'
+            htmlout += ClanCommon.createTD(person['name'],'','')
+            htmlout += ClanCommon.createTD(str(person['collectionDayBattlesPlayed']),'','center')
+            htmlout += ClanCommon.createTD(str(person['cardsEarned']),'','center')
+            if person['battlesPlayed'] == 0:
+                css = 'redbkd'
+            else:
+                css = ''
+            htmlout += ClanCommon.createTD(str(person['battlesPlayed']),css,'center')
+            htmlout += ClanCommon.createTD(str(person['wins']),'','')
+            try:
+                htmlout += ClanCommon.createTD(str(person['numberOfBattles']),'','center')
+            except KeyError:
+                htmlout += ClanCommon.createTD('1','','center')
+            
+            htmlout += '</tr>\n'
+        
+        # Add Table for participants
+        
+        htmlout += '</tbody>\n'
+        htmlout += '</table>\n'
+        htmlout += '</div>\n'
+        htmlout += '</div>\n'
+    
+#    war = wars[1]
+#    
+#    # Add Division for first War Table
+#    htmlout += '<div style="clear:both;"><a name="' + war.warId + '"></a><p>' + war.warDate.strftime('%d-%b-%Y') + '</p></div>\n'
+#    htmlout += '<div class="container_12">\n'
+#    htmlout += '<table class="sortable" cellpadding="0" cellspacing="0"  width=90%>\n'
+#    htmlout += "<thead>\n"
+#    htmlout += ClanCommon.createTH('Participants', '')
+#    htmlout += ClanCommon.createTH('Collection Battles', '')
+#    htmlout += ClanCommon.createTH('Cards Earned', '')
+#    htmlout += ClanCommon.createTH('Battles Played', '')
+#    htmlout += ClanCommon.createTH('Wins', '')
+#    htmlout += ClanCommon.createTH('Num Battles', '')
+#    htmlout += '</thead>\n'
+#    
+#    htmlout += '<tbody>\n'
+#    
+#    for person in war.warData['participants']:
+#        htmlout += '<tr>'
+#        htmlout += ClanCommon.createTD(person['name'],'','')
+#        htmlout += ClanCommon.createTD(str(person['collectionDayBattlesPlayed']),'','center')
+#        htmlout += ClanCommon.createTD(str(person['cardsEarned']),'','center')
+#        if person['battlesPlayed'] == 0:
+#            css = 'redbkd'
+#        else:
+#            css = ''
+#        htmlout += ClanCommon.createTD(str(person['battlesPlayed']),css,'center')
+#        htmlout += ClanCommon.createTD(str(person['wins']),'','')
+#        htmlout += ClanCommon.createTD(str(person['numberOfBattles']),'','center')
+#        
+#        htmlout += '</tr>\n'
+#    
+#    # Add Table for participants
+#    
+#    htmlout += '</tbody>\n'
+#    htmlout += '</table>\n'
+    
+    
     htmlout += '<div align=\"right\">\n'
     htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
 
