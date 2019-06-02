@@ -48,7 +48,7 @@ class memberData:
         return('member:' + self.name + ' rank:' + str(self.rank) + ' donations:' + str(self.donations))
         
 
-def processDailyHistory(clan_tag):
+def processDailyHistory(clan_tag, clan_info):
     
     ClanCommon.init()
     
@@ -112,6 +112,7 @@ def processDailyHistory(clan_tag):
     
     htmlout = ''
     htmlout += ClanCommon.buildhtmlHeader(clan_data[0]['name'])
+    htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Daily Donation History for ' + clan_info['name'] + '</div><br/>\n'
     
     # Add Clan Data
     htmlout += '<div style="width:100%;">\n' 
@@ -232,7 +233,7 @@ def processDailyHistory(clan_tag):
     out.close()
     
 
-def processWeeklyHistory(clan_tag):
+def processWeeklyHistory(clan_tag, clan_data):
 
     ClanCommon.init()
     
@@ -284,6 +285,8 @@ def processWeeklyHistory(clan_tag):
         
     htmlout = ''
     htmlout += ClanCommon.buildhtmlHeader(clan_data['name'])
+    htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Weekly Donation History for ' + clan_data['name'] + '</div><br/>\n'
+    
     
     # Add Clan Data
     htmlout += '<div style="width:100%;">\n' 
@@ -423,8 +426,13 @@ if __name__ == '__main__':
 
 #    modInit()    
     myTimer.start()
-    processDailyHistory('QQG200V')
-    processWeeklyHistory('QQG200V')
+    
+    req = ClanCommon.getAPIData('QQG200V', 'ClanData')
+    clan_data = req.json()
+    
+    
+    processDailyHistory('QQG200V', clan_data)
+    processWeeklyHistory('QQG200V', clan_data)
 
     myTimer.end()
     print('Completed Clan History in {}'.format(myTimer.elapsedTime()))

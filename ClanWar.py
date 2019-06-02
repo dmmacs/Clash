@@ -138,6 +138,8 @@ def processClanWar(clan_tag, clan_data):
     clan_badge += '.png'
 
     htmlout = ClanCommon.buildhtmlHeader(clan_name)
+    htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Clan War for ' + clan_name + '</div><br/>\n'
+
     # Add Clan Data
     htmlout += '<div style="width:100%;">\n' 
     htmlout += '<div style="float: left; width:50%;">'
@@ -398,26 +400,29 @@ if __name__ == '__main__':
     clan_tag = 'QQG200V'
     apiFname = 'api_key.txt'
 
-    fname = os.path.dirname(__file__)
-    fname = os.path.dirname(os.path.abspath(__file__))
-    fname += ClanCommon.DirSlash()
+#    fname = os.path.dirname(__file__)
+#    fname = os.path.dirname(os.path.abspath(__file__))
+#    fname += ClanCommon.DirSlash()
+#
+#    fname += apiFname
+#    fin = open(fname, 'r')
+#    key = fin.readline().strip()
+#    fin.close()
+#
+#
+#    reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
+#    link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
+#    print('Getting Clan Data')
+#    req = requests.get(link_clan, headers=reqHeaders, timeout=2)
+#    clan_data = req.json()
+#    req.close()
+#    if (req.status_code != 200):
+#        print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
+#        sys.exit(-1)
+#    print('\tClan Data for ' + clan_data['name'])
 
-    fname += apiFname
-    fin = open(fname, 'r')
-    key = fin.readline().strip()
-    fin.close()
-
-
-    reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
-    link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
-    print('Getting Clan Data')
-    req = requests.get(link_clan, headers=reqHeaders, timeout=2)
+    req = ClanCommon.getAPIData('QQG200V', 'ClanData')
     clan_data = req.json()
-    req.close()
-    if (req.status_code != 200):
-        print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
-        sys.exit(-1)
-    print('\tClan Data for ' + clan_data['name'])
 
 #    print(json.dumps(clan_data, indent=4))
     processClanWar(clan_tag, clan_data)

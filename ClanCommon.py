@@ -10,6 +10,9 @@ from _version import __version__
 import pytz
 import platform
 import datetime
+import os
+import requests
+import sys
 
 def init():
     global UTC_TZ
@@ -112,4 +115,46 @@ def createTD(text, css='', align=''):
 
 def createTH(text, css=''):
     return ('<th>' + text + '</th>')
+
+def getAPIData(clan_tag, dataType):
+
+    #clan_tag = 'QQG200V'
+    apiFname = 'api_key.txt'
+    
+    
+    fname = os.path.dirname(__file__)
+    fname = os.path.dirname(os.path.abspath(__file__))
+    fname += DirSlash()
+
+    fname += apiFname
+    fin = open(fname, 'r')
+    key = fin.readline().strip()
+    fin.close()
+
+
+    if dataType == 'ClanData':
+        link = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag
+    elif dataType == 'ClanMembers':
+        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/members'
+    elif dataType == 'WarLog':
+        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/warlog'
+    elif dataType == 'CurrentWar':
+        link = 'https://api.clashroyale.com/v1/clans/%' + clan_tag + '/currentwar'
+    elif dataType == 'GlobalTournament':
+        link = 'https://api.clashroyale.com/v1/globaltournaments'
+
+
+
+    reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
+#    link_clan = 'https://api.clashroyale.com/v1/clans/%23' + clan_tag #QQG200V'
+    print('Getting Clan Data')
+    req = requests.get(link, headers=reqHeaders, timeout=2)
+#    clan_data = req.json()
+#    req.close()
+#    if (req.status_code != 200):
+#        print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
+#        sys.exit(-1)
+#    print('\tClan Data for ' + clan_data['name'])
+    
+    return req
 

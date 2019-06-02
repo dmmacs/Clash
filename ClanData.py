@@ -142,53 +142,60 @@ if __name__ == '__main__':
     reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
     # Get Clan Data
     print('Getting Clan Data')
-    req = requests.get(link_clan, headers=reqHeaders, timeout=2)
-    clan_data = req.json()
-    req.close()
+    req = ClanCommon.getAPIData(clan_tag, 'ClanData')
     if (req.status_code != 200):
         print('Could not read Clan Data Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
+    clan_data = req.json()
     print('\tClan Data for ' + clan_data['name'])
     
     # Get Clan member Data
     print('Getting Clan Member Data')
-    req = requests.get(link_members, headers=reqHeaders)
-    clan_member_data = req.json()
-    req.close()
+#    req = requests.get(link_members, headers=reqHeaders)
+#    clan_member_data = req.json()
+#    req.close()
+    req = ClanCommon.getAPIData(clan_tag, 'ClanMembers')
     if (req.status_code != 200):
         print('Could not read Clan Member Data Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
+    clan_member_data = req.json()
     print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan warlog Data
     print('Getting WarLog Data')
-    req = requests.get(link_warlog, headers=reqHeaders)
-    clan_warlog = req.json()
-    req.close()
+#    req = requests.get(link_warlog, headers=reqHeaders)
+#    clan_warlog = req.json()
+#    req.close()
+    req = ClanCommon.getAPIData(clan_tag, 'WarLog')
     if (req.status_code != 200):
         print('Could not read War Log Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
+    clan_warlog = req.json()        
     print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan Current War Data
     print('Getting Current War Data')
-    req = requests.get(link_current_war, headers=reqHeaders)
-    clan_current_war = req.json()
-    req.close()
+#    req = requests.get(link_current_war, headers=reqHeaders)
+#    clan_current_war = req.json()
+#    req.close()
+    req = ClanCommon.getAPIData(clan_tag, 'CurrentWar')
     if (req.status_code != 200):
         print('Could not read Current War Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
+    clan_current_war = req.json()
     print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
     print('Getting Global Tournament Data')
-    req = requests.get(link_tourn_global, headers=reqHeaders)
-    tourn_global_data = req.json()
+#    req = requests.get(link_tourn_global, headers=reqHeaders)
+#    tourn_global_data = req.json()
+#    req.close()
+    req = ClanCommon.getAPIData(clan_tag, 'GlobalTournament')
     if (req.status_code != 200):
         print('Could not read Global Tournament Data Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
-    req.close()
+    tourn_global_data = req.json()
     print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
 #    print(json.dumps(tourn_global_data, indent = 4))
 #    print(processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=ClanCommon.).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
@@ -198,6 +205,8 @@ if __name__ == '__main__':
     
     htmlout = ''
     htmlout = ClanCommon.buildhtmlHeader(clan_data['name'])
+    htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Clan Data for ' + clan_data['name'] + '</div><br/>\n'
+    
 #    htmlout += '<!DOCTYPE HTML>\n'
 #    htmlout += '<html>\n<head>\n'
 #    htmlout += '<title>' + 'Clash Royale - ' + clan_data['name'] + 'Clan' + '</title>\n'
@@ -519,8 +528,8 @@ if __name__ == '__main__':
         out.close()
     
     if args.history:
-        ClanHistory.processWeeklyHistory(clan_tag)
-        ClanHistory.processDailyHistory(clan_tag)
+        ClanHistory.processWeeklyHistory(clan_tag, clan_data)
+        ClanHistory.processDailyHistory(clan_tag, clan_data)
         
     ClanWar.processClanWar(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
