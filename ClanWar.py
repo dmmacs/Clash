@@ -75,7 +75,10 @@ def processClanWar(clan_tag, clan_data):
 
 
     CwParticipants = currentWar['participants']
-    CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
+    if currentWar['state'] == 'warDay':
+        CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
+    else:
+        CwParticipants .sort(key=lambda k: (k['cardsEarned']), reverse=True)
 
     fNames.sort(key=operator.attrgetter('fDate'))
     
