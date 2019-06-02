@@ -18,6 +18,7 @@ import ClanCommon
 import myTimer
 import ClanHistory
 import ClanWar
+import buildIndex
 
 def processClashDate(tmpStr):
     year = int(tmpStr[0:4])
@@ -98,7 +99,7 @@ if __name__ == '__main__':
         print("Unable to find api key file, " + os.path.realpath(__file__) + apiFname)
         sys.exit(-1)
 
-    htmlFname = clan_tag + DirSlash() + 'index.html'
+    htmlFname = clan_tag + DirSlash() + 'clan_data.html'
 
     # Check to see if the clan_tag folder exists:
     if os.path.isdir(clan_tag) is False:
@@ -522,7 +523,9 @@ if __name__ == '__main__':
         ClanHistory.processDailyHistory(clan_tag)
         
     ClanWar.processClanWar(clan_tag, clan_data)
+    buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
     myTimer.end()
+    print()
     print('Completed ClanData in {}'.format(myTimer.elapsedTime()))
     

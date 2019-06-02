@@ -220,10 +220,10 @@ def processClanWar(clan_tag, clan_data):
     
     htmlout += '<tbody>\n'
 
-    if currentWar['state'] == 'warDay':
-        print('War End Time: ' + currentWar['warEndTime'])
-    else:
-        print('Collection End Time: ' + currentWar['collectionEndTime'])
+#    if currentWar['state'] == 'warDay':
+#        print('War End Time: ' + currentWar['warEndTime'])
+#    else:
+#        print('Collection End Time: ' + currentWar['collectionEndTime'])
 
     htmlout += '<tr>'
     if currentWar['state'] == 'warDay':

@@ -226,7 +226,7 @@ def processDailyHistory(clan_tag):
     htmlout += ClanCommon.buildhtmlFooter()
     
     
-    htmlFname = clan_tag + DirSlash() + clan_tag + '_daily_donations' + '.html'
+    htmlFname = clan_tag + DirSlash() + 'daily_donations' + '.html'
     out = open(htmlFname, 'w', encoding='UTF-8')
     out.write(htmlout)
     out.close()
@@ -413,7 +413,7 @@ def processWeeklyHistory(clan_tag):
     htmlout += ClanCommon.buildhtmlFooter()
     
     
-    htmlFname = clan_tag + DirSlash() + clan_tag + '_weekly_donations' + '.html'
+    htmlFname = clan_tag + DirSlash() + 'weekly_donations' + '.html'
     out = open(htmlFname, 'w', encoding='UTF-8')
     out.write(htmlout)
     out.close()
