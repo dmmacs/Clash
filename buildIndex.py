@@ -15,7 +15,7 @@ def processHtmlFiles(clan_tag, clan_name):
     file_filter = clan_tag + ClanCommon.DirSlash() + '*.html'
     files = glob.glob(file_filter)
     
-    
+    files.sort()
     htmlout = ClanCommon.buildhtmlHeader(clan_name)
     for file in files:
         if file.find('index.html') == -1:
