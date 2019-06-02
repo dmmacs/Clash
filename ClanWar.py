@@ -71,7 +71,14 @@ def processClanWar(clan_tag, clan_data):
     fin = open(currentWarFname, 'r')
     currentWar = json.load(fin)
     fin.close()
+
+
+
+    CwParticipants = currentWar['participants']
+    CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
+
     fNames.sort(key=operator.attrgetter('fDate'))
+    
 
     for fName in fNames:
         fin = open(fName.fName , 'r')
@@ -286,7 +293,7 @@ def processClanWar(clan_tag, clan_data):
     htmlout += '</thead>\n'
 
     htmlout += '<tbody>\n'
-    for person in currentWar['participants']:
+    for person in CwParticipants:
         htmlout += '<tr>'
         htmlout += ClanCommon.createTD(person['name'],'','')
         htmlout += ClanCommon.createTD(str(person['collectionDayBattlesPlayed']),'','center')
@@ -327,8 +334,10 @@ def processClanWar(clan_tag, clan_data):
         htmlout += '</thead>\n'
         
         htmlout += '<tbody>\n'
+        Participants =  war.warData['participants']
+        Participants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
         
-        for person in war.warData['participants']:
+        for person in Participants:
 #            print(person)
             htmlout += '<tr>'
             htmlout += ClanCommon.createTD(person['name'],'','')
@@ -402,7 +411,7 @@ if __name__ == '__main__':
         sys.exit(-1)
     print('\tClan Data for ' + clan_data['name'])
 
-    print(json.dumps(clan_data, indent=4))
+#    print(json.dumps(clan_data, indent=4))
     processClanWar(clan_tag, clan_data)
 
     myTimer.end()

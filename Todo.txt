@@ -26,15 +26,16 @@ X--Add Section for each  batlle with participation status
 X--Figure out how to build a local link location in html (anchor, i.e. <a name="raptors"></a>)
 X--Finish Adding Curret War
 X--Fix heading information (get Clan Data to complete?)
+X-History
+X-Figure out how to build index (list of clan Tags instead of a single clan Tag?)
+X-Sort participants in war data (sort by battles won then cards earned)
 
 
 Priority 1
 --Update logic to find api key file to check if the arg is an absolute path
--War
+-Add Titles on pages (only in title bar, difficult to see which page you are on)
 
 Priority 2
--History
--Figure out how to build index (list of clan Tags instead of a single clan Tag?)
 
 
 Priority 3
