@@ -208,7 +208,10 @@ def processClanWar(clan_tag):
     
     htmlout += '<tbody>\n'
 
-    print(currentWar['collectionEndTime'])
+    if currentWar['state'] == 'warDay':
+        print('War End Time: ' + currentWar['warEndTime'])
+    else:
+        print('Collection End Time: ' + currentWar['collectionEndTime'])
     print(currentWar['clan']['clanScore'])
     print(currentWar['clan']['participants'])
     print(currentWar['clan']['battlesPlayed'])
@@ -218,7 +221,11 @@ def processClanWar(clan_tag):
     print('N/A')
 
     htmlout += '<tr>'
-    tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+    if currentWar['state'] == 'warDay':
+        tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+    else:
+        tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + '</a>'
+
     htmlout += ClanCommon.createTD(tmpStr,'','')
     htmlout += ClanCommon.createTD(str(currentWar['clan']['clanScore']),'','center')
     htmlout += ClanCommon.createTD(str(currentWar['clan']['participants']),'', 'center')
