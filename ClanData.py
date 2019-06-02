@@ -61,6 +61,18 @@ if __name__ == '__main__':
     record_folder = 'record'
     history_folder = 'history'
     apiFname = 'api_key.txt'
+    
+    #Create Lock File
+    lockFname = os.path.dirname(os.path.abspath(__file__))
+    lockFname += DirSlash()
+    lockFname += 'ClanData.lck'
+    if os.path.exists(lockFname):
+        print('Lock File already exists')
+        sys.exit(-1)
+    out = open(lockFname, 'w+')
+    out.write('Running')
+    out.close()
+    
 
 #    parser.add_argument('-o', '--output', default='.', required=True, help='Output Folder for HTML and excel files')
 #    parser.add_argument('-e', '--excel', action='store_true', default=False, required=False, help='Enables Excel File output')
@@ -471,6 +483,10 @@ if __name__ == '__main__':
         
     ClanWar.processClanWar(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
+
+    if os.path.exists(lockFname):
+        os.remove(lockFname)
+
 
     myTimer.end()
     print()
