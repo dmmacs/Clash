@@ -212,11 +212,16 @@ if __name__ == '__main__':
     clan_badge = 'https://statsroyale.com/images/clanwars/'
     clan_badge += str(clan_data['badgeId'])
     
-    if clan_data['clanWarTrophies'] < 600:
+    clan_war_level = ClanCommon.getWarLeague(clan_data['clanWarTrophies'])
+    if clan_war_level.find('Bronze') > -1:
+#    if clan_data['clanWarTrophies'] < 600:
         clan_badge += '_bronze3'
-    elif clan_data['clanWarTrophies'] < 1500:
+    elif clan_war_level.find('Silver') > -1:
+#    elif clan_data['clanWarTrophies'] < 1500:
         clan_badge += '_silver3'
-    elif clan_data['clanWarTrophies'] < 3000:
+        clan_war_level = 'Bronze'
+    elif clan_war_level.find('Gold') > -1:
+#    elif clan_data['clanWarTrophies'] < 3000:
         clan_badge += '_gold3'
     else:
         clan_badge += '_magical'
@@ -239,7 +244,7 @@ if __name__ == '__main__':
     htmlout += '<img  style="float:left" src="../img/War_Shield.png" height="100px" width="86px">'
     htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">Current War Status: '
     htmlout += clan_current_war['state']
-    htmlout += '</div>'
+    htmlout += '<br/>' + clan_war_level + '</div>'
     htmlout += '<div style="line-height:20px;font-size:15px">'
     if clan_current_war['state'] == 'warDay':
         warEndTime = processClashDate(clan_current_war['warEndTime'])

@@ -158,3 +158,29 @@ def getAPIData(param, dataType):
     
     return req
 
+
+def getWarLeague(val):
+    if val  < 200:
+        retVal = 'Bronze I'
+    elif val < 400:
+        retVal = 'Bronze II'
+    elif val < 600:
+        retVal = 'Bronze III'
+    elif val < 900:
+        retVal = 'Silver I'
+    elif val < 1200:
+        retVal = 'Silver II'
+    elif val < 1500:
+        retVal = 'Silver III'
+    elif val < 2000:
+        retVal = 'Gold I'
+    elif val < 2500:
+        retVal = 'Gold II'
+    elif val < 3000:
+        retVal = 'Gold III'
+    else:
+        retVal = 'Legendary'
+        
+    return retVal
+        
+        
