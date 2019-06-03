@@ -98,20 +98,24 @@ def processDailyHistory(clan_tag, clan_info):
 
     clan_idx = len(clan_data)-1
     clan_badge = 'https://statsroyale.com/images/clanwars/'
-    clan_badge += str(clan_data[clan_idx]['badgeId'])
+    clan_badge += str(clan_info['badgeId'])
     
-    if clan_data[clan_idx]['clanWarTrophies'] < 600:
+    clan_war_level = ClanCommon.getWarLeague(clan_info['clanScore'])
+    if clan_war_level.find('Bronze') > -1:
+#    if clan_data[clan_idx]['clanWarTrophies'] < 600:
         clan_badge += '_bronze3'
-    elif clan_data[clan_idx]['clanWarTrophies'] < 1500:
+    elif clan_war_level.find('Silver') > -1:
+#    elif clan_data[clan_idx]['clanWarTrophies'] < 1500:
         clan_badge += '_silver3'
-    elif clan_data[clan_idx]['clanWarTrophies'] < 3000:
+    elif clan_war_level.find('Gold') > -1:
+#    elif clan_data[clan_idx]['clanWarTrophies'] < 3000:
         clan_badge += '_gold3'
     else:
         clan_badge += '_magical'
     clan_badge += '.png'
     
     htmlout = ''
-    htmlout += ClanCommon.buildhtmlHeader(clan_data[0]['name'])
+    htmlout += ClanCommon.buildhtmlHeader(clan_info['name'])
     htmlout += '<div style="width:100%;text-align:center;font-weight: bold;font-size:150%">' + 'Daily Donation History for ' + clan_info['name'] + '</div><br/>\n'
     
     # Add Clan Data
@@ -122,10 +126,10 @@ def processDailyHistory(clan_tag, clan_info):
     htmlout += '" height="100px" width="72px">\n'
     
     htmlout += '<div style="font-weight:bold;font-size:35px;margin-left:77px;line-height:60px">'
-    htmlout +=  clan_data[clan_idx]['name']
+    htmlout +=  clan_info['name']
     htmlout += '</div>\n'
     htmlout += '<div style="font-size:14px;margin-left=77px">'
-    htmlout += clan_data[clan_idx]['description']
+    htmlout += clan_info['description']
     htmlout += '</div>\n'
     htmlout += '</div>\n'
 
@@ -155,7 +159,7 @@ def processDailyHistory(clan_tag, clan_info):
     htmlout += '<div style="float: left; width:33%;">\n'
     htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/trophy.png" height="51px" width="51px">\n'
     htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
-    htmlout += str(clan_data[clan_idx]['clanScore'])
+    htmlout += str(clan_info['clanScore'])
     htmlout += '</div>\n'
     htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>'
     htmlout += '</div>\n' #End Left Section Div
@@ -164,7 +168,7 @@ def processDailyHistory(clan_tag, clan_info):
     htmlout += '<div style="float: left; width:33%;">\n'
     htmlout += '<img  style="float:left" src="https://cdn.statsroyale.com/images/clan-trophies.png" height="51px" width="51px">\n'
     htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
-    htmlout += str(clan_data[clan_idx]['clanWarTrophies'])
+    htmlout += str(clan_info['clanWarTrophies'])
     htmlout += '</div>\n'
     htmlout += '<div style="line-height:20px;font-size:15px">Trophies</div>'
 
@@ -174,7 +178,7 @@ def processDailyHistory(clan_tag, clan_info):
     htmlout += '<div style="float: left; width:33%;"></div>\n'
     htmlout += '<img style="float:left;margin-bottom:20px;text-align:center;" src="https://cdn.statsroyale.com/images/cards.png" height="51px" width="51px">\n'
     htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">'
-    htmlout += str(clan_data[clan_idx]['donationsPerWeek'])
+    htmlout += str(clan_info['donationsPerWeek'])
     htmlout += '</div>\n'
     htmlout += '<div style="line-height:20px;font-size:15px">Donations/week</div>'    
     
