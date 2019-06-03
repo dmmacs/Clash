@@ -32,21 +32,19 @@ def processClashDate(tmpStr):
 
 
     
-def DirSlash():
-    if platform.system() == 'Windows':
-        return ('\\')
-    elif platform.system() == 'Linux':
-        return('/')
-
-
-
 # Start of main
 if __name__ == '__main__':
 
     myTimer.start()
-
     print('Python Version is: ' + platform.python_version())
     print('Script Version is: ' + __version__)
+    
+    logFname = os.path.dirname(os.path.abspath(__file__)) + ClanCommon.DirSlash() + 'ClanData.log'
+    logOut = open(logFname, 'w+')
+    logOut.write('Python Version is: ' + platform.python_version() + '\n')
+    logOut.write('Script Version is: ' + __version__ + '\n')
+    
+    
     # ***** Constants *****
 
     ClanCommon.init()
@@ -64,7 +62,7 @@ if __name__ == '__main__':
     
     #Create Lock File
     lockFname = os.path.dirname(os.path.abspath(__file__))
-    lockFname += DirSlash()
+    lockFname += ClanCommon.DirSlash()
     lockFname += 'ClanData.lck'
     if os.path.exists(lockFname):
         print('Lock File already exists')
@@ -87,7 +85,7 @@ if __name__ == '__main__':
     parser.add_argument('-H', '--history', action='store_true', default=False, required=False,help='Build History Tables for Donations and War')
     
     args = parser.parse_args()
-    
+    logOut.write('API Argument: ' + args.key + '\n')    
     
     if args.key:
         apiFname = args.key
@@ -100,7 +98,7 @@ if __name__ == '__main__':
     try:
         fname = os.path.dirname(__file__)
         fname = os.path.dirname(os.path.abspath(__file__))
-        fname += DirSlash()
+        fname += ClanCommon.DirSlash()
 
         fname += apiFname
         fin = open(fname, 'r')
@@ -496,4 +494,9 @@ if __name__ == '__main__':
     myTimer.end()
     print()
     print('Completed ClanData in {}'.format(myTimer.elapsedTime()))
+    
+    logOut.write('Completed ClanData in {}'.format(myTimer.elapsedTime()) + '\n')
+    logOut.close()
+    
+    
     
