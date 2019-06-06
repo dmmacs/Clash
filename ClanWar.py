@@ -66,6 +66,7 @@ def processClanWar(clan_tag, clan_data):
             idx4 = currentWarFname.rfind('.')
             if currentWarFname == '':
                 currentWarFname = file
+                currentWarTime = ClanCommon.getFileNameDate(file[idx1:idx2])
             elif ClanCommon.getFileNameDate(file[idx1:idx2]) > ClanCommon.getFileNameDate(currentWarFname[idx3:idx4]):
                 currentWarFname = file
                 currentWarTime = ClanCommon.getFileNameDate(currentWarFname[idx3:idx4])
