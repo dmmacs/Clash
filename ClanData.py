@@ -67,9 +67,9 @@ if __name__ == '__main__':
     if os.path.exists(lockFname):
         print('Lock File already exists')
         sys.exit(-1)
-    out = open(lockFname, 'w+')
-    out.write('Running')
-    out.close()
+#    out = open(lockFname, 'w+')
+#    out.write('Running')
+#    out.close()
     
 
 #    parser.add_argument('-o', '--output', default='.', required=True, help='Output Folder for HTML and excel files')
@@ -193,7 +193,8 @@ if __name__ == '__main__':
         print('Could not read Global Tournament Data Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
     tourn_global_data = req.json()
-    print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    if len(tourn_global_data['items']) > 0:
+        print('\tGlobal Tournament Title: ' + tourn_global_data['items'][0]['title'])# + ' until ' + processClashDate(tourn_global_data['items'][0]['endTime']).astimezone(tz=Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     #Generate HTML Output
@@ -487,8 +488,8 @@ if __name__ == '__main__':
     ClanWar.processClanWar(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
-    if os.path.exists(lockFname):
-        os.remove(lockFname)
+#    if os.path.exists(lockFname):
+#        os.remove(lockFname)
 
 
     myTimer.end()
