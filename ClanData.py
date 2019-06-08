@@ -19,17 +19,17 @@ import ClanHistory
 import ClanWar
 import buildIndex
 
-def processClashDate(tmpStr):
-    year = int(tmpStr[0:4])
-    month = int(tmpStr[4:6])
-    day = int(tmpStr[6:8])
-    hour = int(tmpStr[9:11])
-    minute = int(tmpStr[11:13])
-    seconds = int(tmpStr[13:15])
-    
-    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=ClanCommon.UTC_TZ)
-    return retVal
-
+#def processClashDate(tmpStr):
+#    year = int(tmpStr[0:4])
+#    month = int(tmpStr[4:6])
+#    day = int(tmpStr[6:8])
+#    hour = int(tmpStr[9:11])
+#    minute = int(tmpStr[11:13])
+#    seconds = int(tmpStr[13:15])
+#    
+#    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=ClanCommon.UTC_TZ)
+#    return retVal
+#
 
     
 # Start of main
@@ -183,7 +183,7 @@ if __name__ == '__main__':
         print('Could not read Current War Api, Response Code {}'.format(req.status_code))
         sys.exit(-1)
     clan_current_war = req.json()
-    print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + ClanCommon.processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
@@ -246,12 +246,12 @@ if __name__ == '__main__':
     htmlout += '<br/>' + clan_war_level + '</div>'
     htmlout += '<div style="line-height:20px;font-size:15px">'
     if clan_current_war['state'] == 'warDay':
-        warEndTime = processClashDate(clan_current_war['warEndTime'])
+        warEndTime = ClanCommon.processClashDate(clan_current_war['warEndTime'])
         htmlout += 'War Ends:'
         htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
         htmlout += ' </div></div>'
     elif clan_current_war['state'] == 'collectionDay':
-        warEndTime = processClashDate(clan_current_war['collectionEndTime'])
+        warEndTime = ClanCommon.processClashDate(clan_current_war['collectionEndTime'])
         htmlout += 'Collection Ends:'
         htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
         htmlout += ' </div></div>'
@@ -333,7 +333,7 @@ if __name__ == '__main__':
         htmlout += ClanCommon.createTD(item['role'], css)
         htmlout += ClanCommon.createTD(str(item['expLevel']), css, 'center')
 
-        last_seen = processClashDate(item['lastSeen'])
+        last_seen = ClanCommon.processClashDate(item['lastSeen'])
         
         timeNow = datetime.datetime.now().replace(microsecond=0)
         timeNow = timeNow.astimezone(tz=ClanCommon.UTC_TZ)

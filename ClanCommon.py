@@ -183,4 +183,13 @@ def getWarLeague(val):
         
     return retVal
         
-        
+def processClashDate(tmpStr):
+    year = int(tmpStr[0:4])
+    month = int(tmpStr[4:6])
+    day = int(tmpStr[6:8])
+    hour = int(tmpStr[9:11])
+    minute = int(tmpStr[11:13])
+    seconds = int(tmpStr[13:15])
+    
+    retVal = datetime.datetime(year, month, day, hour, minute, seconds, tzinfo=UTC_TZ)
+    return retVal
