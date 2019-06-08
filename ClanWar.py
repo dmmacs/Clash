@@ -6,11 +6,9 @@ import glob
 import datetime
 import json
 import ClanCommon
-import sys
+#import sys
 import operator
-import os
 import myTimer
-import requests
 
 
 class warData:
@@ -250,7 +248,7 @@ def processClanWar(clan_tag, clan_data):
         htmlout += '<tr>'
         if warState == 'warDay':
             tmpStr = '<a href="#' + currentWar['warEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + ' CW</a>'
-            tmpStr = ''
+            #tmpStr = ''
         else:
             tmpStr = '<a href="#' + currentWar['collectionEndTime'] + '">' + currentWarTime.strftime('%d-%b-%Y') + ' CW</a>'
         
