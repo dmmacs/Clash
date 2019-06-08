@@ -100,7 +100,7 @@ def processDailyHistory(clan_tag, clan_info):
     clan_badge = 'https://statsroyale.com/images/clanwars/'
     clan_badge += str(clan_info['badgeId'])
     
-    clan_war_level = ClanCommon.getWarLeague(clan_info['clanScore'])
+    clan_war_level = ClanCommon.getWarLeague(clan_info['clanWarTrophies'])
     if clan_war_level.find('Bronze') > -1:
 #    if clan_data[clan_idx]['clanWarTrophies'] < 600:
         clan_badge += '_bronze3'
@@ -237,7 +237,7 @@ def processDailyHistory(clan_tag, clan_info):
     out.close()
     
 
-def processWeeklyHistory(clan_tag, clan_data):
+def processWeeklyHistory(clan_tag, clan_info):
 
     ClanCommon.init()
     
@@ -299,15 +299,28 @@ def processWeeklyHistory(clan_tag, clan_data):
     clan_badge = 'https://statsroyale.com/images/clanwars/'
     clan_badge += str(clan_data['badgeId'])
     
-    if clan_data['clanWarTrophies'] < 600:
+    clan_war_level = ClanCommon.getWarLeague(clan_info['clanWarTrophies'])
+    if clan_war_level.find('Bronze') > -1:
+#    if clan_data[clan_idx]['clanWarTrophies'] < 600:
         clan_badge += '_bronze3'
-    elif clan_data['clanWarTrophies'] < 1500:
+    elif clan_war_level.find('Silver') > -1:
+#    elif clan_data[clan_idx]['clanWarTrophies'] < 1500:
         clan_badge += '_silver3'
-    elif clan_data['clanWarTrophies'] < 3000:
+    elif clan_war_level.find('Gold') > -1:
+#    elif clan_data[clan_idx]['clanWarTrophies'] < 3000:
         clan_badge += '_gold3'
     else:
         clan_badge += '_magical'
     clan_badge += '.png'
+#    if clan_data['clanWarTrophies'] < 600:
+#        clan_badge += '_bronze3'
+#    elif clan_data['clanWarTrophies'] < 1500:
+#        clan_badge += '_silver3'
+#    elif clan_data['clanWarTrophies'] < 3000:
+#        clan_badge += '_gold3'
+#    else:
+#        clan_badge += '_magical'
+#    clan_badge += '.png'
 #    print(clan_badge)
     
     
