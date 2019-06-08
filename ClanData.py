@@ -64,9 +64,9 @@ if __name__ == '__main__':
     lockFname = os.path.dirname(os.path.abspath(__file__))
     lockFname += ClanCommon.DirSlash()
     lockFname += 'ClanData.lck'
-    if os.path.exists(lockFname):
-        print('Lock File already exists')
-        sys.exit(-1)
+    #if os.path.exists(lockFname):
+    #    print('Lock File already exists')
+    #    sys.exit(-1)
 #    out = open(lockFname, 'w+')
 #    out.write('Running')
 #    out.close()
@@ -108,7 +108,7 @@ if __name__ == '__main__':
         print("Unable to find api key file, " + os.path.realpath(__file__) + apiFname)
         sys.exit(-1)
 
-    htmlFname = clan_tag + DirSlash() + 'clan_data.html'
+    htmlFname = clan_tag + ClanCommon.DirSlash() + 'clan_data.html'
 
     # Check to see if the clan_tag folder exists:
     if os.path.isdir(clan_tag) is False:
@@ -118,8 +118,8 @@ if __name__ == '__main__':
         except OSError as exc:
             print(exc.errno)
 
-    record_folder = clan_tag + DirSlash() + record_folder + DirSlash()
-    history_folder = clan_tag + DirSlash() + history_folder + DirSlash()
+    record_folder = clan_tag + ClanCommon.DirSlash() + record_folder + ClanCommon.DirSlash()
+    history_folder = clan_tag + ClanCommon.DirSlash() + history_folder + ClanCommon.DirSlash()
 
     #Check to see if record_folder exists:
     if os.path.isdir(record_folder) is False:
