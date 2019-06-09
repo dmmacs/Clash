@@ -299,10 +299,11 @@ def processClanWar(clan_tag, clan_data):
             timeDelta = clanWarTime - timeNow
             htmlout += '<div style="clear:both;"><a name="' + currentWar['warEndTime'] + '(~ ' + str(timeDelta.total_seconds() // 3600) + ' hours)' + '"></a><p>' + 'Current War: ' + ClanCommon.processClashDate(currentWar['warEndTime']).astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z') + '</p></div>\n'
         else:
+            clanWarTime = ClanCommon.processClashDate(currentWar['collectionEndTime'])
             timeNow = datetime.datetime.now().astimezone(tz=ClanCommon.UTC_TZ)
             #timeDelta = datetime.timedelta()
             timeDelta = clanWarTime - timeNow
-            htmlout += '<div style="clear:both;"><a name="' + currentWar['collectionEndTime'] + '"></a><p>' + 'Curent War: ' + ClanCommon.processClashDate(currentWar['collectionEndTime']).astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z') + currentWarTime.strftime('%d-%b-%Y') + '</p></div>\n'
+            htmlout += '<div style="clear:both;"><a name="' + currentWar['collectionEndTime'] + '"></a><p>' + 'Curent War: ' + ClanCommon.processClashDate(currentWar['collectionEndTime']).astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z') + currentWarTime.strftime('%d-%b-%Y') + '(~ ' + str(timeDelta.total_seconds() // 3600) + ' hours)' + '</p></div>\n'
             
     
         if currentWar['state'] == 'warDay':
