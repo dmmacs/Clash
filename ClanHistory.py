@@ -50,7 +50,6 @@ class memberData:
 
 def processDailyHistory(clan_tag, clan_info):
     
-    ClanCommon.init()
     
     record_folder = 'record' + DirSlash()
     record_folder = clan_tag + DirSlash() + 'record' + DirSlash()
@@ -96,7 +95,7 @@ def processDailyHistory(clan_tag, clan_info):
                 members.append(memberData(person['name'],person['clanRank'], len(fDates)))
                 members[len(members)-1].donations[i] = str(person['donations'])
 
-    clan_idx = len(clan_data)-1
+#    clan_idx = len(clan_data)-1
     clan_badge = 'https://statsroyale.com/images/clanwars/'
     clan_badge += str(clan_info['badgeId'])
     
@@ -230,7 +229,6 @@ def processDailyHistory(clan_tag, clan_info):
         
     htmlout += ClanCommon.buildhtmlFooter()
     
-    
     htmlFname = clan_tag + DirSlash() + 'daily_donations' + '.html'
     out = open(htmlFname, 'w', encoding='UTF-8')
     out.write(htmlout)
@@ -254,12 +252,16 @@ def processWeeklyHistory(clan_tag, clan_info):
     start_of_week  = datetime.datetime.now(ClanCommon.UTC_TZ)
     start_of_week = start_of_week - datetime.timedelta(start_of_week.weekday())
 
+
+    # Use Donation Max as the weekly cutoff
+
     
     fNames = []
     for file in files:
         if file.find('clan_data') > -1:
             idx1 = file.rfind('-') + 1
             idx2 = file.rfind('.')
+            
             fTime = getFileNameDate(file[idx1:idx2])
             if fTime.weekday() == ClanCommon.SUN:
                 fNames.append(historyFnames(file,fTime))
@@ -443,12 +445,15 @@ if __name__ == '__main__':
 
 #    modInit()    
     myTimer.start()
+
+    ClanCommon.init()
+
     
     req = ClanCommon.getAPIData('QQG200V', 'ClanData')
     clan_data = req.json()
     
     
-    processDailyHistory('QQG200V', clan_data)
+#    processDailyHistory('QQG200V', clan_data)
     processWeeklyHistory('QQG200V', clan_data)
 
     myTimer.end()

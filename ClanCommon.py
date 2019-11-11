@@ -13,6 +13,8 @@ import datetime
 import os
 import requests
 import sys
+import traceback
+import urllib3
 
 def init():
     global UTC_TZ
@@ -144,18 +146,27 @@ def getAPIData(param, dataType):
     elif dataType == 'Locations':
         link = 'https://api.clashroyale.com/v1/locations'
     elif dataType == 'Location':
-        link = 'https://api.clashroyale.com/v1/location/' + param
+        link = 'https://api.clashroyale.com/v1/locations/' + param
     elif dataType == 'LocationRankingsClan':
         link = 'https://api.clashroyale.com/v1/locations/' + param + '/rankings/clans'
     elif dataType == 'LocationRankingsPlayers':
         link = 'https://api.clashroyale.com/v1/locations/' + param + '/rankings/players'
+    elif dataType == 'players':
+        param = '%23' + param[1:len(param)]
+        link = 'https://api.clashroyale.com/v1/players/' + param
+    elif dataType == 'battlelog':
+        param = '%23' + param[1:len(param)]
+        link = 'https://api.clashroyale.com/v1/players/' + param + '/battlelog'
+        
     else:
         link = 'https://api.clashroyale.com/v1'
 
     print(link)
     reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
-    req = requests.get(link, headers=reqHeaders, timeout=2)
-    
+    try:
+        req = requests.get(link, headers=reqHeaders, timeout=2)
+    except urllib3.exceptions.ConnectTimeoutError:
+        traceback.print_exc()
     return req
 
 

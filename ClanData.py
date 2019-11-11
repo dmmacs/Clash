@@ -308,7 +308,7 @@ if __name__ == '__main__':
     htmlout += ClanCommon.createTH('Name')
     htmlout += ClanCommon.createTH('Role')
     htmlout += ClanCommon.createTH('Level')
-    htmlout += ClanCommon.createTH('Last Seen')
+    htmlout += ClanCommon.createTH('Last Seen (Hours)')
     htmlout += ClanCommon.createTH('Trophies')
     htmlout += ClanCommon.createTH('Arena')
     htmlout += ClanCommon.createTH('Donations')
@@ -346,7 +346,7 @@ if __name__ == '__main__':
             hours += 1
         
 
-        htmlout += ClanCommon.createTD('{} hours ago'.format(hours), css)        
+        htmlout += ClanCommon.createTD('{}'.format(hours), css)        
         htmlout += ClanCommon.createTD(str(item['trophies']), css, 'center')
         htmlout += ClanCommon.createTD(item['arena']['name'], css)
         htmlout += ClanCommon.createTD(str(item['donations']), css, 'center')

@@ -11,6 +11,20 @@ import operator
 import myTimer
 
 
+class memberWarData_t:
+    def __init__(self):
+        self.name = ''
+        self.id = ''
+        self.cardsEnarned = []
+        self.wins = []
+        self.numberOfBattles = []
+        self.collectionDayBattlesPlayed = []
+        self.totalWars = 0
+        self.totalWins = 0
+
+        
+
+
 class warData:
     def __init__(self, warId, rank, warData):
         self.warId = warId
@@ -410,6 +424,14 @@ def processClanWar(clan_tag, clan_data):
     out.write(htmlout)
     out.close()
 
+    #Loop through the past war data to build some statistics
+    #print(json.dumps(clan_war, indent=4))
+#    for war in wars:
+#        print(war)
+    
+    
+
+
 
 # Start of main
 if __name__ == '__main__':
@@ -440,7 +462,7 @@ if __name__ == '__main__':
 #        sys.exit(-1)
 #    print('\tClan Data for ' + clan_data['name'])
 
-    req = ClanCommon.getAPIData('QQG200V', 'ClanData')
+    req = ClanCommon.getAPIData('2UPJYJPU', 'ClanData')
     clan_data = req.json()
 
 #    print(json.dumps(clan_data, indent=4))

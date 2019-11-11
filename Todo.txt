@@ -33,6 +33,7 @@ X-Add Titles on pages (only in title bar, difficult to see which page you are on
 
 
 Priority 1
+--Update Daily donations to handle case where it is Early Monday and there is no past data files to display anything
 --Update logic to find api key file to check if the arg is an absolute path
 
 Priority 2
