@@ -12,7 +12,7 @@ import platform
 import datetime
 import os
 import requests
-import sys
+#import sys
 import traceback
 import urllib3
 

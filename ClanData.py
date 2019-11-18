@@ -18,6 +18,7 @@ import myTimer
 import ClanHistory
 import ClanWar
 import buildIndex
+import Highland
 
 #def processClashDate(tmpStr):
 #    year = int(tmpStr[0:4])
@@ -83,8 +84,10 @@ if __name__ == '__main__':
     parser.add_argument('-o','--output', default='record', required=False, help='Folder to store raw data')
     parser.add_argument('-v', '--version', action='version', version='Version: ' + __version__)
     parser.add_argument('-H', '--history', action='store_true', default=False, required=False,help='Build History Tables for Donations and War')
+    parser.add_argument('-T', '--tag', default='', required=False, help='Gamer Tag to capture Trophy History')
     
     args = parser.parse_args()
+    print(args)
     logOut.write('API Argument: ' + args.key + '\n')    
     
     if args.key:
@@ -484,7 +487,10 @@ if __name__ == '__main__':
     if args.history:
         ClanHistory.processWeeklyHistory(clan_tag, clan_data)
         ClanHistory.processDailyHistory(clan_tag, clan_data)
-        
+
+    if args.tag:
+        Highland.getTrophyData('#8YGUPVPR',clan_tag)
+
     ClanWar.processClanWar(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
