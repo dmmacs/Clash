@@ -115,7 +115,7 @@ def processClanWar(clan_tag, clan_data):
             for war in wars:
                 if war.warId == item['createdDate']:
                     found = True
-                    break;
+                    break
             if found is False:
 #                print("This is the current War: " + item['createdDate'] + ', ' + fNames[i].fName)
 ##                if item['createdDate'] == '20190520T151400.000Z':
@@ -430,6 +430,92 @@ def processClanWar(clan_tag, clan_data):
 #        print(war)
     
     
+def processNonParticipant(clan_tag, clan_data):
+    ClanCommon.init()
+
+    req = ClanCommon.getAPIData(clan_tag,'CurrentWar')
+    tmpWarData = req.json()
+
+#    print(tmpWarData['state'])
+#    if tmpWarData['state'] == 'collectionDay':
+#        print(tmpWarData['collectionEndTime'])
+#        print(ClanCommon.processClashDate(tmpWarData['collectionEndTime']))
+
+
+    record_folder = clan_tag + ClanCommon.DirSlash() + 'record' + ClanCommon.DirSlash()
+
+    currentWarFname = ''
+    file_filter = record_folder + '*' + '*.txt'
+    files = glob.glob(file_filter)
+    
+    for file in files:
+        if file.find('warlog') > -1:
+            idx1 = file.rfind('-') + 1
+            idx2 = file.rfind('.')
+            #fTime = ClanCommon.getFileNameDate(file[idx1:idx2])
+#            if fTime.weekday() == ClanCommon.FRI:
+            # fNames.append(ClanCommon.myFnames(file,fTime))
+            
+        if file.find('currentwar') > -1:
+            idx1 = file.rfind('-') + 1
+            idx2 = file.rfind('.')
+            idx3 = currentWarFname.rfind('-') + 1
+            idx4 = currentWarFname.rfind('.')
+            if currentWarFname == '':
+                currentWarFname = file
+                #currentWarTime = ClanCommon.getFileNameDate(file[idx1:idx2])
+            elif ClanCommon.getFileNameDate(file[idx1:idx2]) > ClanCommon.getFileNameDate(currentWarFname[idx3:idx4]):
+                currentWarFname = file
+                #currentWarTime = ClanCommon.getFileNameDate(currentWarFname[idx3:idx4])
+
+#    print(currentWarFname)
+    fin = open(currentWarFname, 'r')
+    curWarData = json.load(fin)
+    fin.close()
+
+    #Compare data in file and currentwar (if collectionEndTime matches, then do nothing, else look through current data and find who did not participate)
+
+    people = []
+    cnt = 0
+    total = 0
+    if curWarData['state'] == 'collectionDay':
+        if tmpWarData['state'] == 'collectionDay':
+            if curWarData['collectionEndTime'] != tmpWarData['collectionEndTime']:
+
+                for person in clan_data['memberList']:
+                    found = False
+            #        print(person['name'])
+                    total += 1
+                    for participant in tmpWarData['participants']:
+                        if person['name'] == participant['name']:
+                            found = True
+                            break
+                    
+                    if found == False:
+                        cnt += 1 
+                        people.append(person['name'])
+                        print(person['name'])
+
+                # for participant in tmpWarData['participants']:
+                #     print(participant['name'])
+
+                timeNow = datetime.datetime.now().replace(microsecond=0)
+                timeNow = timeNow.astimezone(tz=ClanCommon.UTC_TZ)
+                file_time_stamp = timeNow.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%Y%m%d')
+                fname = record_folder
+                fname += clan_data['name'] 
+                fname += '-'
+                fname += 'non-participant'
+                fname += '-'
+                fname += file_time_stamp
+                fname += '.txt'
+                print(fname)
+                # out = open(fname, 'w', encoding='UTF-8')
+                # out.write(json.dumps(clan_current_war, indent = 4))
+                # out.close()
+
+    print(cnt, total, total-cnt)
+    myTimer.end()
 
 
 
@@ -462,13 +548,14 @@ if __name__ == '__main__':
 #        sys.exit(-1)
 #    print('\tClan Data for ' + clan_data['name'])
 
-    req = ClanCommon.getAPIData('2UPJYJPU', 'ClanData')
+    req = ClanCommon.getAPIData(clan_tag, 'ClanData')
     clan_data = req.json()
 
 #    print(json.dumps(clan_data, indent=4))
     processClanWar(clan_tag, clan_data)
 
-    myTimer.end()
+    processNonParticipant(clan_tag, clan_data)
+
     print('Completed Clan War in {}'.format(myTimer.elapsedTime()))
     
 

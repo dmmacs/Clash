@@ -80,7 +80,6 @@ def processDailyHistory(clan_tag, clan_info):
                 fin.close()
                 fDates.append(fTime)
                 fNames.append(file)
-
     members = []
     for i, data in enumerate(clan_data):
         for j, person in enumerate(data['memberList']):
@@ -90,7 +89,7 @@ def processDailyHistory(clan_tag, clan_info):
                     member.donations[i] = str(person['donations'])
                     member.rank = person['clanRank']
                     found = True
-                    break;
+                    break
             if found == False:
                 members.append(memberData(person['name'],person['clanRank'], len(fDates)))
                 members[len(members)-1].donations[i] = str(person['donations'])
@@ -284,7 +283,7 @@ def processWeeklyHistory(clan_tag, clan_info):
                         member.donations[fidx] = str(person['donations'])
                         member.rank = person['clanRank']
                         found = True
-                        break;
+                        break
                 if found == False:
                     members.append(memberData(person['name'],person['clanRank'], len(fNames)))
                     members[len(members)-1].donations[fidx] = str(person['donations'])

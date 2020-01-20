@@ -492,6 +492,7 @@ if __name__ == '__main__':
         Highland.getTrophyData('#8YGUPVPR',clan_tag)
 
     ClanWar.processClanWar(clan_tag, clan_data)
+    ClanWar.processNonParticipant(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
 #    if os.path.exists(lockFname):

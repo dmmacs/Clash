@@ -157,7 +157,6 @@ def getAPIData(param, dataType):
     elif dataType == 'battlelog':
         param = '%23' + param[1:len(param)]
         link = 'https://api.clashroyale.com/v1/players/' + param + '/battlelog'
-        
     else:
         link = 'https://api.clashroyale.com/v1'
 
