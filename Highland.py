@@ -1,6 +1,7 @@
 #! /home/dmmacs/anaconda3/bin/python3
 # -*- coding: utf-8 -*-
 
+from _version import __version__
 import ClanCommon
 import glob
 import json
@@ -89,6 +90,24 @@ def genhtml(outData):
     htmlout += '<body>\n'
     htmlout += '<div id="chartContainer" style="height: 50%; width: 80%;"></div>\n'
     htmlout += '<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>\n'
+
+
+    htmlout += '<div style="clear:both;"></div>\n'
+    htmlout += '<div style="clear:both;"></div>\n'
+    htmlout += '<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>\n'
+    htmlout += '<div align=\"right\">\n'
+    htmlout += '<p style=\"font-size:10px;right:auto\"> Last Updated: '
+
+    timeNow = datetime.datetime.now().replace(microsecond=0)
+    timeNow = timeNow.astimezone(tz=ClanCommon.UTC_TZ)
+
+    htmlout += timeNow.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z')
+    htmlout += ' with Version: ' + __version__
+    htmlout += '</p>\n'
+
+    htmlout += '</div>\n'
+
+
     htmlout += '</body>\n'
     htmlout += '</html>\n'
  
