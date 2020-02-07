@@ -14,35 +14,33 @@ clan_tag = 'QQG200V'
 record_folder = 'record' + ClanCommon.DirSlash()
 record_folder = clan_tag + ClanCommon.DirSlash() + 'record' + ClanCommon.DirSlash()
 
-seasonStart = datetime.datetime.now()
-
-
-
 def genhtml(outData):
     global seasonStart
+    global seasonEnd
     
 
     min_value = 20000
+    max_value = 0
     newData = []
     for i, data in enumerate(reversed(outData)):
-#        print(i, data)
-        newData.append(data)
-#        print(data[1])
-        if data[2] < min_value:
-            min_value = data[2]
-        if data[1] == seasonStart:
-        #if data[3] == 0:
-        #    if i > 3:
-            break
-    #print(outData)
-    print(min_value)
+        if data[1] >= seasonStart and data[1] < seasonEnd:
+            newData.append(data)
+            if data[2] < min_value:
+                min_value = data[2]
+            if data[2] > max_value:
+                max_value = data[2]
     min_value /= 100
     min_value = round(min_value,0) * 100
-    print(int(min_value))
+
+    max_value += 150
+    max_value /= 100
+    max_value = int(max_value) * 100 #round(max_value,0) * 100
+
 
     htmlout = '<!DOCTYPE HTML>\n'
     htmlout += '<html>\n'
     htmlout += '<head>\n'
+    htmlout += '<title>' + 'Clash Royale - Highland Trophies' + '</title>\n'
     htmlout += '<script>\n'
     htmlout += 'window.onload = function () {\n'
     htmlout += 'var chart = new CanvasJS.Chart("chartContainer", {\n'
@@ -50,7 +48,7 @@ def genhtml(outData):
     htmlout += '\ttheme: "light3",\n'
     htmlout += '\ttitle:{text: "Trophies for ' + outData[0][0] + ' (' + playerTag + ')' + '"},\n'
     htmlout += '\taxisX:{valueFormatString: "DDD MM/DD/YYYY",crosshair: {enabled: true,snapToDataPoint: true}},\n'
-    htmlout += '\taxisY: {title: "Trophies",minimum: ' + str(min_value) + ',crosshair: {enabled: true, snapToDataPoint: true}},\n'
+    htmlout += '\taxisY: {title: "Trophies",minimum: ' + str(min_value) + ',maximum: ' + str(max_value) + ',crosshair: {enabled: true, snapToDataPoint: true}},\n'
     htmlout += '\ttoolTip:{shared:true,animationEnabled: true},\n'
     htmlout += '\tlegend:{cursor:"pointer",verticalAlign: "bottom",horizontalAlign: "left",dockInsidePlotArea: true,itemclick: toogleDataSeries},\n'
     htmlout += '\tdata: [{\n'
@@ -111,16 +109,15 @@ def genhtml(outData):
     htmlout += '</body>\n'
     htmlout += '</html>\n'
  
-    #print(htmlout)
-
-    print('Saving Data for  ' + outData[0][0])
     fname = clan_tag + ClanCommon.DirSlash() + outData[0][0] + '.html'
+    print('Saving Data for  ' + outData[0][0] + ' in ' + fname)
+#    fname = clan_tag + ClanCommon.DirSlash() + outData[0][0] + '.html'
     out = open(fname, 'w', encoding='UTF-8')
-    print(out.name)
+#    print(out.name)
     out.write(htmlout)
     out.close()
 
-    print(record_folder + fname)
+#    print(record_folder + fname)
 
 def sortSecond(val):
     return(val[1])   
@@ -157,9 +154,7 @@ def getTrophyData(tag, clan_tag):
     req = ClanCommon.getAPIData('#8YGUPVPR', 'players')
     playerData = req.json()
 
-    seasonEnd = datetime.datetime(2019,11,17,0,0,0,tzinfo=ClanCommon.UTC_TZ)
-
-    print(seasonEnd)
+    print(seasonStart, seasonEnd)
 
 
     outData.sort(key=sortSecond)
@@ -174,11 +169,11 @@ def getTrophyData(tag, clan_tag):
         yesterday = datetime.datetime(datetime.datetime.now().year,datetime.datetime.now().month, datetime.datetime.now().day, 0,0,0,0,tzinfo=ClanCommon.UTC_TZ)
         yesterday = yesterday - datetime.timedelta(days=1)
         prop.update_property('date', yesterday.strftime('%Y-%m-%d'))
-        prop.save_properties('season.prop')
+#        prop.save_properties('season.prop')
 
-    splt = prop.props.get('date').split('-')
-    seasonStart = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
-    print(seasonStart)
+    # splt = prop.props.get('date').split('-')
+    # seasonStart = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
+    # print(seasonStart)
     #print(outData)
     genhtml(outData)
 
@@ -198,11 +193,15 @@ def getTrophyData(tag, clan_tag):
     print(prop.props.get('id'))
 # Start of main
 if __name__ == '__main__':
-
     prop.load_properties('season.prop')
+
     print(prop.props)
     myTimer.start()
     ClanCommon.init()
+    splt = prop.props.get('seasonEnd').split('-')
+    seasonEnd = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
+    splt = prop.props.get('seasonStart').split('-')
+    seasonStart = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
 
 
     getTrophyData(playerTag,clan_tag)
