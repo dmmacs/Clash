@@ -47,7 +47,7 @@ def genhtml(outData):
     htmlout += '\tanimationEnabled: true,\n'
     htmlout += '\ttheme: "light3",\n'
     htmlout += '\ttitle:{text: "Trophies for ' + outData[0][0] + ' (' + playerTag + ')' + '"},\n'
-    htmlout += '\taxisX:{valueFormatString: "DDD MM/DD/YYYY",crosshair: {enabled: true,snapToDataPoint: true}},\n'
+    htmlout += '\taxisX:{labelAngle:135,gridThickness:2,tickLength:15,tickColor:"red",gridDashType: "dot",lineDashType: "dot",valueFormatString: "DDD MM/DD/YYYY",crosshair: {enabled: true,snapToDataPoint: true}},\n'
     htmlout += '\taxisY: {title: "Trophies",minimum: ' + str(min_value) + ',maximum: ' + str(max_value) + ',crosshair: {enabled: true, snapToDataPoint: true}},\n'
     htmlout += '\ttoolTip:{shared:true,animationEnabled: true},\n'
     htmlout += '\tlegend:{cursor:"pointer",verticalAlign: "bottom",horizontalAlign: "left",dockInsidePlotArea: true,itemclick: toogleDataSeries},\n'
@@ -56,7 +56,7 @@ def genhtml(outData):
     htmlout += '\t\tdataPoints: [\n'
 
     for i, data in enumerate(reversed(newData)):
-#        print(data[1].year, data[1].month - 1, data[1].day)
+        print(data[1].year, data[1].month - 1, data[1].day)
         tmpStr = '\t\t\t{x: new Date(' + str(data[1].year) + ',' + str(data[1].month - 1) + ',' + str(data[1].day) + ')' + ',y: ' + str(data[2]) + '}'
         #print(i, len(newData)) #  + '},'
         if i < len(newData) - 1:
