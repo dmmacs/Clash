@@ -23,7 +23,7 @@ def genhtml(outData):
     max_value = 0
     newData = []
     for i, data in enumerate(reversed(outData)):
-        if data[1] >= seasonStart and data[1] < seasonEnd:
+        if data[1] >= seasonStart and data[1] <= seasonEnd:
             newData.append(data)
             if data[2] < min_value:
                 min_value = data[2]
