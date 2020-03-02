@@ -40,7 +40,7 @@ def clean_up_files(clan_tag, clan_name, file_root):
     cnt = 0
     for file in files:
         # Need to zip up all files more than 30 days ago
-        file_timestamp = os.path.getctime(file)
+        file_timestamp = os.path.getmtime(file)
 #        print(file, os.path.getmtime(file), now.timestamp() - file_timestamp, now.timestamp() - file_timestamp > SEC_IN_30_DAYS)
         if now.timestamp() - file_timestamp > SEC_IN_30_DAYS:
             zipObj.write(file)
@@ -50,7 +50,7 @@ def clean_up_files(clan_tag, clan_name, file_root):
         #break
 
     zipObj.close()
-    print("Files Archived")
+    print("Files Archived, ", cnt)
 
 if __name__ == "__main__":
 

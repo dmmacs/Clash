@@ -20,7 +20,7 @@ import ClanWar
 import buildIndex
 import Highland
 import logging
-from record_cleanup
+import record_cleanup
 
 #def processClashDate(tmpStr):
 #    year = int(tmpStr[0:4])
