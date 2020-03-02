@@ -19,6 +19,8 @@ import ClanHistory
 import ClanWar
 import buildIndex
 import Highland
+import logging
+from record_cleanup
 
 #def processClashDate(tmpStr):
 #    year = int(tmpStr[0:4])
@@ -41,9 +43,11 @@ if __name__ == '__main__':
     print('Script Version is: ' + __version__)
     
     logFname = os.path.dirname(os.path.abspath(__file__)) + ClanCommon.DirSlash() + 'ClanData.log'
-    logOut = open(logFname, 'w+')
-    logOut.write('Python Version is: ' + platform.python_version() + '\n')
-    logOut.write('Script Version is: ' + __version__ + '\n')
+    LOG_FORMAT = "%(levelname)s %(asctime)s - %(message)s"
+    logging.basicConfig(filename=logFname, level=logging.DEBUG, format=LOG_FORMAT,filemode='w')
+    logger = logging.getLogger()
+    logging.info('Python Version is: ' + platform.python_version() + '\n')
+    logging.info('Script Version is: ' + __version__ + '\n')
     
     
     # ***** Constants *****
@@ -88,7 +92,7 @@ if __name__ == '__main__':
     
     args = parser.parse_args()
     print(args)
-    logOut.write('API Argument: ' + args.key + '\n')    
+    logging.info('API Argument: ' + args.key + '\n')    
     
     if args.key:
         apiFname = args.key
@@ -372,10 +376,9 @@ if __name__ == '__main__':
     htmlout += ClanCommon.buildhtmlFooter()
     
     # Write HTML File
-    
-    out = open(htmlFname, 'w', encoding='UTF-8')
-    out.write(htmlout)
-    out.close()
+
+    with open(htmlFname, 'w', encoding='UTF-8') as out:    
+        out.write(htmlout)
     
     #Capture weekly data if its time, between 23:55 and 11:59:59
     midnight = timeNow.replace(hour=23, minute=59, second=59, microsecond=0)
@@ -392,9 +395,8 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Clan Data ' + fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    out.write(json.dumps(clan_data, indent = 4))
-    out.close()
+    with open(fname, 'w', encoding='UTF-8') as out:
+        out.write(json.dumps(clan_data, indent = 4))
     
     
     if timeNow > eleven_fifty_five and timeNow < midnight:
@@ -421,9 +423,9 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Clan Member Data ' + fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    out.write(json.dumps(clan_member_data, indent = 4))
-    out.close()
+    
+    with open(fname, 'w', encoding='UTF-8') as out:
+        out.write(json.dumps(clan_member_data, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -439,9 +441,8 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Warlog Data ' + fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    out.write(json.dumps(clan_warlog, indent = 4))
-    out.close()
+    with open(fname, 'w', encoding='UTF-8') as out:
+        out.write(json.dumps(clan_warlog, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -457,9 +458,8 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Current War Data ' + fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    out.write(json.dumps(clan_current_war, indent = 4))
-    out.close()
+    with open(fname, 'w', encoding='UTF-8') as out:
+        out.write(json.dumps(clan_current_war, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -475,9 +475,8 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Global Tournament Data ' + fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    out.write(json.dumps(tourn_global_data, indent = 4))
-    out.close()
+    with open(fname, 'w', encoding='UTF-8') as out:
+        out.write(json.dumps(tourn_global_data, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -495,6 +494,13 @@ if __name__ == '__main__':
     ClanWar.processNonParticipant(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
+    record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-clan_member_data')
+    record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-clan_data-')
+    record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-currentwar-')
+    record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-tourn_global_data-')
+    record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-warlog-')
+    
+
 #    if os.path.exists(lockFname):
 #        os.remove(lockFname)
 
@@ -503,8 +509,6 @@ if __name__ == '__main__':
     print()
     print('Completed ClanData in {}'.format(myTimer.elapsedTime()))
     
-    logOut.write('Completed ClanData in {}'.format(myTimer.elapsedTime()) + '\n')
-    logOut.close()
     
     
     
