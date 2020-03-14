@@ -53,14 +53,14 @@ def genhtml(outData):
     htmlout += 'window.onload = function () {\n'
     htmlout += 'var chart = new CanvasJS.Chart("chartContainer", {\n'
     htmlout += '\tanimationEnabled: true,\n'
-    htmlout += '\ttheme: "light3",\n'
-    htmlout += '\ttitle:{text: "Trophies for ' + outData[0][0] + ' (' + playerTag + ')' + '"},\n'
-    htmlout += '\taxisX:{labelAngle:135,gridThickness:2,tickLength:15,tickColor:"red",gridDashType: "dot",lineDashType: "dot",valueFormatString: "DDD MM/DD/YYYY",crosshair: {enabled: true,snapToDataPoint: true}},\n'
-    htmlout += '\taxisY: {title: "Trophies",minimum: ' + str(min_value) + ',maximum: ' + str(max_value) + ',crosshair: {enabled: true, snapToDataPoint: true}},\n'
+    htmlout += '\ttheme: "dark1",\n'
+    htmlout += '\ttitle:{fontColor:"red",text: "Trophies for ' + outData[0][0] + ' (' + playerTag + ')' + '"},\n'
+    htmlout += '\taxisX:{labelFontColor: "red",titleFontColor: "red",labelAngle:135,gridThickness:2,tickLength:15,tickColor:"red",gridDashType: "dot",lineDashType: "dot",valueFormatString: "DDD MM/DD/YYYY",crosshair: {enabled: true,snapToDataPoint: true}},\n'
+    htmlout += '\taxisY: {labelFontColor: "red",titleFontColor: "red",title: "Trophies",minimum: ' + str(min_value) + ',maximum: ' + str(max_value) + ',crosshair: {enabled: true, snapToDataPoint: true}},\n'
     htmlout += '\ttoolTip:{shared:true,animationEnabled: true},\n'
     htmlout += '\tlegend:{cursor:"pointer",verticalAlign: "bottom",horizontalAlign: "left",dockInsidePlotArea: true,itemclick: toogleDataSeries},\n'
     htmlout += '\tdata: [{\n'
-    htmlout += '\t\ttype: "line",showInLegend: true,name: "Trophies",markerType: "cross",xValueFormatString: "DDD MM/DD/YYYY",color: "blue",\n'
+    htmlout += '\t\ttype: "line",showInLegend: true,name: "Trophies",markerType: "cross",xValueFormatString: "DDD MM/DD/YYYY",color: "red",\n'
     htmlout += '\t\tdataPoints: [\n'
 
     for i, data in enumerate(reversed(newData)):
@@ -93,7 +93,7 @@ def genhtml(outData):
 
     htmlout += '</script>\n'
     htmlout += '</head>\n'
-    htmlout += '<body>\n'
+    htmlout += '<body style="background-color:black;">\n'
     htmlout += '<div id="chartContainer" style="height: 50%; width: 80%;"></div>\n'
     htmlout += '<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>\n'
 
