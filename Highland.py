@@ -183,16 +183,42 @@ def getTrophyData(tag, clan_tag):
     # seasonStart = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
     # print(seasonStart)
     #print(outData)
-    genhtml(outData)
+    # genhtml(outData)
+
+    min_value = 20000
+    max_value = 0
+    newData = []
+    for i, data in enumerate(reversed(outData)):
+        if data[1] >= seasonStart and data[1] <= seasonEnd:
+            newData.append(data)
+            if data[2] < min_value:
+                min_value = data[2]
+            if data[2] > max_value:
+                max_value = data[2]
+    min_value /= 100
+    min_value = round(min_value,0) * 100
+
+    max_value += 150
+    max_value /= 100
+    max_value = int(max_value) * 100 #round(max_value,0) * 100
+
+    fname = clan_tag + ClanCommon.DirSlash() + "data1.js"
+    with open(fname, "w", encoding="utf-8") as out:
+        out.write("row_data = [\n")
+        for data in reversed(newData):
+            # out.write('\t["' + data[0] + '","' + data[1].strftime('%Y-%m-%d') + '",' + str(data[2]) + "],\n")# + ',' + str(data[3]) + "],\n")
+            out.write('\t["' + data[1].strftime('%Y-%m-%d') + '",' + str(data[2]) + "],\n")# + ',' + str(data[3]) + "],\n")
+        
+        out.write("];\n")
+        now = datetime.datetime.now()
+        out.write("updateTime=" + "\"" + now.astimezone(tz=ClanCommon.AZ_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z') + "\"\n")
+
 
     fname = record_folder + 'highland' + '.csv'
     #    print(fname)
-    out = open(fname, 'w', encoding='UTF-8')
-    for data in outData:
-        out.write(data[0] + ',' + data[1].strftime('%d-%b-%Y') + ',' + str(data[2]) + ',' + str(data[3]) + '\n')
-        #pass
-    #out.write(outstr)
-    out.close()
+    with open(fname, 'w', encoding='UTF-8') as out:
+        for data in outData:
+            out.write(data[0] + ',' + data[1].strftime('%d-%b-%Y') + ',' + str(data[2]) + ',' + str(data[3]) + '\n')
 
     #print(playerData['leagueStatistics'])
 #    print(json.dumps(playerData, indent=4))

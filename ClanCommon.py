@@ -19,6 +19,7 @@ import urllib3
 def init():
     global UTC_TZ
     global Eastern_TZ
+    global AZ_TZ
     global MON
     global TUE
     global WED
@@ -29,6 +30,7 @@ def init():
     
     UTC_TZ = pytz.timezone('UTC')
     Eastern_TZ = pytz.timezone("US/Eastern")
+    AZ_TZ = pytz.timezone("US/Arizona")
     
     MON = 0
     TUE = 1
