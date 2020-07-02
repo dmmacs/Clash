@@ -8,6 +8,8 @@ import json
 import datetime
 import myTimer
 import prop
+import argparse
+
 
 playerTag = '#8YGUPVPR'
 clan_tag = 'QQG200V'
@@ -151,7 +153,7 @@ def getTrophyData(tag, clan_tag):
         fin = open(file, 'r')
         clan_data = json.load(fin)
         for person in clan_data['memberList']:
-            if person['tag'] == '#8YGUPVPR':
+            if person['tag'] == tag:
                 # print('{},{},{}'.format(fTime.strftime('%d-%b-%Y'),person['name'], person['trophies']))
                 outstr += '{},{},{}\n'.format(person['name'], fTime.strftime('%d-%b-%Y'), person['trophies'])
                 #outData.append('{},{},{}'.format(person['name'], fTime.strftime('%d-%b-%Y'), person['trophies']))
@@ -159,7 +161,7 @@ def getTrophyData(tag, clan_tag):
                 break
 
 
-    req = ClanCommon.getAPIData('#8YGUPVPR', 'players')
+    req = ClanCommon.getAPIData(tag, 'players')
     playerData = req.json()
 
     print(seasonStart, seasonEnd)
@@ -202,7 +204,9 @@ def getTrophyData(tag, clan_tag):
     max_value /= 100
     max_value = int(max_value) * 100 #round(max_value,0) * 100
 
-    fname = clan_tag + ClanCommon.DirSlash() + "data1.js"
+    print(playerData['name'])
+    fname = clan_tag + ClanCommon.DirSlash() + playerData['name'] + ".js"
+    print(fname)
     with open(fname, "w", encoding="utf-8") as out:
         out.write("row_data = [\n")
         for data in reversed(newData):
@@ -214,11 +218,11 @@ def getTrophyData(tag, clan_tag):
         out.write("updateTime=" + "\"" + now.astimezone(tz=ClanCommon.AZ_TZ).strftime('%d-%b-%Y %I:%M:%S %p %Z') + "\"\n")
 
 
-    fname = record_folder + 'highland' + '.csv'
-    #    print(fname)
-    with open(fname, 'w', encoding='UTF-8') as out:
-        for data in outData:
-            out.write(data[0] + ',' + data[1].strftime('%d-%b-%Y') + ',' + str(data[2]) + ',' + str(data[3]) + '\n')
+    # fname = record_folder + 'highland' + '.csv'
+    # #    print(fname)
+    # with open(fname, 'w', encoding='UTF-8') as out:
+    #     for data in outData:
+    #         out.write(data[0] + ',' + data[1].strftime('%d-%b-%Y') + ',' + str(data[2]) + ',' + str(data[3]) + '\n')
 
     #print(playerData['leagueStatistics'])
 #    print(json.dumps(playerData, indent=4))
@@ -229,6 +233,11 @@ def getTrophyData(tag, clan_tag):
 if __name__ == '__main__':
     prop.load_properties('season.prop')
 
+    parser = argparse.ArgumentParser(description='Arguments for ClanData.py')
+    parser.add_argument('-c','--clantag', default='QQG200V', required=False, help='Clan Tag to get data for')
+    parser.add_argument('-T', '--tag', default='', required=False, help='Gamer Tag to capture Trophy History')
+    args = parser.parse_args()
+
     print(prop.props)
     myTimer.start()
     ClanCommon.init()
@@ -237,9 +246,15 @@ if __name__ == '__main__':
     splt = prop.props.get('seasonStart').split('-')
     seasonStart = datetime.datetime(int(splt[0]), int(splt[1]), int(splt[2]), 0, 0, 0, tzinfo=ClanCommon.UTC_TZ)
 
+    if args.tag:
+        print(args.tag)
+        playerTag = args.tag
 
+    if args.clantag:
+        print(args.clantag)
+        clan_tag = args.clantag
     getTrophyData(playerTag,clan_tag)
 
     myTimer.end()
-
-    myTimer.printTime()
+    print()
+    print('Completed ' + __file__ + ' in {}'.format(myTimer.elapsedTime()))
