@@ -1,0 +1,18 @@
+INFO 2020-07-01 16:13:13,946 - Python Version is: 3.7.6
+
+INFO 2020-07-01 16:13:13,947 - Script Version is: 0.4.0
+
+INFO 2020-07-01 16:13:14,015 - API Argument: api_key.txt
+
+DEBUG 2020-07-01 16:13:14,019 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:14,353 - https://api.clashroyale.com:443 "GET /v1/clans/%23QQG200V HTTP/1.1" 200 None
+DEBUG 2020-07-01 16:13:14,358 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:14,606 - https://api.clashroyale.com:443 "GET /v1/clans/%25QQG200V/members HTTP/1.1" 200 None
+DEBUG 2020-07-01 16:13:14,610 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:14,820 - https://api.clashroyale.com:443 "GET /v1/clans/%25QQG200V/warlog HTTP/1.1" 200 None
+DEBUG 2020-07-01 16:13:14,826 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:15,038 - https://api.clashroyale.com:443 "GET /v1/clans/%25QQG200V/currentwar HTTP/1.1" 200 None
+DEBUG 2020-07-01 16:13:15,042 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:15,239 - https://api.clashroyale.com:443 "GET /v1/globaltournaments HTTP/1.1" 200 None
+DEBUG 2020-07-01 16:13:15,271 - Starting new HTTPS connection (1): api.clashroyale.com:443
+DEBUG 2020-07-01 16:13:15,478 - https://api.clashroyale.com:443 "GET /v1/players/%238YGUPVPR HTTP/1.1" 200 None
