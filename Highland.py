@@ -174,11 +174,11 @@ def getTrophyData(tag, clan_tag):
         #print('{}|||{}'.format(delta.days, delta.days % 14))
         data.append(delta.days % 14)
 
-    if prop.props.get('id') == playerData['leagueStatistics']['previousSeason']['id']:
-        prop.update_property('id', playerData['leagueStatistics']['previousSeason']['id'])
-        yesterday = datetime.datetime(datetime.datetime.now().year,datetime.datetime.now().month, datetime.datetime.now().day, 0,0,0,0,tzinfo=ClanCommon.UTC_TZ)
-        yesterday = yesterday - datetime.timedelta(days=1)
-        prop.update_property('date', yesterday.strftime('%Y-%m-%d'))
+    # if prop.props.get('id') == playerData['leagueStatistics']['previousSeason']['id']:
+    #     prop.update_property('id', playerData['leagueStatistics']['previousSeason']['id'])
+    #     yesterday = datetime.datetime(datetime.datetime.now().year,datetime.datetime.now().month, datetime.datetime.now().day, 0,0,0,0,tzinfo=ClanCommon.UTC_TZ)
+    #     yesterday = yesterday - datetime.timedelta(days=1)
+    #     prop.update_property('date', yesterday.strftime('%Y-%m-%d'))
 #        prop.save_properties('season.prop')
 
     # splt = prop.props.get('date').split('-')
@@ -227,8 +227,8 @@ def getTrophyData(tag, clan_tag):
     #print(playerData['leagueStatistics'])
 #    print(json.dumps(playerData, indent=4))
 #    print(playerData['leagueStatistics']['previousSeason']['id'])
-    print(playerData['leagueStatistics']['previousSeason']['id'])
-    print(prop.props.get('id'))
+    # print(playerData['leagueStatistics']['previousSeason']['id'])
+    # print(prop.props.get('id'))
 # Start of main
 if __name__ == '__main__':
     prop.load_properties('season.prop')
