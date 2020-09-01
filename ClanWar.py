@@ -83,27 +83,27 @@ def processClanWar(clan_tag, clan_data):
                 currentWarFname = file
                 currentWarTime = ClanCommon.getFileNameDate(currentWarFname[idx3:idx4])
 
-    fin = open(currentWarFname, 'r')
-    currentWar = json.load(fin)
-    fin.close()
+    # fin = open(currentWarFname, 'r')
+    # currentWar = json.load(fin)
+    # fin.close()
 
-    warState = currentWar['state']
+    # warState = currentWar['state']
 
 
-    if warState != 'notInWar':
-        CwParticipants = currentWar['participants']
-        if currentWar['state'] == 'warDay':
-            CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
-        else:
-            CwParticipants .sort(key=lambda k: (k['cardsEarned']), reverse=True)
+    # if warState != 'notInWar':
+    #     CwParticipants = currentWar['participants']
+    #     if currentWar['state'] == 'warDay':
+    #         CwParticipants .sort(key=lambda k: (k['wins'],k['cardsEarned']), reverse=True)
+    #     else:
+    #         CwParticipants .sort(key=lambda k: (k['cardsEarned']), reverse=True)
 
     fNames.sort(key=operator.attrgetter('fDate'))
     
 
-    for fName in fNames:
-        fin = open(fName.fName , 'r')
-        clan_war.append(json.load(fin))
-        fin.close()
+    # for fName in fNames:
+    #     fin = open(fName.fName , 'r')
+    #     clan_war.append(json.load(fin))
+    #     fin.close()
 
 
     wars = []
@@ -469,9 +469,9 @@ def processNonParticipant(clan_tag, clan_data):
                 #currentWarTime = ClanCommon.getFileNameDate(currentWarFname[idx3:idx4])
 
 #    print(currentWarFname)
-    fin = open(currentWarFname, 'r')
-    curWarData = json.load(fin)
-    fin.close()
+    # fin = open(currentWarFname, 'r')
+    # curWarData = json.load(fin)
+    # fin.close()
 
     #Compare data in file and currentwar (if collectionEndTime matches, then do nothing, else look through current data and find who did not participate)
 

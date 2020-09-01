@@ -190,7 +190,7 @@ def getTrophyData(tag, clan_tag):
     min_value = 20000
     max_value = 0
     newData = []
-    for i, data in enumerate(reversed(outData)):
+    for data in reversed(outData):
         if data[1] >= seasonStart and data[1] <= seasonEnd:
             newData.append(data)
             if data[2] < min_value:

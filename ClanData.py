@@ -176,21 +176,21 @@ if __name__ == '__main__':
     
     # Get Clan warlog Data
     print('Getting WarLog Data')
-    req = ClanCommon.getAPIData(clan_tag, 'WarLog')
-    if (req.status_code != 200):
-        print('Could not read War Log Api, Response Code {}'.format(req.status_code))
-        sys.exit(-1)
-    clan_warlog = req.json()        
-    print('\ttotal Clan Members = ' + str(clan_data['members']))
+    # req = ClanCommon.getAPIData(clan_tag, 'WarLog')
+    # if (req.status_code != 200):
+    #     print('Could not read War Log Api, Response Code {}'.format(req.status_code))
+    #     sys.exit(-1)
+    # clan_warlog = req.json()        
+    # print('\ttotal Clan Members = ' + str(clan_data['members']))
     
     # Get Clan Current War Data
     print('Getting Current War Data')
-    req = ClanCommon.getAPIData(clan_tag, 'CurrentWar')
-    if (req.status_code != 200):
-        print('Could not read Current War Api, Response Code {}'.format(req.status_code))
-        sys.exit(-1)
-    clan_current_war = req.json()
-    print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + ClanCommon.processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
+    # req = ClanCommon.getAPIData(clan_tag, 'CurrentWar')
+    # if (req.status_code != 200):
+    #     print('Could not read Current War Api, Response Code {}'.format(req.status_code))
+    #     sys.exit(-1)
+    # clan_current_war = req.json()
+    # print('\tClan War State = ' + str(clan_current_war['state']))# + ' until ' + ClanCommon.processClashDate(clan_current_war['warEndTime']).strftime('%d-%b-%Y %I:%M:%S %p %Z'))
     
     
     # Get Global Tournament Data
@@ -248,20 +248,20 @@ if __name__ == '__main__':
 
     htmlout += '<div style="float: left; width:50%;">'
     htmlout += '<img  style="float:left" src="../img/War_Shield.png" height="100px" width="86px">'
-    htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">Current War Status: '
-    htmlout += clan_current_war['state']
+    # htmlout += '<div style="font-weight:bold;line-height:20px;font-size:15px">Current War Status: '
+    # htmlout += clan_current_war['state']
     htmlout += '<br/>' + clan_war_level + '</div>'
     htmlout += '<div style="line-height:20px;font-size:15px">'
-    if clan_current_war['state'] == 'warDay':
-        warEndTime = ClanCommon.processClashDate(clan_current_war['warEndTime'])
-        htmlout += 'War Ends:'
-        htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
-        htmlout += ' </div></div>'
-    elif clan_current_war['state'] == 'collectionDay':
-        warEndTime = ClanCommon.processClashDate(clan_current_war['collectionEndTime'])
-        htmlout += 'Collection Ends:'
-        htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
-        htmlout += ' </div></div>'
+    # if clan_current_war['state'] == 'warDay':
+        # warEndTime = ClanCommon.processClashDate(clan_current_war['warEndTime'])
+    htmlout += 'War Ends:'
+        # htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+    htmlout += ' </div></div>'
+    # elif clan_current_war['state'] == 'collectionDay':
+    #     # warEndTime = ClanCommon.processClashDate(clan_current_war['collectionEndTime'])
+    #     htmlout += 'Collection Ends:'
+    #     # htmlout += warEndTime.astimezone(tz=ClanCommon.Eastern_TZ).strftime('%I:%M:%S %p %Z %d-%b-%Y')
+    #     htmlout += ' </div></div>'
     
     
     htmlout += '</div>\n'
@@ -440,9 +440,9 @@ if __name__ == '__main__':
     fname += '-'
     fname += file_time_stamp
     fname += '.txt'
-    print('Saving Warlog Data ' + fname)
-    with open(fname, 'w', encoding='UTF-8') as out:
-        out.write(json.dumps(clan_warlog, indent = 4))
+    # print('Saving Warlog Data ' + fname)
+    # with open(fname, 'w', encoding='UTF-8') as out:
+    #     out.write(json.dumps(clan_warlog, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -458,8 +458,8 @@ if __name__ == '__main__':
     fname += file_time_stamp
     fname += '.txt'
     print('Saving Current War Data ' + fname)
-    with open(fname, 'w', encoding='UTF-8') as out:
-        out.write(json.dumps(clan_current_war, indent = 4))
+    # with open(fname, 'w', encoding='UTF-8') as out:
+    #     out.write(json.dumps(clan_current_war, indent = 4))
     if timeNow > eleven_fifty_five and timeNow < midnight:
         fname = fname.replace(record_folder, history_folder)
         out = open(fname, 'w', encoding='UTF-8')
@@ -490,8 +490,8 @@ if __name__ == '__main__':
     if args.tag:
         Highland.getTrophyData('#8YGUPVPR',clan_tag)
 
-    ClanWar.processClanWar(clan_tag, clan_data)
-    ClanWar.processNonParticipant(clan_tag, clan_data)
+    # ClanWar.processClanWar(clan_tag, clan_data)
+    # ClanWar.processNonParticipant(clan_tag, clan_data)
     buildIndex.processHtmlFiles(clan_tag, clan_data['name'])
 
     record_cleanup.clean_up_files(clan_tag, 'beavercleavers', '-clan_member_data')
