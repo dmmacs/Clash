@@ -139,7 +139,7 @@ def getAPIData(param, dataType):
     if dataType == 'ClanData':
         link = 'https://api.clashroyale.com/v1/clans/%23' + param
     elif dataType == 'ClanMembers':
-        link = 'https://api.clashroyale.com/v1/clans/%' + param + '/members'
+        link = 'https://api.clashroyale.com/v1/clans/%23' + param + '/members'
     elif dataType == 'WarLog':
         link = 'https://api.clashroyale.com/v1/clans/%' + param + '/warlog'
     elif dataType == 'CurrentWar':
@@ -166,8 +166,10 @@ def getAPIData(param, dataType):
     print(link)
     reqHeaders = {"Accept":"application/json", "authorization":"Bearer " + key}
     try:
-        req = requests.get(link, headers=reqHeaders, timeout=2)
+        req = requests.get(link, headers=reqHeaders, timeout=20)
     except urllib3.exceptions.ConnectTimeoutError:
+        traceback.print_exc()
+    except requests.exceptions.ReadTimeout:
         traceback.print_exc()
     return req
 

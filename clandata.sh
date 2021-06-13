@@ -3,18 +3,18 @@ cd /srv/www/web/ClashRoyale
 echo `pwd`
 
 date
-echo "Check on Lock File"
-./testLock.py
+#echo "Check on Lock File"
+#./testLock.py
 
-echo "Runing" >> ClanData.lck
-echo "Data for Clan Tag #QQG200V"
+#echo "Runing" >> ClanData.lck
+#echo "Data for Clan Tag #QQG200V"
 ./ClanData.py --clantag QQG200V --history
 chmod 666 QQG200V/record/*.txt
 retVal=$?
 #printf 'QQG200V Exit Code = %d\n' $retVal
 
 if [ $retVal -ne 0 ]; then
-    echo "Got Here1"
+    echo "Failed QQG200V Clan History"
     exit 1
 fi
 
@@ -47,4 +47,4 @@ fi
 date
 touch /home/dmmacs/tmp.txt
 
-rm ClanData.lck
+#rm ClanData.lck
